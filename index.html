@@ -1,10 +1,177 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Kuan-Yu Huang</title>
-  </head>
-  <body>
-    <h1>Hi! I'm Peter.</h1>
-  </body>
+    <link rel="stylesheet" href="css/presentational.css">
+    <link rel="stylesheet" href="css/circular-images.css">
+</head>
+
+<body>    
+    <div class="header">
+        <div class="headerColumn">
+            <img class="circular--square" src="images/head_shot.jpg" height="200">
+        </div>
+
+        <div class="headerColumn">
+            <p class="headertitle">Kuang-Yu Huang</p>
+            <p class="headerline">Email: <a class="adress" href="mailto:peter124574@gmail.com">peter124574@gmail.com</a></p>
+            <p class="headerline">Github: <a class="adress" href="https://github.com/peteryuX">github.com/peteryuX</a></p>
+            <p class="headerline">Linkedin: <a class="adress" href="https://www.linkedin.com/in/kuan-yu-huang/">www.linkedin.com/in/kuan-yu-huang</a></p>
+        </div>
+        <div class="headerButton">
+        <a class="headerButtonAction" href="mailto:peter124574@gmail.com"><img src="images/mail_logo.png" height="40px"></a>
+        <a class="headerButtonAction" href="https://github.com/peteryuX"><img src="images/github_logo.png" height="40px"></a>
+        <a class="headerButtonAction" href="https://www.linkedin.com/in/kuan-yu-huang/"><img src="images/linkedIn_logo.png" height="40px"></a>
+        </div>
+    </div>
+
+    <div class="section" id="Biography">
+        <h1>Biography</h1>
+        <p class="bioline">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            I am currently a software engineer at HTC VIVE team, where I solve issues about computer vison 
+            apllications on virtual reality device by machine learning. Previously, I received  my M.S. 
+            degree in Electrical Engineering from National Tsing Hua University, and worked with Prof. 
+            Chia-Wen Lin. My research focused on computer vision and image processing using deep learning; 
+            B.C. degree in Electrical Engineering from National Chung Cheng University, and studied 
+            intensively into Communications and Networking.
+        </p>
+        <div class="bioLogoColumn">
+            <img src="images/HTCVIVE_logo.png" height="160">
+            <p class="logoline">Engineer<br>HTC VIVE co.,ltd<br>Taipei, Taiwan<br>Dec 17 - Present</p>
+        </div>
+
+        <div class="bioLogoColumn">
+            <img src="images/NTHU_logo.png" height="160">
+            <p class="logoline">M.S. in Electrical Engineering<br>National Tsing Hua University<br>Hsinchu, Taiwan<br>Sep 15 - Oct 17</p>
+        </div>
+
+        <div class="bioLogoColumn">
+            <img src="images/CCU_logo.png" height="160">
+            <p class="logoline">B.S. in Electrical Engineering<br>National Chung Cheng University<br>Chiayi, Taiwan<br>Sep 11 - Jun 15</p>
+        </div>
+    </div>
+    
+    <hr class="heavy">
+    <div class="section" id="Projects">
+        <h1>Projects</h1>
+
+        <h2>Master's Dissertation, 2017</h2>
+        <div class="projectImageColumn">
+            <img src="images/SiIQA.jpg" width="360">
+        </div>
+        <div class="projectTextColumn">
+            <h3>Pairwise Learning on Image Quality Assessment using Deep Siamese Neural Network</h3>
+            <p class="projectline">
+                In this thesis, we propose a pairwise training model for image subjective quality
+                assessment. Our architecture is based on Siamese network, which can make our model
+                training on paired-comparison data. This architecture lets us solve the problem on
+                image retargeting and easily extends to similar tasks. On general subjective quality
+                assessment database, our method can also alleviate the difficulty of data collections.
+                Experiment shows that our proposed method produces better results compared to
+                previous works on the retargeted image case and comparative results in the general
+                quality assessment database, even under the limitation of labeling information.
+            </p>
+            <p class="authorline">Kuan-Yu Huang.<br>Adivisor: Prof. Chia-Wen Lin.</p>
+            <a class="projectButtonAction" href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing">PDF</a>
+        </div>
+
+        <hr class="light">
+
+        <h2>Side Project, 2017</h2>
+        <div class="projectImageColumn">
+            <img src="images/OpenView.jpg" width="360">
+        </div>
+        <div class="projectTextColumn">
+            <h3>Open View: Single Image Retargeting by GAN-based Boundary Inpainting</h3>
+            <p class="projectline">
+                In this project, I use generative adversarial network (GAN) to eliminate the dark side 
+                produced by the non-match aspect ratio contents on display device (like 4:3 to 16:9), 
+                which can provide user a better experience when enjoying a visual content with old specification. 
+                The idea is combination of two classic problem in image processing, which are image retargeting 
+                and image inpainting. My method expand the visual regions by inpaint the boundaries to meet the need 
+                about change the aspect ratio of image content. Under my disgned loss (special adversarial/ perceptual 
+                / texture loss) and multi-I/O architecture, the produced results show that my network can 
+                generate approximate boundaries for the some non-complex situations.
+            </p>
+            <p class="authorline">Kuan-Yu Huang.</p>
+            <a class="projectButtonAction" href="https://drive.google.com/file/d/1NLrT50UaFifBsIi-Yc9W2Gy-PUMuDxg9/view?usp=sharing">Slides</a>
+        </div>
+
+        <hr class="light">
+
+        <h2>Industry-Academy Cooperation Plan(NOVATEK co.,ltd), 2016</h2>
+        <div class="projectImageColumn">
+            <img src="images/NovaSR.jpg" width="360">
+        </div>
+        <div class="projectTextColumn">
+            <h3>A Resource-Constrained Scheme of Image Super-Resolution</h3>
+            <p class="projectline">
+                We propose a resource-constrained CNN-based super-resolution method, which can use for more 
+                practical situation, like the embedding chips in high-resolution digital television. To reach 
+                the requirement, we need to efficiently training a super-resolution network, which has high 
+                performance but also lower parameters. We chose the shallow version of FSRCNN as backbone, and 
+                replace the deconvolution up-sample layer as ESPCN’s sub-pixel up-sample layer.
+                To further, solve the artifact distortion on the visual result with computer graphic input image, 
+                which main problem caused by the low capacity of shallow network. We use divisive normalization 
+                after every convolution layers and add total variation loss to objective cost function, which let 
+                our network learning more efficiently. All of these mechanisms have significant improvement. Our 
+                method get the comparable performance and visual quality under lower parameters.
+            </p>
+            <p class="authorline">Kuan-Yu Huang and Xian-Xin Lu.<br>Adivisor: Prof. Chia-Wen Lin.</p>
+        </div>
+
+        <hr class="light">
+
+        <h2>Computer Vision Final Project, 2015</h2>
+        <div class="projectImageColumn">
+            <img src="images/CVFinalProject.jpg" width="360">
+        </div>
+        <div class="projectTextColumn">
+            <h3>Real-time Computing Mathematical Expressions Recognized from Images</h3>
+            <p class="projectline">
+                For students, fast and correct computing mathematical
+                expressions is necessary when studying. We often use
+                scientific calculators to help us solving complicated
+                mathematical problem. However, typing mathematical
+                expressions into calculator costs much time, and sometimes
+                results in wrong answers due to errant typing. In this work,
+                we propose to compute mathematics expressions
+                recognized from images. In specific, we detect the
+                expressions in images by extracting feature points.
+                Afterwards, we crop out the characters from the detected
+                expressions, and classify them as corresponding numbers
+                and symbols.
+            </p>
+            <p class="authorline">Kuan-Yu Huang and Yi-Mu Lo.<br>Instructor: Prof. Min Sun</p>
+            <a class="projectButtonAction" href="https://drive.google.com/file/d/1hzM7n5ViOtLgSOEAzUTEE08Ddksfh81R/view?usp=sharing">PDF</a>
+        </div>
+
+        <hr class="light">
+
+        <h2>Independent Study, 2014</h2>
+        <div class="projectImageColumn">
+            <img src="images/5GVisualizatopm.jpg" width="360">
+        </div>
+        <div class="projectTextColumn">
+            <h3>5G Communication-LTE TM6 & Beamforming Visualization</h3>
+            <p class="projectline">
+                We created a platform using JAVA. It contained three base stations, and we 3D
+                visualized the communication technology Beamforming (with TM6 model in
+                Transmission modes in LTE Release 9). The platform can help user or researcher
+                to understanding the change of signal intensity between three base stations
+                when using Beamforming and different codebook.
+            </p>
+            <p class="authorline">Kuan-Yu Huang and Heng-Zhe Zhang.<br>Adivisor: Prof. Jen-Yi Pan</p>
+            <a class="projectButtonAction" href="https://drive.google.com/open?id=1UNHMmHzNqt6kpYvMrC4SrTKM2OBBdpv5">PDF</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a class="topButtonAction" href="#top">BACK TO TOP</a>
+    </div>
+</body>
+
 </html>
