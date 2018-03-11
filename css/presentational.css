@@ -96,7 +96,6 @@ h3 {
 }
 
 .bioLogoColumn {
-  width: 100px auto;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -116,8 +115,8 @@ h3 {
 }
 
 .projectImageColumn img:hover {
-  margin:0 0 0 180px;
-  transform: scale(2);
+  margin:0 0 0 25%;
+  transform: scale(1.8);
   border:1px #d8d8d8b7 solid;
   border-radius: 5px;
   background-color: white;
@@ -126,9 +125,8 @@ h3 {
 }
 
 .projectTextColumn {
-  max-width: 480px;
-  padding: 20px;
-  margin-top: -35px;
+  max-width: 50%;
+  padding: 1vh 2vw;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
@@ -145,12 +143,7 @@ h3 {
 }
 
 .projectButtonAction {
-  float: right;
   text-align: center;
-  display: block;
-  width: 36px;
-  line-height: 20px;
-  margin: 0px 36px auto;
   padding: 8px;
   font-family: "Noto Sans Bold";
   font-weight: bold;
@@ -262,14 +255,34 @@ hr.heavy {
 
 /* Pad */
 @media only screen and (max-width: 1024px) {
-  h1 {
-    font-size: 36px;
-    letter-spacing: 1px;
+  .bioLogoColumn {
+    padding: 1vh 0vw;
+  }
+
+  #projectImage {
+    width: 80%;
+    height: auto;
+  }
+
+  .projectImageColumn img:hover {
+    margin:0 0 0 0%;
+    transform: scale(1);
+    border:0px #d8d8d8b7 solid;
+    padding: 0px;
+  }
+
+  .projectTextColumn {
+    max-width: 90%;
+  }
+
+  .topButtonAction:hover {
+    background-color: #087070;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
   }
 }
 
 /* Phone */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 540px) {
   h1 {
     font-size: 8vw;
     letter-spacing: 0vw;
@@ -293,8 +306,18 @@ hr.heavy {
     height: auto;
   }
 
-  #headerButton{
+  #headerButton {
     width:32%;
+    height: auto;
+  }
+
+  #bioImage {
+    width: 50%;
+    height: auto;
+  }
+
+  #projectImage {
+    width: 90%;
     height: auto;
   }
 
@@ -308,8 +331,14 @@ hr.heavy {
     letter-spacing: 0.1vw;
     text-align: center;
   }
+
   .headerline {
     font-size: 0%;
     margin: 0%;
+  }
+
+  .footer {
+    padding: 0px;
+    background:  #087070;
   }
 }
