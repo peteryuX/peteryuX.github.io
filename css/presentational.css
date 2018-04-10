@@ -65,6 +65,11 @@ h3 {
   text-align: center;
 }
 
+.footer {
+  padding: 25px;
+  text-align: center;
+}
+
 .headerButton {
   text-align: center;
   vertical-align: middle;
@@ -83,7 +88,14 @@ h3 {
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
+@media screen and (max-width: 690px) {
+  .original {
+    margin-bottom: 50px;
+  }
+}
+
 .headerColumn {
+  /* width: 100px auto; */
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -91,6 +103,7 @@ h3 {
 }
 
 .bioLogoColumn {
+  width: 100px auto;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -98,6 +111,9 @@ h3 {
 }
 
 .projectImageColumn{
+  width: 360px;
+  padding: 15px;
+  margin-top: -35px;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -110,8 +126,7 @@ h3 {
 }
 
 .projectImageColumn img:hover {
-  margin:0 0 0 25%;
-  transform: scale(1.8);
+  transform: translate(180px, 0px) scale(2);
   border:1px #d8d8d8b7 solid;
   border-radius: 5px;
   background-color: white;
@@ -120,14 +135,17 @@ h3 {
 }
 
 .projectTextColumn {
-  max-width: 50%;
-  padding: 1vh 2vw;
+  max-width: 460px;
+  padding: 15px;
+  margin-top: -35px;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
 }
 
 .headerButtonAction {
+  display: inline-block;
+  padding: 6px;
   border-radius: 6px;
   transition: background-color 0.3s;
 }
@@ -138,7 +156,12 @@ h3 {
 }
 
 .projectButtonAction {
+  float: right;
   text-align: center;
+  display: block;
+  width: 36px;
+  line-height: 20px;
+  margin: 0px 36px auto;
   padding: 8px;
   font-family: "Noto Sans Bold";
   font-weight: bold;
@@ -153,12 +176,6 @@ h3 {
 .projectButtonAction:hover{
   background-color: rgba(250, 217, 108, 0.8);
   transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-
-.footer {
-  padding: 25px;
-  text-align: center;
 }
 
 .topButtonAction {
@@ -201,7 +218,7 @@ h3 {
 }
 
 .bioline {
-  text-align: left;
+  text-align: justify;
   line-height: 22px;
   margin: 10px;
 }
@@ -213,13 +230,13 @@ h3 {
 
 .projectline {
   line-height: 22px;
-  text-align: left;
+  text-align: justify;
 }
 
 .authorline {
   font-size: 18px;
   text-align: left;
-  color: rgba(14, 113, 131, 0.829);
+  color: rgba(11, 61, 68, 0.9);
 }
 
 .adress:link {
@@ -251,101 +268,4 @@ hr.heavy {
   background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
-}
-
-
-/* Pad */
-@media only screen and (max-width: 1024px) {
-  .bioLogoColumn {
-    padding: 1vh 0vw;
-  }
-
-  #projectImage {
-    width: 80%;
-    height: auto;
-  }
-
-  .projectImageColumn img:hover {
-    margin:0 0 0 0%;
-    transform: scale(1);
-    border:0px #d8d8d8b7 solid;
-    padding: 0px;
-  }
-
-  .projectTextColumn {
-    max-width: 90%;
-  }
-
-  .topButtonAction:hover {
-    background-color: #087070;
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Phone */
-@media only screen and (max-width: 540px) {
-  h1 {
-    font-size: 8vw;
-    letter-spacing: 0vw;
-  }
-
-  h2 {
-    margin-top: 10vw;
-    font-size: 6vw;
-  }
-
-  h3 {
-    font-size: 5vw;
-  }
-
-  .header {
-    padding: 8vw 0vw;
-  }
-
-  #head_shot {
-    width: 50%;
-    height: auto;
-  }
-
-  #headerButton {
-    width:32%;
-    height: auto;
-  }
-
-  #bioImage {
-    width: 50%;
-    height: auto;
-  }
-
-  #projectImage {
-    width: 90%;
-    height: auto;
-  }
-
-  .headerColumn {
-    padding: 0%;
-  }
-
-  .headertitle {
-    font-size: 8vw;
-    font-weight: bold;
-    letter-spacing: 0.1vw;
-    text-align: center;
-  }
-
-  .headerline {
-    font-size: 0%;
-    margin: 0%;
-  }
-
-  .footer {
-    padding: 0px;
-    background:  #087070;
-  }
-
-  .topButtonAction {
-    width: auto;
-    font-size: 4vw;
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
-  }
 }
