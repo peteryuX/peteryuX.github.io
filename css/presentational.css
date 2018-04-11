@@ -262,6 +262,10 @@ hr.heavy {
     padding: 0px;
   }
 
+  .headerButtonAction:hover{
+    background-color: unset;
+  }
+
   .bioLogoColumn {
     padding: 1vh 0vw;
   }
