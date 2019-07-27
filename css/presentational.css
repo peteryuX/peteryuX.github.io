@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Noto Sans";
+  font-family: "Helvetica";
   src: url("../fonts/noto-sans.eot");
   src: url("../fonts/noto-sans.eot?#iefix") format("embedded-opentype"), url("../fonts/noto-sans.woff2") format("woff2"), url("../fonts/noto-sans.woff") format("woff"), url("../fonts/noto-sans.ttf") format("truetype"), url("../fonts/noto-sans.svg#Noto-Sans") format("svg");
   font-weight: normal;
@@ -18,11 +18,11 @@ html,
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Helvetica";
   font-size: 18px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.7);
-  background-color: #ffffff;
+  color: #3d4457;
+  background-color: #eeeeee;
 }
 
 h1,
@@ -55,7 +55,7 @@ h3 {
   text-align: center;
   vertical-align:middle;
   color: #fff;
-  background-color: #087070;
+  background-color: #556f82;
 }
 
 .section {
@@ -143,7 +143,7 @@ h3 {
   padding: 8px;
   font-family: "Noto Sans Bold";
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   text-decoration: none;
   color: rgba(253, 77, 121, 0.8);
   border-radius: 6px;
@@ -203,18 +203,26 @@ h3 {
 
 .bioline {
   text-align: left;
-  line-height: 22px;
+  line-height: 26px;
   margin: 10px;
 }
 
 .logoline {
-  line-height: 22px;
+  line-height: 26px;
   text-align: center;
 }
 
 .projectline {
-  line-height: 22px;
+  line-height: 26px;
   text-align: left;
+}
+
+#projectImage {
+  height: auto;
+  border: 0.1vw #bbbbbb solid;
+  border-radius: 1%;
+  background-color: white;
+  padding: 3px;
 }
 
 .authorline {
@@ -273,6 +281,7 @@ hr.heavy {
   #projectImage {
     width: 80%;
     height: auto;
+    border: 0.1vw #bbbbbb solid;
   }
 
   .projectImageColumn img:hover {
@@ -331,11 +340,13 @@ hr.heavy {
   #bioImage {
     width: 50%;
     height: auto;
+    padding-top: 15%;
   }
 
   #projectImage {
     width: 90%;
     height: auto;
+    border: 0.1vw #bbbbbb solid;
   }
 
   .headerColumn {
