@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Helvetica";
+  font-family: "Noto Sans";
   src: url("../fonts/noto-sans.eot");
   src: url("../fonts/noto-sans.eot?#iefix") format("embedded-opentype"), url("../fonts/noto-sans.woff2") format("woff2"), url("../fonts/noto-sans.woff") format("woff"), url("../fonts/noto-sans.ttf") format("truetype"), url("../fonts/noto-sans.svg#Noto-Sans") format("svg");
   font-weight: normal;
@@ -30,6 +30,7 @@ h2,
 h3,
 h4 {
   font-family: "Noto Sans Bold", sans-serif;
+  color: #3d4457;
 }
 
 h1 {
@@ -40,21 +41,21 @@ h1 {
 
 h2 {
   margin-top: 40px;
-  font-size: 28px;
+  font-size: 32px;
   color: rgba(0, 0, 0, 0.675);
 }
 
 h3 {
   color: rgba(0, 0, 0, 0.65);
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .header {
-  padding: 42px 22px;
+  padding: 0.1vw 0.1vw;
   min-height: 240px;
   text-align: center;
-  vertical-align:middle;
-  color: #fff;
+  vertical-align: middle;
+  color: #ffffff;
   background-color: #556f82;
 }
 
@@ -144,6 +145,9 @@ h3 {
   font-family: "Noto Sans Bold";
   font-weight: bold;
   font-size: 18px;
+  border:1px #bbbbbb solid;
+  padding-left: 5%;
+  padding-right: 5%;
   text-decoration: none;
   color: rgba(253, 77, 121, 0.8);
   border-radius: 6px;
@@ -189,9 +193,9 @@ h3 {
   font-size: 46px;
   font-weight: bold;
   letter-spacing: 2px;
-  text-align: left;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
 }
 
 .headerline {
@@ -204,6 +208,7 @@ h3 {
 .bioline {
   text-align: left;
   line-height: 26px;
+  word-break: break-all; 
   margin: 10px;
 }
 
@@ -215,6 +220,7 @@ h3 {
 .projectline {
   line-height: 26px;
   text-align: left;
+  word-break: break-all;
 }
 
 #projectImage {
@@ -265,6 +271,15 @@ hr.heavy {
 
 /* Pad */
 @media only screen and (max-width: 1024px) {
+  .header {
+    padding: 1vw 0vw 1vw 0vw;
+  }
+
+  #headerButton {
+    width: 24%;
+    height: auto;
+  }
+
   .headerButtonAction{
     display: unset;
     padding: 0px;
@@ -315,7 +330,6 @@ hr.heavy {
   }
 
   h2 {
-    margin-top: 10vw;
     font-size: 6vw;
   }
 
@@ -324,7 +338,7 @@ hr.heavy {
   }
 
   .header {
-    padding: 8vw 0vw;
+    padding: 6vw 0vw 1vw 0vw;
   }
 
   #head_shot {
@@ -333,7 +347,7 @@ hr.heavy {
   }
 
   #headerButton {
-    width:32%;
+    width: 24%;
     height: auto;
   }
 
