@@ -135,7 +135,7 @@ h3 {
 }
 
 .headerButtonAction:hover {
-  background-color: #00acc1;
+  background-color: #1b575f;
   transition: background-color 0.3s;
 }
 
@@ -178,19 +178,19 @@ h3 {
   text-decoration: none;
   color: #fff;
   border-radius: 6px;
-  background-color: #087070;
+  background-color: #556f82;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .topButtonAction:hover {
-  background-color: #00acc1;
+  background-color: #1b575f;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .headertitle {
-  font-size: 46px;
+  font-size: 54px;
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
@@ -278,6 +278,7 @@ hr.heavy {
   #headerButton {
     width: 24%;
     height: auto;
+    margin-top: 10px;
   }
 
   .headerButtonAction{
@@ -349,6 +350,7 @@ hr.heavy {
   #headerButton {
     width: 24%;
     height: auto;
+    margin-top: 10px;
   }
 
   #bioImage {
