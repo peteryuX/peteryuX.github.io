@@ -129,13 +129,14 @@ h3 {
 
 .headerButtonAction {
   display: inline-block;
-  padding: 6px;
+  padding: 1.5%;
+  padding-top: 2%;
   border-radius: 6px;
   transition: background-color 0.3s;
 }
 
 .headerButtonAction:hover {
-  background-color: #397981;
+  background-color: #11272b;
   transition: background-color 0.3s;
 }
 
@@ -184,7 +185,7 @@ h3 {
 }
 
 .topButtonAction:hover {
-  background-color: #397981;
+  background-color: #11272b;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -281,7 +282,7 @@ hr.heavy {
 
   .headerButtonAction{
     display: unset;
-    padding: 0px;
+    padding: 1.5%;
   }
 
   .headerButtonAction:hover{
@@ -310,7 +311,7 @@ hr.heavy {
   }
 
   .topButtonAction:hover {
-    background-color: #087070;
+    background-color: #11272b;
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
   }
 }
@@ -381,12 +382,12 @@ hr.heavy {
 
   .footer {
     padding: 0px;
-    background:  #087070;
   }
 
   .topButtonAction {
     width: auto;
     font-size: 4vw;
+    border-radius: unset;
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
   }
 }
