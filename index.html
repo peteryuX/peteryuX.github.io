@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta name="theme-color" content="#2c4457">
     <meta name="google-site-verification" content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Kuan-Yu Huang</title>
+    <link rel="stylesheet" href="github_widget/github-widget.css" type="text/css" />
     <link rel="stylesheet" href="css/presentational.css">
     <link rel="stylesheet" href="css/circular-images.css">
 </head>
 
-<body>    
+<body>
     <div class="header">
         <div class="headerColumn">
             <img class="circular--square" id="head_shot" src="images/head_shot.jpg" height="200">
@@ -62,8 +63,18 @@
             <p class="logoline">B.S. in Electrical Engineering<br>National Chung Cheng University<br>Chiayi, Taiwan<br>Sep 11 - Jun 15</p>
         </div>
     </div>
-    
+
     <hr class="heavy">
+
+    <div class="section" id="Github Repositories">
+        <h1>Github Repositories</h1>
+        <div class="github-widget" data-user="peteryuX"></div>
+
+        <script src="github_widget/github-widget.min.js"></script>
+    </div>
+
+    <hr class="heavy">
+
     <div class="section" id="Projects">
         <h1>Projects</h1>
 
@@ -96,13 +107,13 @@
         </div>
         <div class="projectTextColumn">
             <p class="projectline">
-                In this project, I use generative adversarial network (GAN) to eliminate the dark side 
-                produced by the non-match aspect ratio contents on display device (like 4:3 to 16:9), 
-                which can provide user a better experience when enjoying a visual content with old specification. 
-                The idea is combination of two classic problem in image processing, which are image retargeting 
-                and image inpainting. My method expand the visual regions by inpaint the boundaries to meet the need 
-                about change the aspect ratio of image content. Under my disgned loss (special adversarial/ perceptual 
-                / texture loss) and multi-I/O architecture, the produced results show that my network can 
+                In this project, I use generative adversarial network (GAN) to eliminate the dark side
+                produced by the non-match aspect ratio contents on display device (like 4:3 to 16:9),
+                which can provide user a better experience when enjoying a visual content with old specification.
+                The idea is combination of two classic problem in image processing, which are image retargeting
+                and image inpainting. My method expand the visual regions by inpaint the boundaries to meet the need
+                about change the aspect ratio of image content. Under my disgned loss (special adversarial/ perceptual
+                / texture loss) and multi-I/O architecture, the produced results show that my network can
                 generate approximate boundaries for the some non-complex situations.
             </p>
             <p class="authorline">Kuan-Yu Huang.</p>
@@ -118,15 +129,15 @@
         </div>
         <div class="projectTextColumn">
             <p class="projectline">
-                We propose a resource-constrained CNN-based super-resolution method, which can use for more 
-                practical situation, like the embedding chips in high-resolution digital television. To reach 
-                the requirement, we need to efficiently training a super-resolution network, which has high 
-                performance but also lower parameters. We chose the shallow version of FSRCNN as backbone, and 
+                We propose a resource-constrained CNN-based super-resolution method, which can use for more
+                practical situation, like the embedding chips in high-resolution digital television. To reach
+                the requirement, we need to efficiently training a super-resolution network, which has high
+                performance but also lower parameters. We chose the shallow version of FSRCNN as backbone, and
                 replace the deconvolution up-sample layer as ESPCN’s sub-pixel up-sample layer.
-                To further, solve the artifact distortion on the visual result with computer graphic input image, 
-                which main problem caused by the low capacity of shallow network. We use divisive normalization 
-                after every convolution layers and add total variation loss to objective cost function, which let 
-                our network learning more efficiently. All of these mechanisms have significant improvement. Our 
+                To further, solve the artifact distortion on the visual result with computer graphic input image,
+                which main problem caused by the low capacity of shallow network. We use divisive normalization
+                after every convolution layers and add total variation loss to objective cost function, which let
+                our network learning more efficiently. All of these mechanisms have significant improvement. Our
                 method get the comparable performance and visual quality under lower parameters.
             </p>
             <p class="authorline">Kuan-Yu Huang and Xian-Xin Lu.<br>Adivisor: Prof. Chia-Wen Lin.</p>
@@ -178,9 +189,11 @@
         </div>
     </div>
 
+
     <div class="footer">
         <a class="topButtonAction" href="#top">BACK TO TOP</a>
     </div>
+
 </body>
 
 </html>
