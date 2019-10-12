@@ -25,6 +25,15 @@ body {
   background-color: #eeeeee;
 }
 
+::-moz-selection { 
+  background: rgba(253, 77, 121, 0.5);
+  /* color: rgb(240, 240, 240); */
+}
+::selection { 
+  background: rgba(253, 77, 121, 0.5); 
+  /* color: rgb(240, 240, 240); */
+}
+
 h1,
 h2,
 h3,
