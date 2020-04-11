@@ -397,6 +397,15 @@ hr.heavy {
     font-size: 5vw;
   }
 
+  #navbar a {
+    display: inline-block;
+    color: #f2f2f2;
+    padding: 1px;
+    text-decoration: none;
+    font-size: 8px;
+    font-weight: bold;
+  }
+
   .header {
     padding: 5vw 0vw 1vw 0vw;
   }
