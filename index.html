@@ -13,6 +13,27 @@
 </head>
 
 <body>
+    <div id="navbar">
+        <a href="#top">Home</a>
+        <a href="#Biography">Biography</a>
+        <a href="#Github Repositories">GithubRepos</a>
+        <a href="#Projects">Projects</a>
+        <a href="#Certification">Certification</a>
+    </div>
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, slide down the navbar
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            document.getElementById("navbar").style.top = "0";
+          } else {
+            document.getElementById("navbar").style.top = "-100px";
+          }
+        }
+    </script>
+
     <div class="header">
         <div class="headerColumn">
             <img class="circular--square" id="head_shot" src="images/head_shot.jpg" height="200">
@@ -20,10 +41,6 @@
 
         <div class="headerColumn">
             <p class="headertitle">Kuan-Yu Huang</p>
-            <!-- <p class="headerline">Email: <a class="adress" href="mailto:peter124574@gmail.com"> peter124574@gmail.com</a></p>
-            <p class="headerline">Github: <a class="adress" href="https://github.com/peteryuX"> github.com/peteryuX</a></p>
-            <p class="headerline">Linkedin: <a class="adress" href="https://www.linkedin.com/in/kuan-yu-huang/"> www.linkedin.com/in/kuan-yu-huang</a></p>
-            <p class="headerline">CV: <a class="adress" href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD"> pdf link </a></p> -->
             <a class="headerButtonAction" href="mailto:peter124574@gmail.com"><img src="images/mail_logo.png" id="headerButton" height="45px"></a>
             <a class="headerButtonAction" href="https://github.com/peteryuX"><img src="images/github_logo.png" id="headerButton" height="45px"></a>
             <a class="headerButtonAction" href="https://www.linkedin.com/in/kuan-yu-huang/"><img src="images/linkedIn_logo.png" id="headerButton" height="45px"></a>
