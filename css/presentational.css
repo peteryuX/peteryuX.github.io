@@ -68,6 +68,7 @@ h3 {
 }
 
 #navbar {
+  z-index: 1;
   background-color: #2c4457;
   position: fixed;
   top: -50px;
@@ -157,8 +158,8 @@ h3 {
 
 .projectImageColumn img{
   margin:0 0 0 0px;
-  /* transform: scale(1);
-  transition: transform 1s, margin 1.5s; */
+  transform: scale(1);
+  transition: transform 1s, margin 1.5s;
 }
 
 .projectImageColumn img:hover {
