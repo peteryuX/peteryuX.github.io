@@ -24,14 +24,14 @@
 
     <script>
         // When the user scrolls down 20px from the top of the document, slide down the navbar
-        window.onscroll = function() {scrollFunction()};
+        window.onscroll = function () { scrollFunction() };
 
         function scrollFunction() {
-          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            document.getElementById("navbar").style.top = "0";
-          } else {
-            document.getElementById("navbar").style.top = "-200px";
-          }
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                document.getElementById("navbar").style.top = "0";
+            } else {
+                document.getElementById("navbar").style.top = "-200px";
+            }
         }
     </script>
 
@@ -42,10 +42,14 @@
 
         <div class="headerColumn">
             <p class="headertitle">Kuan-Yu Huang</p>
-            <a class="headerButtonAction" href="mailto:peter124574@gmail.com"><img src="images/mail_logo.png" id="headerButton" height="45px"></a>
-            <a class="headerButtonAction" href="https://github.com/peteryuX"><img src="images/github_logo.png" id="headerButton" height="45px"></a>
-            <a class="headerButtonAction" href="https://www.linkedin.com/in/kuan-yu-huang/"><img src="images/linkedIn_logo.png" id="headerButton" height="45px"></a>
-            <a class="headerButtonAction" href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD"><img src="images/cv_logo.png" id="headerButton" height="45px"></a>
+            <a class="headerButtonAction" href="mailto:peter124574@gmail.com"><img src="images/mail_logo.png"
+                    id="headerButton" height="45px"></a>
+            <a class="headerButtonAction" href="https://github.com/peteryuX"><img src="images/github_logo.png"
+                    id="headerButton" height="45px"></a>
+            <a class="headerButtonAction" href="https://www.linkedin.com/in/kuan-yu-huang/"><img
+                    src="images/linkedIn_logo.png" id="headerButton" height="45px"></a>
+            <a class="headerButtonAction" href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD"><img
+                    src="images/cv_logo.png" id="headerButton" height="45px"></a>
         </div>
         <div class="headerButton">
         </div>
@@ -54,31 +58,41 @@
     <div class="section" id="Biography">
         <h1>Biography</h1>
         <p class="bioline">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            I am currently a machine learning software engineer at HTC VIVE team, where I mainly
-            solve issues about computer vision applications on AR /
+            &nbsp;&nbsp;&nbsp;&nbsp; I'm currently a ML/data scientist at BOOYAH (Garena | Sea),
+            where I focus on recommendation system building for
+            <a class="bioTextLink" href="https://booyah.live/">BOOYAH! LIVE</a>
+            platform. I also worked in HTC VIVE team for 3 years experiences, where I mainly
+            developed computer vision applications of AR /
             <a class="bioTextLink" href="https://www.vive.com/tw/product/cosmos/">VR</a>
-            device by machine learning.
-            My job involves visual detection and traincking using deep neural networks, which
-            is suitable for mobile device. Previously, I received  my M.S. degree in Electrical
-            Engineering from National Tsing Hua University,  and worked with Prof. <a class="bioTextLink" href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.
-            My research focused on computer vision and image  processing using deep learning;
-            B.C. degree in Electrical Engineering from National  Chung Cheng University, and
+            device (visual detection and traincking) by machine learning and deep learning. <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Previously, I received my M.S. degree in Electrical
+            Engineering from National Tsing Hua University, and worked with Prof. <a class="bioTextLink"
+                href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.
+            My research focused on computer vision and image processing using deep learning;
+            B.C. degree in Electrical Engineering from National Chung Cheng University, and
             studied intensively into Communications and Networking.
         </p>
         <div class="bioLogoColumn">
+            <img src="images/Garena_Booyah.png" id="bioImage" height="160">
+            <p class="logoline">ML Data Scientist<br>BOOYAH! (Garena | Sea) <br>Taipei, Taiwan<br>Feb 2021 - Present
+            </p>
+        </div>
+
+        <div class="bioLogoColumn">
             <img src="images/HTCVIVE_logo.png" id="bioImage" height="160">
-            <p class="logoline">ML Software Engineer<br>HTC VIVE co.,ltd<br>Taipei, Taiwan<br>Dec 2017 - Present</p>
+            <p class="logoline">ML Software Engineer<br>HTC VIVE co.,ltd<br>Taipei, Taiwan<br>Dec 2017 - Feb 2021</p>
         </div>
 
         <div class="bioLogoColumn">
             <img src="images/NTHU_logo.png" id="bioImage" height="160">
-            <p class="logoline">M.S. in Electrical Engineering<br>National Tsing Hua University<br>Hsinchu, Taiwan<br>Sep 2015 - Oct 2017</p>
+            <p class="logoline">M.S. in Electrical Engineering<br>National Tsing Hua University<br>Hsinchu,
+                Taiwan<br>Sep 2015 - Oct 2017</p>
         </div>
 
         <div class="bioLogoColumn">
             <img src="images/CCU_logo.png" id="bioImage" height="160">
-            <p class="logoline">B.S. in Electrical Engineering<br>National Chung Cheng University<br>Chiayi, Taiwan<br>Sep 2011 - Jun 2015</p>
+            <p class="logoline">B.S. in Electrical Engineering<br>National Chung Cheng University<br>Chiayi,
+                Taiwan<br>Sep 2011 - Jun 2015</p>
         </div>
     </div>
 
@@ -103,14 +117,20 @@
         </div>
         <div class="projectTextColumn">
             <p class="projectline">
-                In this study, a coupled adversarial net (CAN) based on Siamese Network Structure is proposed, to improve the effectiveness of the feature
-                extraction. In the proposed CAN, we offer GAN loss and semantic feature distances simultaneously, reducing the training complexity as well as
+                In this study, a coupled adversarial net (CAN) based on Siamese Network Structure is proposed, to
+                improve the effectiveness of the feature
+                extraction. In the proposed CAN, we offer GAN loss and semantic feature distances simultaneously,
+                reducing the training complexity as well as
                 improving the performance.
             </p>
 
-            <p class="authorline"><a class="bioTextLink" href="https://scholar.google.com.tw/citations?user=mIWRYc4AAAAJ&hl=zh-TW&oi=sra">Chih-Chung Hsu</a> and Kuan-Yu Huang.
-                <br>[Supported in part by the Ministry of Science and Technology, Taiwan.]</p>
-            <a class="projectButtonAction" href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing">Slides</a>
+            <p class="authorline"><a class="bioTextLink"
+                    href="https://scholar.google.com.tw/citations?user=mIWRYc4AAAAJ&hl=zh-TW&oi=sra">Chih-Chung Hsu</a>
+                and Kuan-Yu Huang.
+                <br>[Supported in part by the Ministry of Science and Technology, Taiwan.]
+            </p>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing">Slides</a>
         </div>
 
     </div>
@@ -136,8 +156,10 @@
                 previous works on the retargeted image case and comparative results in the general
                 quality assessment database, even under the limitation of labeling information.
             </p>
-            <p class="authorline">Kuan-Yu Huang.<br>Advisor: Prof. <a class="bioTextLink" href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
-            <a class="projectButtonAction" href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing">PDF</a>
+            <p class="authorline">Kuan-Yu Huang.<br>Advisor: Prof. <a class="bioTextLink"
+                    href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing">PDF</a>
         </div>
 
         <h2>Side Project, 2017</h2>
@@ -157,7 +179,8 @@
                 generate approximate boundaries for the some non-complex situations.
             </p>
             <p class="authorline">Kuan-Yu Huang.</p>
-            <a class="projectButtonAction" href="https://drive.google.com/file/d/1NLrT50UaFifBsIi-Yc9W2Gy-PUMuDxg9/view?usp=sharing">Slides</a>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/file/d/1NLrT50UaFifBsIi-Yc9W2Gy-PUMuDxg9/view?usp=sharing">Slides</a>
         </div>
 
         <h2>Industry-Academy Cooperation Plan(NOVATEK co.,ltd), 2016</h2>
@@ -177,8 +200,10 @@
                 more efficiently. Our method get the comparable performance and visual quality under lower
                 parameters.
             </p>
-            <p class="authorline">Kuan-Yu Huang and Xian-Xin Lu.<br>Advisor: Prof. <a class="bioTextLink" href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
-            <a class="projectButtonAction" href="https://drive.google.com/file/d/1yb6bVlw7jj-KvpVjZ3M0Fg_qAB2a69m2/view?usp=sharing">PDF</a>
+            <p class="authorline">Kuan-Yu Huang and Xian-Xin Lu.<br>Advisor: Prof. <a class="bioTextLink"
+                    href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/file/d/1yb6bVlw7jj-KvpVjZ3M0Fg_qAB2a69m2/view?usp=sharing">PDF</a>
         </div>
 
         <h2>Computer Vision Final Project, 2015</h2>
@@ -199,8 +224,10 @@
                 expressions, and classify them as corresponding numbers
                 and symbols.
             </p>
-            <p class="authorline">Kuan-Yu Huang and Yi-Mu Lo.<br>Instructor: Prof. <a class="bioTextLink" href="https://scholar.google.com.tw/citations?hl=zh-TW&user=1Rf6sGcAAAAJ">Min Sun</a></p>
-            <a class="projectButtonAction" href="https://drive.google.com/file/d/1hzM7n5ViOtLgSOEAzUTEE08Ddksfh81R/view?usp=sharing">PDF</a>
+            <p class="authorline">Kuan-Yu Huang and Yi-Mu Lo.<br>Instructor: Prof. <a class="bioTextLink"
+                    href="https://scholar.google.com.tw/citations?hl=zh-TW&user=1Rf6sGcAAAAJ">Min Sun</a></p>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/file/d/1hzM7n5ViOtLgSOEAzUTEE08Ddksfh81R/view?usp=sharing">PDF</a>
         </div>
 
         <h2>Independent Study, 2014</h2>
@@ -216,77 +243,82 @@
                 to understanding the change of signal intensity between three base stations
                 when using Beamforming and different codebook.
             </p>
-            <p class="authorline">Kuan-Yu Huang and Heng-Zhe Zhang.<br>Advisor: Prof. <a class="bioTextLink" href="https://scholar.google.com.tw/citations?hl=zh-TW&user=a-m1LgkAAAAJ">Jen-Yi Pan</a></p>
-            <a class="projectButtonAction" href="https://drive.google.com/open?id=1UNHMmHzNqt6kpYvMrC4SrTKM2OBBdpv5">PDF</a>
+            <p class="authorline">Kuan-Yu Huang and Heng-Zhe Zhang.<br>Advisor: Prof. <a class="bioTextLink"
+                    href="https://scholar.google.com.tw/citations?hl=zh-TW&user=a-m1LgkAAAAJ">Jen-Yi Pan</a></p>
+            <a class="projectButtonAction"
+                href="https://drive.google.com/open?id=1UNHMmHzNqt6kpYvMrC4SrTKM2OBBdpv5">PDF</a>
         </div>
     </div>
 
     <hr class="heavy">
 
     <div class="section" id="Certification">
-            <h1>Training and Certification</h1>
+        <h1>Training and Certification</h1>
 
-            <h2>TensorFlow Developer Certificate</h2>
-            <div class="projectImageColumn">
-                <img src="images/TensorflowDeveloperCertificate.png" id="projectImage" width="300">
-            </div>
-            <div class="projectTextColumn">
-                <p class="projectline">
-                    <li>This level one certificate exam tests a developers foundational knowledge
-                        of integrating machine learning into tools and applications. The
-                        certificate program requires an understanding of building TensorFlow models
-                        using Computer Vision, Convolutional Neural Networks, Natural Language
-                        Processing, and real-world image data and strategies.</li>
-                    <p class="authorline">TensorFlow, 28493329, 2021.</p>
-                </p>
-                <a class="projectButtonAction" href="https://www.credential.net/6a216cc0-2820-4325-82d5-634dca3c6791">Detail</a>
-            </div>
-
-            <h2>Advanced Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
-            <div class="projectImageColumn">
-                <img src="images/Coursera P3FEDSP296K4.jpg" id="projectImage" width="300">
-            </div>
-            <div class="projectTextColumn">
-                <p class="projectline">
-                    <li>End-to-End Machine Learning with TensorFlow on GCP</li>
-                    <li>Production Machine Learning Systems</li>
-                    <li>Image Understanding with TensorFlow on GCP</li>
-                    <li>Sequence Models for Time Series and Natural Language</li>
-                    <li>Processing Recommendation Systems with TensorFlow on GCP</li>
-                    <p class="authorline">Coursera + Google Cloud, P3FEDSP296K4, 2019.</p>
-                </p>
-                <a class="projectButtonAction" href="https://www.coursera.org/account/accomplishments/specialization/P3FEDSP296K4">Detail</a>
-            </div>
-
-            <h2>Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
-            <div class="projectImageColumn">
-                <img src="images/Coursera 9VP8REDMAR3X.jpg" id="projectImage" width="300">
-            </div>
-            <div class="projectTextColumn">
-                <p class="projectline">
-                    <li>How Google does Machine Learning</li>
-                    <li>Launching into Machine Learning</li>
-                    <li>Intro to TensorFlow</li>
-                    <li>Feature Engineering</li>
-                    <li>Art and Science of Machine Learning</li>
-                    <p class="authorline">Coursera + Google Cloud, 9VP8REDMAR3X, 2019.</p>
-                </p>
-                <a class="projectButtonAction" href="https://www.coursera.org/account/accomplishments/specialization/9VP8REDMAR3X">Detail</a>
-            </div>
-
-            <h2>100Days Machine Learning Marathon Challenge</h2>
-            <div class="projectImageColumn">
-                <img src="images/ML_marathon_challenge_certificate_of_completion.jpg" id="projectImage" width="300">
-            </div>
-            <div class="projectTextColumn">
-                <p class="projectline">
-                    <li>A marathon Challenge about training your machine learning
-                    skill on Kaggle in 100 consecutive days.</li>
-                    <p class="authorline">CUPOY, 2019010026, 2019.</p>
-                </p>
-                <a class="projectButtonAction" href="https://github.com/peteryuX/100Day-ML-Marathon">Detail</a>
-            </div>
+        <h2>TensorFlow Developer Certificate</h2>
+        <div class="projectImageColumn">
+            <img src="images/TensorflowDeveloperCertificate.png" id="projectImage" width="300">
         </div>
+        <div class="projectTextColumn">
+            <p class="projectline">
+                <li>This level one certificate exam tests a developers foundational knowledge
+                    of integrating machine learning into tools and applications. The
+                    certificate program requires an understanding of building TensorFlow models
+                    using Computer Vision, Convolutional Neural Networks, Natural Language
+                    Processing, and real-world image data and strategies.</li>
+            <p class="authorline">TensorFlow, 28493329, 2021.</p>
+            </p>
+            <a class="projectButtonAction"
+                href="https://www.credential.net/6a216cc0-2820-4325-82d5-634dca3c6791">Detail</a>
+        </div>
+
+        <h2>Advanced Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
+        <div class="projectImageColumn">
+            <img src="images/Coursera P3FEDSP296K4.jpg" id="projectImage" width="300">
+        </div>
+        <div class="projectTextColumn">
+            <p class="projectline">
+                <li>End-to-End Machine Learning with TensorFlow on GCP</li>
+                <li>Production Machine Learning Systems</li>
+                <li>Image Understanding with TensorFlow on GCP</li>
+                <li>Sequence Models for Time Series and Natural Language</li>
+                <li>Processing Recommendation Systems with TensorFlow on GCP</li>
+            <p class="authorline">Coursera + Google Cloud, P3FEDSP296K4, 2019.</p>
+            </p>
+            <a class="projectButtonAction"
+                href="https://www.coursera.org/account/accomplishments/specialization/P3FEDSP296K4">Detail</a>
+        </div>
+
+        <h2>Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
+        <div class="projectImageColumn">
+            <img src="images/Coursera 9VP8REDMAR3X.jpg" id="projectImage" width="300">
+        </div>
+        <div class="projectTextColumn">
+            <p class="projectline">
+                <li>How Google does Machine Learning</li>
+                <li>Launching into Machine Learning</li>
+                <li>Intro to TensorFlow</li>
+                <li>Feature Engineering</li>
+                <li>Art and Science of Machine Learning</li>
+            <p class="authorline">Coursera + Google Cloud, 9VP8REDMAR3X, 2019.</p>
+            </p>
+            <a class="projectButtonAction"
+                href="https://www.coursera.org/account/accomplishments/specialization/9VP8REDMAR3X">Detail</a>
+        </div>
+
+        <h2>100Days Machine Learning Marathon Challenge</h2>
+        <div class="projectImageColumn">
+            <img src="images/ML_marathon_challenge_certificate_of_completion.jpg" id="projectImage" width="300">
+        </div>
+        <div class="projectTextColumn">
+            <p class="projectline">
+                <li>A marathon Challenge about training your machine learning
+                    skill on Kaggle in 100 consecutive days.</li>
+            <p class="authorline">CUPOY, 2019010026, 2019.</p>
+            </p>
+            <a class="projectButtonAction" href="https://github.com/peteryuX/100Day-ML-Marathon">Detail</a>
+        </div>
+    </div>
 
     <div class="footer">
         <a class="topButtonAction" href="#top">BACK TO TOP</a>

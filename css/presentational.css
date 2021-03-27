@@ -26,12 +26,12 @@ body {
   background-color: #eeeeee;
 }
 
-::-moz-selection { 
+::-moz-selection {
   background: rgba(253, 77, 121, 0.5);
   /* color: rgb(240, 240, 240); */
 }
-::selection { 
-  background: rgba(253, 77, 121, 0.5); 
+::selection {
+  background: rgba(253, 77, 121, 0.5);
   /* color: rgb(240, 240, 240); */
 }
 
@@ -267,7 +267,8 @@ h3 {
 }
 
 .logoline {
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 20px;
   letter-spacing: 0.5px;
   text-align: center;
 }
@@ -351,7 +352,7 @@ hr.heavy {
 
   .bioLogoColumn {
     padding: 1vh 0vw;
-    width: 100%;
+    width: 24%;
   }
 
   #projectImage {
