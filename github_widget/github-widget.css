@@ -25,11 +25,14 @@
   text-decoration: none;
   font-weight: bold;
   color: rgba(14, 113, 131, 0.829);
-  text-align:center
+  text-align:center;
+  transition: background-color 1s;
 }
 
 .gw-name:hover{
   text-decoration: underline;
+  background-color: #f7d7e8;
+  transition: background-color 0.5s;
 }
 
 .gw-stats {
@@ -74,8 +77,8 @@
 @media only screen and (max-width: 1024px) {
   .gw-repo-outer {
     float: left;
-    width: 100%;
-    padding: 3px;
+    width: 95%;
+    padding: 0.2rem;
   }
 
   .gw-title{

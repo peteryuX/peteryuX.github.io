@@ -1,358 +1,591 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#2c4457">
-    <meta name="google-site-verification" content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#2c4457" />
+    <meta
+      name="google-site-verification"
+      content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
     <meta property="og:image" content="images/head_shot.jpg" />
     <meta property="og:title" content="Kuan-Yu Huang's Personal Website." />
-    <meta property="og:description" content="Hello, I'm Kuan-Yu Huang (Peter) and good to see you!" />
+    <meta
+      property="og:description"
+      content="Hello, I'm Kuan-Yu Huang (Peter) and good to see you!"
+    />
     <title>Kuan-Yu Huang</title>
-    <link rel="stylesheet" href="github_widget/github-widget.css" type="text/css" />
-    <link rel="stylesheet" href="css/presentational.css">
-    <link rel="stylesheet" href="css/circular-images.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="github_widget/github-widget.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="css/presentational.css" />
+    <link rel="stylesheet" href="css/circular-images.css" />
+  </head>
 
-<body>
+  <body>
     <div id="navbar">
-        <a href="#top">Home</a>
-        <a href="#Biography">Biography</a>
-        <a href="#Github Repositories">GithubRepos</a>
-        <a href="#Publications">Publications</a>
-        <a href="#Projects">Projects</a>
-        <a href="#Certification">Certification</a>
+      <a href="#top">Home</a>
+      <a href="#Biography">Biography</a>
+      <a href="#Github Repositories">GithubRepos</a>
+      <a href="#Publications">Publications</a>
+      <a href="#Projects">Projects</a>
+      <a href="#Certifications">Certifications</a>
     </div>
 
     <script>
-        // When the user scrolls down 20px from the top of the document, slide down the navbar
-        window.onscroll = function () { scrollFunction() };
+      // When the user scrolls down 20px from the top of the document, slide down the navbar
+      window.onscroll = function () {
+        scrollFunction();
+      };
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                document.getElementById("navbar").style.top = "0";
-            } else {
-                document.getElementById("navbar").style.top = "-200px";
-            }
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          document.getElementById("navbar").style.top = "0rem";
+        } else {
+          document.getElementById("navbar").style.top = "-100rem";
         }
+      }
     </script>
 
     <div class="header">
-        <div class="headerColumn">
-            <img class="circular--square" id="head_shot" src="images/head_shot.jpg" height="200">
-        </div>
+      <div class="headerColumn">
+        <img
+          class="circular--square"
+          id="headShot"
+          src="images/head_shot.jpg"
+        />
+      </div>
 
-        <div class="headerColumn">
-            <p class="headertitle">Kuan-Yu Huang</p>
-            <div class="headerButtonContainer">
-                <div class="headerButtonColumn">
-                    <a id="headerButton" href="mailto:peter124574@gmail.com"><img src="images/mail_logo.png" height="40"></a>
-                </div>
-                <div class="headerButtonColumn">
-                    <a id="headerButton" href="https://github.com/peteryuX"><img src="images/github_logo.png" height="40"></a>
-                </div>
-                <div class="headerButtonColumn">
-                    <a id="headerButton" href="https://www.linkedin.com/in/kuan-yu-huang/"><img
-                            src="images/linkedIn_logo.png" height="40"></a>
-                </div>
-                <div class="headerButtonColumn">
-                    <a id="headerButton" href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD"><img
-                            src="images/cv_logo.png" height="40"></a>
-                </div>
-            </div>
+      <div class="headerColumn">
+        <p class="headertitle">Kuan-Yu Huang</p>
+        <div class="headerButtonContainer">
+          <div class="headerButtonColumn">
+            <a id="headerButton" href="mailto:peter124574@gmail.com"
+              ><img src="images/mail_logo.png"
+            /></a>
+          </div>
+          <div class="headerButtonColumn">
+            <a
+              id="headerButton"
+              href="https://github.com/peteryuX"
+              target="_blank"
+              ><img src="images/github_logo.png"
+            /></a>
+          </div>
+          <div class="headerButtonColumn">
+            <a
+              id="headerButton"
+              href="https://www.linkedin.com/in/kuan-yu-huang/"
+              target="_blank"
+              ><img src="images/linkedIn_logo.png"
+            /></a>
+          </div>
+          <div class="headerButtonColumn">
+            <a
+              id="headerButton"
+              href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD"
+              target="_blank"
+              ><img src="images/cv_logo.png"
+            /></a>
+          </div>
         </div>
-        <div class="headerButton">
-        </div>
+      </div>
+      <div class="headerButton"></div>
     </div>
 
     <div class="section" id="Biography">
-        <h1>Biography</h1>
-        <p class="bioline">
-            &nbsp;&nbsp;&nbsp;&nbsp;I'm a software engineer for machine learning and passionate about building machine
-            learning models in production!
-            I'm currently open to new opportunities (ML engineer / Data Scientist)! <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Previously, I was a data scientist at BOOYAH (Garena | Sea) for 1+ years experiences,
-            where I focused on recommendation system building for
-            <a class="bioTextLink" href="https://booyah.live/">BOOYAH! LIVE</a>
-            platform. I also worked in HTC VIVE team for 3+ years experiences, where I mainly
-            developed computer vision applications of AR /
-            <a class="bioTextLink" href="https://www.vive.com/tw/product/cosmos/">VR</a>
-            device (visual detection and tracking) by machine learning and deep learning. <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;I received my M.S. degree in Electrical
-            Engineering from National Tsing Hua University, and worked with Prof. <a class="bioTextLink"
-                href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.
-            My research focused on computer vision and image processing using deep learning;
-            B.C. degree in Electrical Engineering from National Chung Cheng University, and
-            studied intensively into Communications and Networking.
-        </p>
-        <div class="bioLogoContainer">
-            <div class="bioLogoColumn">
-                <img src="images/HTCVIVE_logo.png" id="bioImage" height="140">
-                <p class="logoline">ML Software Engineer<br>HTC VIVE co.,ltd<br>Taipei, Taiwan<br>Nov 2022 - Present</p>
-                </p>
-            </div>
+      <h1>Biography</h1>
+      <p class="bioLine">
+        &nbsp;&nbsp;&nbsp;&nbsp;I am a software engineer specializing in machine
+        learning, with a strong passion for developing machine learning models
+        for production. Currently, I have several years of experience working
+        with the
+        <a class="bioTextLink" href="https://www.vive.com/us/" target="_blank"
+          >HTC VIVE</a
+        >
+        team, where I have primarily focused on developing computer vision
+        applications for AR /
+        <a
+          class="bioTextLink"
+          href="https://www.vive.com/us/product/vive-xr-elite/overview/"
+          target="_blank"
+          >XR</a
+        >
+        /
+        <a
+          class="bioTextLink"
+          href="https://www.vive.com/us/product/vive-focus3/overview/"
+          target="_blank"
+          >VR</a
+        >
+        devices using machine learning and deep learning techniques for visual
+        detection and tracking.
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;In my previous role, I served as a data
+        scientist at Garena (Sea Group) for over a year. My primary focus there
+        was on building a recommendation system for the
+        <a class="bioTextLink" href="https://booyah.live/" target="_blank"
+          >BOOYAH! LIVE</a
+        >
+        platform. Subsequently, I joined
+        <a class="bioTextLink" href="https://www.dcard.tw/" target="_blank"
+          >Dcard</a
+        >
+        as an ML Engineer, where my main responsibility was to develop a post
+        recommendation system that aimed to improve the user experience on the
+        platform.
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;I hold an M.S. degree in Electrical Engineering
+        from National Tsing Hua University, where I worked with Professor
+        <a
+          class="bioTextLink"
+          href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW"
+          >Chia-Wen Lin</a
+        >. My research there was focused on computer vision and image processing
+        using deep learning techniques. Additionally, I obtained a B.C. degree
+        in Electrical Engineering from National Chung Cheng University, where I
+        studied Communications and Networking intensively.
+      </p>
 
-            <div class="bioLogoColumn">
-                <img src="images/Dcard_logo.png" id="bioImage" height="140">
-                <p class="logoline">ML Data Scientist<br>Dcard co.,ltd<br>Taipei, Taiwan<br>Aug 2022 - Nov 2022</p>
-                </p>
-            </div>
+      <hr class="light" />
 
-            <div class="bioLogoColumn">
-                <img src="images/Garena_Booyah.png" id="bioImage" height="140">
-                <p class="logoline">ML Data Scientist<br>BOOYAH! (Garena | Sea) <br>Taipei, Taiwan<br>Feb 2021 - March 2022
-                </p>
-            </div>
-
-            <div class="bioLogoColumn">
-                <img src="images/HTCVIVE_logo.png" id="bioImage" height="140">
-                <p class="logoline">ML Software Engineer<br>HTC VIVE co.,ltd<br>Taipei, Taiwan<br>Dec 2017 - Feb 2021</p>
-            </div>
-
-            <div class="bioLogoColumn">
-                <img src="images/NTHU_logo.png" id="bioImage" height="140">
-                <p class="logoline">M.S. in Electrical Engineering<br>National Tsing Hua University<br>Hsinchu,
-                    Taiwan<br>Sep 2015 - Oct 2017</p>
-            </div>
-
-            <div class="bioLogoColumn">
-                <img src="images/CCU_logo.png" id="bioImage" height="140">
-                <p class="logoline">B.S. in Electrical Engineering<br>National Chung Cheng University<br>Chiayi,
-                    Taiwan<br>Sep 2011 - Jun 2015</p>
-            </div>
+      <div class="bioLogoContainer">
+        <div class="bioLogoColumn">
+          <img src="images/HTCVIVE_logo.png" />
+          <p class="logoLine">
+            <b>HTC VIVE<br />ML Engineer</b>
+          </p>
+          <p class="logoSubLine">Taipei, Taiwan<br />Nov. 2022 - Present</p>
         </div>
+
+        <div class="bioLogoColumn">
+          <img src="images/Dcard_logo.png" />
+          <p class="logoLine"><b>Dcard</b><br /><b>ML Engineer</b></p>
+          <p class="logoSubLine">Taipei, Taiwan<br />Aug. 2022 - Nov. 2022</p>
+        </div>
+
+        <div class="bioLogoColumn">
+          <img src="images/Garena_Booyah.png" />
+          <p class="logoLine">
+            <b>Garena | SEA<br />(BOOYAH!)<br />Data Scientist</b>
+          </p>
+          <p class="logoSubLine">Taipei, Taiwan<br />Feb. 2021 - Mar. 2022</p>
+        </div>
+
+        <div class="bioLogoColumn">
+          <img src="images/HTCVIVE_logo.png" />
+          <p class="logoLine"><b>HTC VIVE</b><br /><b>ML Engineer</b></p>
+          <p class="logoSubLine">Taipei, Taiwan<br />Dec. 2017 - Feb. 2021</p>
+        </div>
+
+        <div class="bioLogoColumn">
+          <img src="images/NTHU_logo.png" />
+          <p class="logoLine">
+            <b>National Tsing Hua University<br />M.S. in E.E.</b>
+          </p>
+          <p class="logoSubLine">Hsinchu, Taiwan<br />Sep. 2015 - Oct. 2017</p>
+        </div>
+
+        <div class="bioLogoColumn">
+          <img src="images/CCU_logo.png" />
+          <p class="logoLine">
+            <b>National Chung Cheng University<br />B.S. in E.E.</b>
+          </p>
+          <p class="logoSubLine">Chiayi, Taiwan<br />Sep. 2011 - Jun. 2015</p>
+        </div>
+      </div>
     </div>
 
-    <hr class="heavy">
+    <hr class="heavy" />
 
     <div class="section" id="Github Repositories">
-        <h1>Github Repositories</h1>
-        <div class="github-widget" data-user="peteryuX"></div>
+      <h1>Github Repositories</h1>
+      <div class="github-widget" data-user="peteryuX"></div>
 
-        <script src="github_widget/github-widget.min.js"></script>
+      <script src="github_widget/github-widget.min.js"></script>
     </div>
 
-    <hr class="heavy">
+    <hr class="heavy" />
 
     <div class="section" id="Publications">
-        <h1>Publications</h1>
+      <h1>Publications</h1>
 
-        <h2>Coupled Adversarial Learning for Single Image Super-Resolution</h2>
-        <h3>IEEE SAM 2020</h3>
+      <h2>Coupled Adversarial Learning for Single Image Super-Resolution</h2>
+      <h3>IEEE SAM 2020</h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/CANSR.JPG" id="projectImage" width="360">
+          <img src="images/CANSR.JPG" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                In this study, a coupled adversarial net (CAN) based on Siamese Network Structure is proposed, to
-                improve the effectiveness of the feature
-                extraction. In the proposed CAN, we offer adversarial loss (GAN) and semantic feature distances simultaneously,
-                reducing the training complexity as well as
-                improving the performance.
-            </p>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;In this study, a coupled adversarial net
+            (CAN) based on Siamese Network Structure is proposed, to improve the
+            effectiveness of the feature extraction. In the proposed CAN, we
+            offer adversarial loss (GAN) and semantic feature distances
+            simultaneously, reducing the training complexity as well as
+            improving the performance.
+          </p>
 
-            <p class="authorline"><a class="bioTextLink"
-                    href="https://scholar.google.com.tw/citations?user=mIWRYc4AAAAJ&hl=zh-TW&oi=sra">Chih-Chung Hsu</a>
-                and Kuan-Yu Huang.
-                <br>[Supported in part by the Ministry of Science and Technology, Taiwan.]
-            </p>
-            <a class="projectButtonAction" href="https://ieeexplore.ieee.org/document/9104288">Paper</a>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing">Slides</a>
+          <p class="authorline">
+            <a
+              class="bioTextLink"
+              href="https://scholar.google.com.tw/citations?user=mIWRYc4AAAAJ&hl=zh-TW&oi=sra"
+              >Chih-Chung Hsu</a
+            >
+            and Kuan-Yu Huang.
+            <br />[Supported in part by the Ministry of Science and Technology,
+            Taiwan.]
+          </p>
+          <div class="projectButtonRow">
+            <a
+              href="https://ieeexplore.ieee.org/document/9104288"
+              target="_blank"
+              >Paper</a
+            >
+            <a
+              href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing"
+              target="_blank"
+              >Slides</a
+            >
+          </div>
         </div>
-
+      </div>
     </div>
 
-    <hr class="heavy">
+    <hr class="heavy" />
 
     <div class="section" id="Projects">
-        <h1>Projects</h1>
+      <h1>Projects</h1>
 
-        <h2>Master's Thesis, 2017</h2>
-        <h3>Pairwise Learning on Image Quality Assessment using Deep Siamese Neural Network</h3>
+      <h2>Master's Thesis, 2017</h2>
+      <h3>
+        Pairwise Learning on Image Quality Assessment using Deep Siamese Neural
+        Network
+      </h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/SiIQA.jpg" id="projectImage" width="360">
+          <img src="images/SiIQA.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                In this thesis, we propose a pairwise training model for image subjective quality
-                assessment. Our architecture is based on Siamese network, which can make our model
-                training on paired-comparison data. This architecture lets us solve the problem on
-                image retargeting and easily extends to similar tasks. On general subjective quality
-                assessment database, our method can also alleviate the difficulty of data collections.
-                Experiment shows that our proposed method produces better results compared to
-                previous works on the retargeted image case and comparative results in the general
-                quality assessment database, even under the limitation of labeling information.
-            </p>
-            <p class="authorline">Kuan-Yu Huang.<br>Advisor: Prof. <a class="bioTextLink"
-                    href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing">PDF</a>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;In this thesis, we propose a pairwise
+            training model for assessing the subjective quality of images. Our
+            model is based on a Siamese network architecture, enabling training
+            on paired-comparison data. This architecture allows us to address
+            image retargeting problems and extend to similar tasks with ease.
+            Furthermore, our method can alleviate the difficulty of collecting
+            data on general subjective quality assessment databases. Our
+            experimental results demonstrate that our proposed approach yields
+            superior results compared to previous works in the retargeted image
+            case and comparable results in the general quality assessment
+            database, even with the limitation of labeling information.
+          </p>
+          <p class="authorline">
+            Kuan-Yu Huang.<br />Advisor: Prof.
+            <a
+              class="bioTextLink"
+              href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW"
+              >Chia-Wen Lin</a
+            >.
+          </p>
+          <div class="projectButtonRow">
+            <a
+              href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing"
+              target="_blank"
+              >PDF</a
+            >
+          </div>
         </div>
+      </div>
 
-        <h2>Side Project, 2017</h2>
-        <h3>Open View: Single Image Retargeting by GAN-based Boundary Inpainting</h3>
+      <hr class="light" />
+
+      <h2>Side Project, 2017</h2>
+      <h3>
+        Open View: Single Image Retargeting by GAN-based Boundary Inpainting
+      </h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/OpenView.jpg" id="projectImage" width="360">
+          <img src="images/OpenView.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                In this project, I use generative adversarial network (GAN) to eliminate the dark side
-                produced by the non-match aspect ratio contents on display device (like 4:3 to 16:9),
-                which can provide user a better experience when enjoying a visual content with old specification.
-                The idea is combination of two classic problem in image processing, which are image retargeting
-                and image inpainting. My method expand the visual regions by inpaint the boundaries to meet the need
-                about change the aspect ratio of image content. Under my disgned loss (special adversarial/ perceptual
-                / texture loss) and multi-I/O architecture, the produced results show that my network can
-                generate approximate boundaries for the some non-complex situations.
-            </p>
-            <p class="authorline">Kuan-Yu Huang.</p>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/file/d/1NLrT50UaFifBsIi-Yc9W2Gy-PUMuDxg9/view?usp=sharing">Slides</a>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;In this project, a generative adversarial
+            network (GAN) is employed to mitigate visual distortions resulting
+            from non-matching aspect ratio content on display devices (e.g., 4:3
+            to 16:9). This approach aims to enhance the user experience when
+            viewing old specification content. The proposed method combines two
+            classic image processing problems, image retargeting and image
+            inpainting, to expand visual regions by inpainting boundaries to
+            accommodate changes in the aspect ratio of image content. The
+            designed loss function (comprising adversarial, perceptual, and
+            texture loss) and multi-input/output architecture of our network
+            yield results that accurately approximate boundaries in some
+            non-complex situations.
+          </p>
+          <p class="authorline">Kuan-Yu Huang.</p>
+          <div class="projectButtonRow">
+            <a
+              href="https://drive.google.com/file/d/1NLrT50UaFifBsIi-Yc9W2Gy-PUMuDxg9/view?usp=sharing"
+              target="_blank"
+              >Slides</a
+            >
+          </div>
         </div>
+      </div>
 
-        <h2>Industry-Academy Cooperation Plan(NOVATEK co.,ltd), 2016</h2>
-        <h3>A Resource-Constrained Scheme of Image Super-Resolution</h3>
+      <hr class="light" />
+
+      <h2>Industry-Academy Cooperation Plan(NOVATEK co.,ltd), 2016</h2>
+      <h3>A Resource-Constrained Scheme of Image Super-Resolution</h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/NovaSR.jpg" id="projectImage" width="360">
+          <img src="images/NovaSR.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                We propose a resource-constrained CNN-based super-resolution method, which can be used for
-                the embedding chips in high-resolution digital television. To reach the requirement, we
-                chose the shallow version of FSRCNN as backbone, and replace the deconvolution up-sample
-                layer as ESPCN’s sub-pixel up-sample layer. To further, solve the artifact distortion on
-                the visual result with computer graphic input image, which main problem caused by the low
-                capacity of shallow network. We use divisive normalization after every convolution layers
-                and add total variation loss to objective cost function, which let our network learning
-                more efficiently. Our method get the comparable performance and visual quality under lower
-                parameters.
-            </p>
-            <p class="authorline">Kuan-Yu Huang and Xian-Xin Lu.<br>Advisor: Prof. <a class="bioTextLink"
-                    href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW">Chia-Wen Lin</a>.</p>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/file/d/1yb6bVlw7jj-KvpVjZ3M0Fg_qAB2a69m2/view?usp=sharing">PDF</a>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;We present a CNN-based super-resolution
+            method that is suitable for embedding chips in high-resolution
+            digital television under resource constraints. To meet this
+            requirement, we employ the shallow version of FSRCNN as the backbone
+            and replace the deconvolution up-sample layer with ESPCN's sub-pixel
+            up-sample layer. To address the artifact distortion resulting from
+            the shallow network's low capacity, we incorporate divisive
+            normalization after every convolution layer and include total
+            variation loss in the objective cost function to improve the
+            network's learning efficiency. Our approach achieves comparable
+            performance and visual quality with fewer parameters, demonstrating
+            its effectiveness in resource-constrained scenarios.
+          </p>
+          <p class="authorline">
+            Kuan-Yu Huang and Xian-Xin Lu.<br />Advisor: Prof.
+            <a
+              class="bioTextLink"
+              href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW"
+              >Chia-Wen Lin</a
+            >.
+          </p>
+          <div class="projectButtonRow">
+            <a
+              href="https://drive.google.com/file/d/1yb6bVlw7jj-KvpVjZ3M0Fg_qAB2a69m2/view?usp=sharing"
+              target="_blank"
+              >PDF</a
+            >
+          </div>
         </div>
+      </div>
 
-        <h2>Computer Vision Final Project, 2015</h2>
-        <h3>Real-time Computing Mathematical Expressions Recognized from Images</h3>
+      <hr class="light" />
+
+      <h2>Computer Vision Final Project, 2015</h2>
+      <h3>
+        Real-time Computing Mathematical Expressions Recognized from Images
+      </h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/CVFinalProject.jpg" id="projectImage" width="360">
+          <img src="images/CVFinalProject.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                For students, fastly and correctly computing mathematical
-                expressions is necessary when studying. However, typing mathematical
-                expressions into calculator costs much time, and sometimes
-                results in wrong answers due to errant typing. In this work,
-                we propose to compute mathematics expressions
-                recognized from images. In specific, we detect the
-                expressions in images by extracting feature points.
-                Afterwards, we crop out the characters from the detected
-                expressions, and classify them as corresponding numbers
-                and symbols.
-            </p>
-            <p class="authorline">Kuan-Yu Huang and Yi-Mu Lo.<br>Instructor: Prof. <a class="bioTextLink"
-                    href="https://scholar.google.com.tw/citations?hl=zh-TW&user=1Rf6sGcAAAAJ">Min Sun</a></p>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/file/d/1hzM7n5ViOtLgSOEAzUTEE08Ddksfh81R/view?usp=sharing">PDF</a>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;Efficiently and accurately computing
+            mathematical expressions is crucial for students during their
+            studies. However, manually inputting equations into a calculator can
+            be time-consuming and error-prone. To address this issue, we propose
+            a method for recognizing mathematical expressions from images.
+            Specifically, we detect expressions in images by extracting feature
+            points and crop out individual characters. We then classify these
+            characters as corresponding numbers and symbols, enabling efficient
+            and accurate computation of mathematical expressions from images.
+          </p>
+          <p class="authorline">
+            Kuan-Yu Huang and Yi-Mu Lo.<br />Instructor: Prof.
+            <a
+              class="bioTextLink"
+              href="https://scholar.google.com.tw/citations?hl=zh-TW&user=1Rf6sGcAAAAJ"
+              >Min Sun</a
+            >
+          </p>
+          <div class="projectButtonRow">
+            <a
+              href="https://drive.google.com/file/d/1hzM7n5ViOtLgSOEAzUTEE08Ddksfh81R/view?usp=sharing"
+              target="_blank"
+              >PDF</a
+            >
+          </div>
         </div>
+      </div>
 
-        <h2>Independent Study, 2014</h2>
-        <h3>5G Communication-LTE TM6 & Beamforming Visualization</h3>
+      <hr class="light" />
+
+      <h2>Independent Study, 2014</h2>
+      <h3>5G Communication-LTE TM6 & Beamforming Visualization</h3>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/5GVisualizatopm.jpg" id="projectImage" width="360">
+          <img src="images/5GVisualizatopm.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                We created a platform using JAVA. It contained three base stations, and we 3D
-                visualized the communication technology Beamforming (with TM6 model in
-                Transmission modes in LTE Release 9). The platform can help user or researcher
-                to understanding the change of signal intensity between three base stations
-                when using Beamforming and different codebook.
-            </p>
-            <p class="authorline">Kuan-Yu Huang and Heng-Zhe Zhang.<br>Advisor: Prof. <a class="bioTextLink"
-                    href="https://scholar.google.com.tw/citations?hl=zh-TW&user=a-m1LgkAAAAJ">Jen-Yi Pan</a></p>
-            <a class="projectButtonAction"
-                href="https://drive.google.com/open?id=1UNHMmHzNqt6kpYvMrC4SrTKM2OBBdpv5">PDF</a>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;We have developed a JAVA-based platform
+            featuring three base stations for 3D visualization of the advanced
+            communication technique of Beamforming, utilizing the TM6 model in
+            Transmission modes in LTE Release 9. Our platform enables users and
+            researchers to effectively comprehend the variations in signal
+            intensity between the three base stations while employing
+            Beamforming and distinct codebooks.
+          </p>
+          <p class="authorline">
+            Kuan-Yu Huang and Heng-Zhe Zhang.<br />Advisor: Prof.
+            <a
+              class="bioTextLink"
+              href="https://scholar.google.com.tw/citations?hl=zh-TW&user=a-m1LgkAAAAJ"
+              >Jen-Yi Pan</a
+            >
+          </p>
+          <div class="projectButtonRow">
+            <a
+              href="https://drive.google.com/open?id=1UNHMmHzNqt6kpYvMrC4SrTKM2OBBdpv5"
+              target="_blank"
+              >PDF</a
+            >
+          </div>
         </div>
+      </div>
     </div>
 
-    <hr class="heavy">
+    <hr class="heavy" />
 
-    <div class="section" id="Certification">
-        <h1>Training and Certification</h1>
+    <div class="section" id="Certifications">
+      <h1>Certifications</h1>
 
-        <h2>TensorFlow Developer Certificate</h2>
+      <h2>TensorFlow Developer Certificate</h2>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/TensorflowDeveloperCertificate.png" id="projectImage" width="300">
+          <img src="images/TensorflowDeveloperCertificate.png" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                <li>This level one certificate exam tests a developers foundational knowledge
-                    of integrating machine learning into tools and applications. The
-                    certificate program requires an understanding of building TensorFlow models
-                    using Computer Vision, Convolutional Neural Networks, Natural Language
-                    Processing, and real-world image data and strategies.</li>
-            <p class="authorline">TensorFlow, 28493329, 2021.</p>
-            </p>
-            <a class="projectButtonAction"
-                href="https://www.credential.net/6a216cc0-2820-4325-82d5-634dca3c6791">Detail</a>
-        </div>
+          <p class="projectline"></p>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp;This level one certificate exam tests a
+            developers foundational knowledge of integrating machine learning
+            into tools and applications.
+            <br />&nbsp;&nbsp;&nbsp;&nbsp;The certificate program requires an
+            understanding of building TensorFlow models using Computer Vision,
+            Convolutional Neural Networks, Natural Language Processing, and
+            real-world image data and strategies.
+          </p>
 
-        <h2>Advanced Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
+          <p class="authorline">TensorFlow, 28493329, 2021.</p>
+
+          <div class="projectButtonRow">
+            <a
+              href="https://www.credential.net/6a216cc0-2820-4325-82d5-634dca3c6791"
+              target="_blank"
+              >Detail</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <hr class="light" />
+
+      <h2>
+        Advanced Machine Learning with TensorFlow on Google Cloud Platform
+        Specialization
+      </h2>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/Coursera P3FEDSP296K4.jpg" id="projectImage" width="300">
+          <img src="images/Coursera P3FEDSP296K4.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                <li>End-to-End Machine Learning with TensorFlow on GCP</li>
-                <li>Production Machine Learning Systems</li>
-                <li>Image Understanding with TensorFlow on GCP</li>
-                <li>Sequence Models for Time Series and Natural Language</li>
-                <li>Processing Recommendation Systems with TensorFlow on GCP</li>
-            <p class="authorline">Coursera + Google Cloud, P3FEDSP296K4, 2019.</p>
-            </p>
-            <a class="projectButtonAction"
-                href="https://www.coursera.org/account/accomplishments/specialization/P3FEDSP296K4">Detail</a>
-        </div>
+          <p class="projectline">
+            <li>End-to-End Machine Learning with TensorFlow on GCP</li>
+            <li>Production Machine Learning Systems</li>
+            <li>Image Understanding with TensorFlow on GCP</li>
+            <li>Sequence Models for Time Series and Natural Language</li>
+            <li>Processing Recommendation Systems with TensorFlow on GCP</li>
+          </p>
 
-        <h2>Machine Learning with TensorFlow on Google Cloud Platform Specialization</h2>
+          <p class="authorline">Coursera + Google Cloud, P3FEDSP296K4, 2019.</p>
+
+          <div class="projectButtonRow">
+            <a
+              href="https://www.coursera.org/account/accomplishments/specialization/P3FEDSP296K4"
+              target="_blank"
+              >Detail</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <hr class="light" />
+
+      <h2>
+        Machine Learning with TensorFlow on Google Cloud Platform Specialization
+      </h2>
+
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/Coursera 9VP8REDMAR3X.jpg" id="projectImage" width="300">
+          <img src="images/Coursera 9VP8REDMAR3X.jpg" />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                <li>How Google does Machine Learning</li>
-                <li>Launching into Machine Learning</li>
-                <li>Intro to TensorFlow</li>
-                <li>Feature Engineering</li>
-                <li>Art and Science of Machine Learning</li>
-            <p class="authorline">Coursera + Google Cloud, 9VP8REDMAR3X, 2019.</p>
-            </p>
-            <a class="projectButtonAction"
-                href="https://www.coursera.org/account/accomplishments/specialization/9VP8REDMAR3X">Detail</a>
-        </div>
+          <p class="projectline">
+            <li>How Google does Machine Learning</li>
+            <li>Launching into Machine Learning</li>
+            <li>Intro to TensorFlow</li>
+            <li>Feature Engineering</li>
+            <li>Art and Science of Machine Learning</li>
+          </p>
 
-        <h2>100Days Machine Learning Marathon Challenge</h2>
+          <p class="authorline">Coursera + Google Cloud, 9VP8REDMAR3X, 2019.</p>
+          <div class="projectButtonRow">
+            <a
+              href="https://www.coursera.org/account/accomplishments/specialization/9VP8REDMAR3X"
+              target="_blank"
+              >Detail</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <hr class="light" />
+
+      <h2>100Days Machine Learning Marathon Challenge</h2>
+      <div class="projectInfoContainer">
         <div class="projectImageColumn">
-            <img src="images/ML_marathon_challenge_certificate_of_completion.jpg" id="projectImage" width="300">
+          <img
+            src="images/ML_marathon_challenge_certificate_of_completion.jpg"
+          />
         </div>
         <div class="projectTextColumn">
-            <p class="projectline">
-                <li>A marathon Challenge about training your machine learning
-                    skill on Kaggle in 100 consecutive days.</li>
-            <p class="authorline">CUPOY, 2019010026, 2019.</p>
-            </p>
-            <a class="projectButtonAction" href="https://github.com/peteryuX/100Day-ML-Marathon">Detail</a>
+          <p class="projectline"></p>
+          <p class="projectline">
+            &nbsp;&nbsp;&nbsp;&nbsp; A marathon Challenge about training your
+            machine learning skill on Kaggle in 100 consecutive days.
+          </p>
+
+          <p class="authorline">CUPOY, 2019010026, 2019.</p>
+
+          <div class="projectButtonRow">
+            <a
+              href="https://github.com/peteryuX/100Day-ML-Marathon"
+              target="_blank"
+              >Detail</a
+            >
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="footer">
-        <a class="topButtonAction" href="#top">BACK TO TOP</a>
+      <a class="topButtonAction" href="#top">BACK TO TOP</a>
     </div>
-
-</body>
-
+  </body>
 </html>
