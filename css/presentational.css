@@ -20,24 +20,20 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   font-family: "Helvetica";
   font-size: 1rem;
   letter-spacing: 0.05rem;
   font-weight: 400;
-  color: #3d4457;
   background-color: #eeeeee;
   scroll-behavior: smooth;
 }
 
 ::-moz-selection {
-  background: rgba(253, 77, 121, 0.5);
-  /* color: rgb(240, 240, 240); */
+  background: #fd4d7980;
 }
 ::selection {
-  background: rgba(253, 77, 121, 0.5);
-  /* color: rgb(240, 240, 240); */
+  background: #fd4d7980;
 }
 
 h1,
@@ -78,7 +74,8 @@ nav {
 }
 
 nav a {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
   color: #f2f2f2;
   padding: 1vw 2vw;
   text-decoration: none;
@@ -89,15 +86,15 @@ nav a {
 }
 
 nav a:hover {
-  background-color: rgb(113, 187, 176);
+  background-color: #71bbb0;
   transition: background-color 0.5s;
 }
 
 header {
-  padding: 0.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
   color: #ffffff;
   background-color: #2c4457;
 }
@@ -108,61 +105,61 @@ section {
   text-align: center;
 }
 
-.section {
-  width: 98%;
-  margin: 1rem auto 1rem auto;
-  text-align: center;
-}
-
-.original {
-  display: inline-block;
-}
-
-.original,
-.circular--square,
-.circular--landscape,
-.circular--portrait {
-  margin: 0.1rem;
-}
-
-.headerColumn {
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.headerButtonContainer {
+header div#left {
+  flex: 0 0 10rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+header div#right {
+  flex: 0 0 20rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-.headerButtonColumn img {
-  height: 2rem;
-  width: auto;
-  max-height: 10vw;
+header div#right p#headertitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
-.headerColumn img {
-  transition: transform 1.5s;
+header div#right div#headerButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.headerColumn img:hover {
-  transform: scale(1.1);
-  transition: transform 0.5s;
-}
-
-#headerButton {
-  display: inline-block;
+header div#right div#headerButtonContainer a.headerButton {
   margin: 0.02rem;
   padding: 0.4rem 0.2rem 0.2rem 0.2rem;
   border-radius: 0.5rem;
   transition: background-color 0.5s;
 }
 
-#headerButton:hover {
+header div#right div#headerButtonContainer a.headerButton:hover {
   background-color: #448996;
   transition: background-color 0.5s;
+}
+
+header div#right div#headerButtonContainer a.headerButton img {
+  height: 2rem;
+  transition: transform 1.5s;
+}
+
+header div#right div#headerButtonContainer a.headerButton img:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s;
+}
+
+section#Biography p#bioLine {
+  text-align: left;
+  line-height: 1.5rem;
+  margin: 0.5rem 1rem;
 }
 
 .bioLogoContainer {
@@ -290,19 +287,6 @@ footer {
   transition: background-color 0.3s, scale 0.5s;
 }
 
-.headertitle {
-  font-size: 2.2rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 0.5rem 1rem 0.5rem 1rem;
-}
-
-.bioLine {
-  text-align: left;
-  line-height: 1.5rem;
-  margin: 0.5rem 1rem;
-}
-
 .logoLine {
   font-size: 0.9rem;
   text-align: center;
@@ -313,7 +297,7 @@ footer {
   font-size: 0.75rem;
   text-align: center;
   margin-top: 0.2rem;
-  letter-spacing: 0.0rem;
+  letter-spacing: 0rem;
 }
 
 .projectTextColumn p {
@@ -378,8 +362,20 @@ hr.heavy {
 
 /* Phone */
 @media only screen and (max-width: 540px) {
+  header {
+    flex-direction: column;
+  }
+
+  header div#left {
+    flex: 0 0 0;
+  }
+
+  header div#right {
+    flex: 0 0 0;
+  }
+
   nav {
-    z-index: -1;
+    display: none;
   }
 
   footer {
