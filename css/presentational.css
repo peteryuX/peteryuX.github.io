@@ -64,7 +64,7 @@ h4 {
   color: #3d4457;
 }
 
-#navbar {
+nav {
   z-index: 2;
   background-color: #2c4457;
   position: fixed;
@@ -77,7 +77,7 @@ h4 {
   text-align: center;
 }
 
-#navbar a {
+nav a {
   display: inline-block;
   color: #f2f2f2;
   padding: 1vw 2vw;
@@ -88,18 +88,24 @@ h4 {
   transition: background-color 1.5s;
 }
 
-#navbar a:hover {
+nav a:hover {
   background-color: rgb(113, 187, 176);
   transition: background-color 0.5s;
 }
 
-.header {
+header {
   padding: 0.5rem;
   margin-bottom: 2rem;
   text-align: center;
   vertical-align: middle;
   color: #ffffff;
   background-color: #2c4457;
+}
+
+section {
+  width: 98%;
+  margin: 1rem auto 1rem auto;
+  text-align: center;
 }
 
 .section {
@@ -259,7 +265,7 @@ h4 {
   transition: background-color 0.25s, border 0.25s, color 0.25s;
 }
 
-.footer {
+footer {
   padding: 1rem;
   text-align: center;
   display: flex;
@@ -372,11 +378,11 @@ hr.heavy {
 
 /* Phone */
 @media only screen and (max-width: 540px) {
-  #navbar {
+  nav {
     z-index: -1;
   }
 
-  .footer {
+  footer {
     padding: 0;
   }
 

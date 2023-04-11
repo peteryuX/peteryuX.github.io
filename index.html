@@ -28,15 +28,6 @@
   </head>
 
   <body>
-    <div id="navbar">
-      <a href="#top">Home</a>
-      <a href="#Biography">Biography</a>
-      <a href="#Github Repositories">GithubRepos</a>
-      <a href="#Publications">Publications</a>
-      <a href="#Projects">Projects</a>
-      <a href="#Certifications">Certifications</a>
-    </div>
-
     <script>
       // When the user scrolls down 20px from the top of the document, slide down the navbar
       window.onscroll = function () {
@@ -48,14 +39,14 @@
           document.body.scrollTop > 100 ||
           document.documentElement.scrollTop > 100
         ) {
-          document.getElementById("navbar").style.top = "0rem";
+          document.getElementsByTagName("nav")[0].style.top = "0rem";
         } else {
-          document.getElementById("navbar").style.top = "-100rem";
+          document.getElementsByTagName("nav")[0].style.top = "-100rem";
         }
       }
     </script>
 
-    <div class="header">
+    <header>
       <div class="headerColumn">
         <img
           class="circular--square"
@@ -99,9 +90,18 @@
         </div>
       </div>
       <div class="headerButton"></div>
-    </div>
+    </header>
 
-    <div class="section" id="Biography">
+    <nav id="navbar">
+      <a href="#top">Home</a>
+      <a href="#Biography">Biography</a>
+      <a href="#Github Repositories">GithubRepos</a>
+      <a href="#Publications">Publications</a>
+      <a href="#Projects">Projects</a>
+      <a href="#Certifications">Certifications</a>
+    </nav>
+
+    <section id="Biography">
       <h1>Biography</h1>
       <p class="bioLine">
         &nbsp;&nbsp;&nbsp;&nbsp;I am a software engineer specializing in machine
@@ -202,20 +202,20 @@
           <p class="logoSubLine">Chiayi, Taiwan<br />Sep. 2011 - Jun. 2015</p>
         </div>
       </div>
-    </div>
+    </section>
 
     <hr class="heavy" />
 
-    <div class="section" id="Github Repositories">
+    <section id="Github Repositories">
       <h1>Github Repositories</h1>
       <div class="github-widget" data-user="peteryuX"></div>
 
       <script src="github_widget/github-widget.min.js"></script>
-    </div>
+    </section>
 
     <hr class="heavy" />
 
-    <div class="section" id="Publications">
+    <section id="Publications">
       <h1>Publications</h1>
 
       <h2>Coupled Adversarial Learning for Single Image Super-Resolution</h2>
@@ -258,11 +258,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <hr class="heavy" />
 
-    <div class="section" id="Projects">
+    <section id="Projects">
       <h1>Projects</h1>
 
       <h2>Master's Thesis, 2017</h2>
@@ -458,11 +458,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <hr class="heavy" />
 
-    <div class="section" id="Certifications">
+    <section id="Certifications">
       <h1>Certifications</h1>
 
       <h2>TensorFlow Developer Certificate</h2>
@@ -582,10 +582,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="footer">
+    <footer>
       <a class="topButtonAction" href="#top">BACK TO TOP</a>
-    </div>
+    </footer>
   </body>
 </html>
