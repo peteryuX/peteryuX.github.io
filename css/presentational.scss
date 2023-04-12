@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$htmlBackgroundColor: #eeeeee;
+$htmlTextColor: #000000b3;
+$selectionColor: #fd4d7980;
+$themeColor: #2c4457;
+$themeSelectionColor: #71bbb0;
+$themeTextColor: #ffffff;
+$textLinkColor: #0e7183d3;
+
+html {
+    font-family: "Helvetica";
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    font-weight: 400;
+    background-color: $htmlBackgroundColor;
+    color: $htmlTextColor;
+    scroll-behavior: smooth;
+}
+
+hr {
+    margin: 2rem auto;
+    width: 90%;
+
+    &.light {
+        border: 0;
+        height: 0;
+        border-top: 0.05rem solid #0000001a;
+        border-bottom: 0.05rem solid #ffffff4d;
+    }
+
+    &.heavy {
+        height: 0.12rem;
+        background-image: -webkit-linear-gradient(left, #f0f0f0, #9b9a9a, #f0f0f0);
+        background-image: -moz-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
+        background-image: -ms-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
+        background-image: -o-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
+    }
+}
+
+::selection {
+    background-color: $selectionColor;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+    color: $themeTextColor;
+    background-color: $themeColor;
+
+    div#left {
+        flex: 0 0 10rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div#right {
+        flex: 0 0 20rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p#headertitle {
+            color: $themeTextColor;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.5rem 1rem 0.5rem 1rem;
+        }
+
+        div#headerButtonContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            a.headerButton {
+                display: inline-block;
+                margin: 0.02rem;
+                padding: 0.4rem 0.2rem 0.2rem 0.2rem;
+                border-radius: 0.5rem;
+                transition: background-color 0.5s;
+
+                &:hover {
+                    background-color: $themeSelectionColor;
+                    transition: background-color 0.2s;
+                }
+
+                img {
+                    height: 2rem;
+                    transition: transform 0.5s;
+
+                    &:hover {
+                        transform: scale(1.2);
+                        transition: transform 0.2s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+nav {
+    z-index: 2;
+    background-color: $themeColor;
+    position: fixed;
+    top: -20rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: top 0.2s;
+    opacity: 0.975;
+    text-align: center;
+
+    a {
+        display: flex;
+        flex-direction: row;
+        color: $themeTextColor;
+        padding: 1vw 2vw;
+        text-decoration: none;
+        font-size: min(1rem, 2vw);
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+
+    a:hover {
+        background-color: $themeSelectionColor;
+        transition: background-color 0.2s ease;
+    }
+}
+
+section {
+    width: 98%;
+    margin: 1rem auto;
+    text-align: center;
+
+    a.textLink {
+        text-decoration: none;
+        font-weight: bold;
+        color: $textLinkColor;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    div.projectInfoContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        div.projectInfoImageColumn {
+            width: 30%;
+            margin: 0.5rem;
+            display: flex;
+            justify-content: right;
+
+            img {
+                width: 95%;
+                max-width: 32rem;
+                object-fit: scale-down;
+                padding: 0.2rem;
+                position: relative;
+                border: 0.1rem #bbbbbb solid;
+                border-radius: 0.1rem;
+                background-color: white;
+                transition: scale 0.5s, transform 0.5s;
+                &:hover {
+                    transform: translate(30%, 0%);
+                    scale: 2.5;
+                    z-index: 1;
+                    transition: scale 1s, transform 0.5s;
+                }
+            }
+        }
+
+        div.projectTextColumn {
+            margin: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+
+            p {
+                text-align: left;
+                line-height: 1.5rem;
+                margin: 0.5rem 1rem;
+            }
+
+            li {
+                text-align: left;
+                line-height: 1.5rem;
+                margin: 0rem 1rem;
+            }
+
+            p.authorline {
+                text-align: left;
+                font-size: 1rem;
+                margin: 0.5rem 1rem;
+                color: $textLinkColor;
+            }
+
+            div.projectButtonRow {
+                display: flex;
+                flex-direction: row;
+                margin: 0.5rem 1rem;
+
+                a {
+                    width: 5rem;
+                    padding: 0.25rem;
+                    margin-right: 0.5rem;
+                    font-weight: bold;
+                    border: 0.25rem #bbbbbb4b solid;
+                    text-decoration: none;
+                    color: #e97894;
+                    border-radius: 0.5rem;
+                    background-color: rgb(248, 248, 248);
+                    transition: background-color 0.2s, border 0.2s, color 0.2s;
+
+                    &:hover {
+                        background-color: white;
+                        color: #fd4d79;
+                        border: 0.25rem #ff8fab solid;
+                        transition: background-color 0.1s, border 0.1s, color 0.1s;
+                    }
+                }
+            }
+        }
+    }
+
+    &#Biography {
+        p#bioLine {
+            text-align: left;
+            line-height: 1.5rem;
+            margin: 0.5rem 1rem;
+        }
+
+        div#bioLogoContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+
+            div.bioLogoColumn {
+                width: 9rem;
+                padding: 0.5rem;
+
+                img {
+                    width: 7.5rem;
+                    height: 7.5rem;
+                    margin: 0.5rem;
+                    transition: transform 1s;
+
+                    &:hover {
+                        transform: scale(1.2);
+                        transition: transform 0.2s;
+                    }
+                }
+
+                p.logoLine {
+                    font-size: 0.9rem;
+                    text-align: center;
+                    margin-bottom: 0;
+                }
+
+                p.logoSubLine {
+                    font-size: 0.75rem;
+                    text-align: center;
+                    margin-top: 0.2rem;
+                    letter-spacing: 0rem;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    a#topButtonAction {
+        width: 10rem;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: $themeTextColor;
+        border-radius: 1rem;
+        background-color: $themeColor;
+        transition: background-color 0.5s, scale 0.5s;
+
+        &:hover {
+            background-color: $themeSelectionColor;
+            scale: 1.2;
+            transition: background-color 0.2s, scale 0.2s;
+        }
+    }
+}
+
+/* Pad */
+@media only screen and (max-width: 1024px) {
+    section {
+        div.projectInfoContainer {
+            flex-direction: column;
+
+            div.projectInfoImageColumn {
+                width: 60%;
+                justify-content: center;
+
+                img:hover {
+                    transform: translate(0);
+                    scale: 1;
+                }
+            }
+
+            div.projectTextColumn {
+                width: 95%;
+            }
+        }
+    }
+}
+
+/* Phone */
+@media only screen and (max-width: 540px) {
+    header {
+        flex-direction: column;
+
+        div#left {
+            flex: 0 0 0;
+        }
+
+        div#right {
+            flex: 0 0 0;
+        }
+    }
+
+    nav {
+        display: none;
+    }
+
+    footer {
+        padding: 0;
+
+        a#topButtonAction {
+            width: 100%;
+            padding: 1rem 0rem 1rem 0rem;
+            border-radius: unset;
+        }
+    }
+}

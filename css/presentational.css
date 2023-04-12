@@ -1,22 +1,6 @@
-/* @font-face {
-  font-family: "Noto Sans";
-  src: url("../fonts/noto-sans.eot");
-  src: url("../fonts/noto-sans.eot?#iefix") format("embedded-opentype"), url("../fonts/noto-sans.woff2") format("woff2"), url("../fonts/noto-sans.woff") format("woff"), url("../fonts/noto-sans.ttf") format("truetype"), url("../fonts/noto-sans.svg#Noto-Sans") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Noto Sans Bold";
-  src: url("../fonts/noto-sans--bold.eot");
-  src: url("../fonts/noto-sans--bold.eot?#iefix") format("embedded-opentype"), url("../fonts/noto-sans--bold.woff2") format("woff2"), url("../fonts/noto-sans--bold.woff") format("woff"), url("../fonts/noto-sans--bold.ttf") format("truetype"), url("../fonts/noto-sans--bold.svg#noto-sans--bold") format("svg");
-  font-weight: normal;
-  font-style: normal;
-} */
-
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -26,68 +10,31 @@ html {
   letter-spacing: 0.05rem;
   font-weight: 400;
   background-color: #eeeeee;
+  color: rgba(0, 0, 0, 0.7019607843);
   scroll-behavior: smooth;
 }
 
+hr {
+  margin: 2rem auto;
+  width: 90%;
+}
+hr.light {
+  border: 0;
+  height: 0;
+  border-top: 0.05rem solid rgba(0, 0, 0, 0.1019607843);
+  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.3019607843);
+}
+hr.heavy {
+  height: 0.12rem;
+  background-image: -o-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
+}
+
 ::-moz-selection {
-  background: #fd4d7980;
+  background-color: rgba(253, 77, 121, 0.5019607843);
 }
+
 ::selection {
-  background: #fd4d7980;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin: 0.25rem;
-  font-family: "Noto Sans Bold", sans-serif;
-}
-
-h1 {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-h2 {
-  color: rgba(0, 0, 0, 0.675);
-}
-
-h3 {
-  color: rgba(0, 0, 0, 0.65);
-}
-
-h4 {
-  color: #3d4457;
-}
-
-nav {
-  z-index: 2;
-  background-color: #2c4457;
-  position: fixed;
-  top: -20rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  transition: top 0.5s;
-  opacity: 0.975;
-  text-align: center;
-}
-
-nav a {
-  display: flex;
-  flex-direction: row;
-  color: #f2f2f2;
-  padding: 1vw 2vw;
-  text-decoration: none;
-  font-size: min(1rem, 2vw);
-  font-weight: bold;
-  border-radius: 0.25rem;
-  transition: background-color 1.5s;
-}
-
-nav a:hover {
-  background-color: #71bbb0;
-  transition: background-color 0.5s;
+  background-color: rgba(253, 77, 121, 0.5019607843);
 }
 
 header {
@@ -98,13 +45,6 @@ header {
   color: #ffffff;
   background-color: #2c4457;
 }
-
-section {
-  width: 98%;
-  margin: 1rem auto 1rem auto;
-  text-align: center;
-}
-
 header div#left {
   flex: 0 0 10rem;
   display: flex;
@@ -112,154 +52,194 @@ header div#left {
   justify-content: center;
   align-items: center;
 }
-
 header div#right {
   flex: 0 0 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 header div#right p#headertitle {
+  color: #ffffff;
   font-size: 2.2rem;
   font-weight: bold;
   text-align: center;
   margin: 0.5rem 1rem 0.5rem 1rem;
 }
-
 header div#right div#headerButtonContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-
 header div#right div#headerButtonContainer a.headerButton {
+  display: inline-block;
   margin: 0.02rem;
   padding: 0.4rem 0.2rem 0.2rem 0.2rem;
   border-radius: 0.5rem;
   transition: background-color 0.5s;
 }
-
 header div#right div#headerButtonContainer a.headerButton:hover {
-  background-color: #448996;
-  transition: background-color 0.5s;
+  background-color: #71bbb0;
+  transition: background-color 0.2s;
 }
-
 header div#right div#headerButtonContainer a.headerButton img {
   height: 2rem;
-  transition: transform 1.5s;
+  transition: transform 0.5s;
 }
-
 header div#right div#headerButtonContainer a.headerButton img:hover {
-  transform: scale(1.1);
-  transition: transform 0.5s;
-}
-
-section#Biography p#bioLine {
-  text-align: left;
-  line-height: 1.5rem;
-  margin: 0.5rem 1rem;
-}
-
-.bioLogoContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.bioLogoColumn {
-  width: 9rem;
-  padding: 0.5rem;
-}
-
-.bioLogoColumn img {
-  width: 7.5rem;
-  height: 7.5rem;
-  margin: 0.5rem;
-  transition: transform 3s;
-}
-
-.bioLogoColumn img:hover {
   transform: scale(1.2);
-  transition: transform 0.5s;
+  transition: transform 0.2s;
 }
 
-.bioTextLink {
+nav {
+  z-index: 2;
+  background-color: #2c4457;
+  position: fixed;
+  top: -20rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: top 0.2s;
+  opacity: 0.975;
+  text-align: center;
+}
+nav a {
+  display: flex;
+  flex-direction: row;
+  color: #ffffff;
+  padding: 1vw 2vw;
+  text-decoration: none;
+  font-size: min(1rem, 2vw);
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+nav a:hover {
+  background-color: #71bbb0;
+  transition: background-color 0.2s ease;
+}
+
+section {
+  width: 98%;
+  margin: 1rem auto;
+  text-align: center;
+}
+section a.textLink {
   text-decoration: none;
   font-weight: bold;
-  color: rgba(14, 113, 131, 0.829);
-  transition: background-color 1s;
+  color: rgba(14, 113, 131, 0.8274509804);
 }
-
-.bioTextLink:hover {
+section a.textLink:hover {
   text-decoration: underline;
-  background-color: #f7d7e8;
-  transition: background-color 0.5s;
 }
-
-.projectInfoContainer {
+section div.projectInfoContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
-
-.projectImageColumn {
+section div.projectInfoContainer div.projectInfoImageColumn {
   width: 30%;
   margin: 0.5rem;
   display: flex;
   justify-content: right;
 }
-
-.projectImageColumn img {
+section div.projectInfoContainer div.projectInfoImageColumn img {
   width: 95%;
-  max-width: 20rem;
+  max-width: 32rem;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
   padding: 0.2rem;
   position: relative;
   border: 0.1rem #bbbbbb solid;
   border-radius: 0.1rem;
   background-color: white;
-  transition: scale 0.5s, transform 1s, z-index 1s;
+  transition: scale 0.5s, transform 0.5s;
 }
-
-.projectImageColumn img:hover {
+section div.projectInfoContainer div.projectInfoImageColumn img:hover {
   transform: translate(30%, 0%);
   scale: 2.5;
   z-index: 1;
-  transition: scale 1s, transform 0.5s, z-index 1s;
+  transition: scale 1s, transform 0.5s;
 }
-
-.projectTextColumn {
+section div.projectInfoContainer div.projectTextColumn {
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
   width: 70%;
 }
-
-.projectButtonRow {
+section div.projectInfoContainer div.projectTextColumn p {
+  text-align: left;
+  line-height: 1.5rem;
+  margin: 0.5rem 1rem;
+}
+section div.projectInfoContainer div.projectTextColumn li {
+  text-align: left;
+  line-height: 1.5rem;
+  margin: 0rem 1rem;
+}
+section div.projectInfoContainer div.projectTextColumn p.authorline {
+  text-align: left;
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
+  color: rgba(14, 113, 131, 0.8274509804);
+}
+section div.projectInfoContainer div.projectTextColumn div.projectButtonRow {
   display: flex;
   flex-direction: row;
   margin: 0.5rem 1rem;
 }
-
-.projectButtonRow a {
+section div.projectInfoContainer div.projectTextColumn div.projectButtonRow a {
   width: 5rem;
   padding: 0.25rem;
   margin-right: 0.5rem;
   font-weight: bold;
-  border: 0.25rem #bbbbbb4b solid;
+  border: 0.25rem rgba(187, 187, 187, 0.2941176471) solid;
   text-decoration: none;
-  color: rgba(233, 120, 148, 1);
+  color: #e97894;
   border-radius: 0.5rem;
   background-color: rgb(248, 248, 248);
-  transition: background-color 0.5s, border 0.5s, color 0.5s;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
 }
-
-.projectButtonRow a:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgba(253, 77, 121, 1);
-  border: 0.25rem rgba(255, 143, 171, 1) solid;
-  transition: background-color 0.25s, border 0.25s, color 0.25s;
+section div.projectInfoContainer div.projectTextColumn div.projectButtonRow a:hover {
+  background-color: white;
+  color: #fd4d79;
+  border: 0.25rem #ff8fab solid;
+  transition: background-color 0.1s, border 0.1s, color 0.1s;
+}
+section#Biography p#bioLine {
+  text-align: left;
+  line-height: 1.5rem;
+  margin: 0.5rem 1rem;
+}
+section#Biography div#bioLogoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+section#Biography div#bioLogoContainer div.bioLogoColumn {
+  width: 9rem;
+  padding: 0.5rem;
+}
+section#Biography div#bioLogoContainer div.bioLogoColumn img {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0.5rem;
+  transition: transform 1s;
+}
+section#Biography div#bioLogoContainer div.bioLogoColumn img:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+section#Biography div#bioLogoContainer div.bioLogoColumn p.logoLine {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+section#Biography div#bioLogoContainer div.bioLogoColumn p.logoSubLine {
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 0.2rem;
+  letter-spacing: 0rem;
 }
 
 footer {
@@ -268,123 +248,60 @@ footer {
   display: flex;
   justify-content: center;
 }
-
-.topButtonAction {
+footer a#topButtonAction {
   width: 10rem;
   padding: 1rem;
   font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   border-radius: 1rem;
   background-color: #2c4457;
-  transition: background-color 1s, scale 1s;
+  transition: background-color 0.5s, scale 0.5s;
 }
-
-.topButtonAction:hover {
-  background-color: #6bafbb;
+footer a#topButtonAction:hover {
+  background-color: #71bbb0;
   scale: 1.2;
-  transition: background-color 0.3s, scale 0.5s;
-}
-
-.logoLine {
-  font-size: 0.9rem;
-  text-align: center;
-  margin-bottom: 0;
-}
-
-.logoSubLine {
-  font-size: 0.75rem;
-  text-align: center;
-  margin-top: 0.2rem;
-  letter-spacing: 0rem;
-}
-
-.projectTextColumn p {
-  text-align: left;
-  line-height: 1.5rem;
-  margin: 0.5rem 1rem;
-}
-
-.projectTextColumn li {
-  text-align: left;
-  line-height: 1.5rem;
-  margin: 0rem 1rem;
-}
-
-.authorline {
-  text-align: left;
-  font-size: 1rem;
-  margin: 0.5rem 1rem;
-  color: rgba(14, 113, 131, 0.829);
-}
-
-hr.light {
-  margin: 1rem 0rem;
-  width: 80%;
-  border: 0;
-  height: 0;
-  border-top: 0.05rem solid rgba(0, 0, 0, 0.1);
-  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.3);
-}
-
-hr.heavy {
-  margin: 1rem 0rem;
-  border: 0.1rem;
-  height: 0.12rem;
-  width: 100%;
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #9b9a9a, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
+  transition: background-color 0.2s, scale 0.2s;
 }
 
 /* Pad */
 @media only screen and (max-width: 1024px) {
-  .projectInfoContainer {
+  section div.projectInfoContainer {
     flex-direction: column;
   }
-
-  .projectImageColumn {
-    width: 95%;
+  section div.projectInfoContainer div.projectInfoImageColumn {
+    width: 60%;
     justify-content: center;
   }
-
-  .projectImageColumn img:hover {
-    transform: scale(1);
+  section div.projectInfoContainer div.projectInfoImageColumn img:hover {
+    transform: translate(0);
     scale: 1;
   }
-
-  .projectTextColumn {
+  section div.projectInfoContainer div.projectTextColumn {
     width: 95%;
   }
 }
-
 /* Phone */
 @media only screen and (max-width: 540px) {
   header {
     flex-direction: column;
   }
-
   header div#left {
     flex: 0 0 0;
   }
-
   header div#right {
     flex: 0 0 0;
   }
-
   nav {
     display: none;
   }
-
   footer {
     padding: 0;
   }
-
-  .topButtonAction {
+  footer a#topButtonAction {
     width: 100%;
     padding: 1rem 0rem 1rem 0rem;
     border-radius: unset;
   }
-}
+}/*# sourceMappingURL=presentational.css.map */

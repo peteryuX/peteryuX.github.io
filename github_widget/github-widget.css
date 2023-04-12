@@ -16,23 +16,20 @@
 }
 
 .gw-title{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
   margin-bottom: 0.3em;
-  margin-left: 17.5%;
+  margin-left: 15%;
 }
 
 .gw-name {
-  font-size: 24;
+  font-size: 1rem;
+  padding: 0 1rem;
   text-decoration: none;
   font-weight: bold;
   color: rgba(14, 113, 131, 0.829);
   text-align:center;
-  transition: background-color 1s;
-}
-
-.gw-name:hover{
-  text-decoration: underline;
-  background-color: #f7d7e8;
-  transition: background-color 0.5s;
 }
 
 .gw-stats {
@@ -75,24 +72,14 @@
 
 /* Pad */
 @media only screen and (max-width: 1024px) {
-  .gw-repo-outer {
-    float: left;
-    width: 95%;
-    padding: 0.2rem;
-  }
-
-  .gw-title{
-    margin-bottom: 0.3em;
-    margin-left: 7.5%;
-  }
-
 }
 
 
 /* Phone */
 @media only screen and (max-width: 540px) {
-  .gw-title{
-    margin-bottom: 0.3em;
-    margin-left: 15%;
+  .gw-repo-outer {
+    float: left;
+    width: 95%;
+    padding: 0.2rem;
   }
 }
