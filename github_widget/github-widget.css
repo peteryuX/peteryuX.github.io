@@ -15,36 +15,45 @@
   margin: 0 0 1em 1.5em;
 }
 
-.gw-title{
+.gw-title {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   margin-bottom: 0.3em;
-  margin-left: 15%;
 }
 
 .gw-name {
+  width: 15rem;
   font-size: 1rem;
-  padding: 0 1rem;
+  margin: 0 1rem 0 9rem;
   text-decoration: none;
   font-weight: bold;
   color: rgba(14, 113, 131, 0.829);
-  text-align:center;
+  text-align: center;
+}
+
+.gw-name:hover {
+  text-decoration: underline;
 }
 
 .gw-stats {
-  display: block;
+  width: 8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
   float: right;
 }
 
-.gw-stars, .gw-forks {
+.gw-stars,
+.gw-forks {
   display: inline-block;
   height: 21px;
   padding: 0 5px 0 23px;
   line-height: 21px;
-  background: transparent url('repostat.png') no-repeat 0 0;
+  background: transparent url("repostat.png") no-repeat 0 0;
 }
 
 .gw-stars {
@@ -69,17 +78,23 @@
   padding: 1vh 2vw;
 }
 
-
 /* Pad */
 @media only screen and (max-width: 1024px) {
-}
+  .gw-title {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 
+  .gw-name {
+    margin: 0 0 0.5rem 0;
+  }
+}
 
 /* Phone */
 @media only screen and (max-width: 540px) {
   .gw-repo-outer {
     float: left;
     width: 95%;
-    padding: 0.2rem;
+    padding-left: 1rem;
   }
 }

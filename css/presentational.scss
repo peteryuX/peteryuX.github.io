@@ -12,9 +12,28 @@ $themeSelectionColor: #71bbb0;
 $themeTextColor: #ffffff;
 $textLinkColor: #0e7183d3;
 
+::selection {
+    background-color: $selectionColor;
+}
+
+// scroll bar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #2f2f2f;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #597c7f;
+}
+
 html {
     font-family: "Helvetica";
-    font-size: 1rem;
     letter-spacing: 0.05rem;
     font-weight: 400;
     background-color: $htmlBackgroundColor;
@@ -25,6 +44,7 @@ html {
 hr {
     margin: 2rem auto;
     width: 90%;
+    max-width: 75rem;
 
     &.light {
         border: 0;
@@ -34,7 +54,7 @@ hr {
     }
 
     &.heavy {
-        height: 0.12rem;
+        height: 0.1rem;
         background-image: -webkit-linear-gradient(left, #f0f0f0, #9b9a9a, #f0f0f0);
         background-image: -moz-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
         background-image: -ms-linear-gradient(left, #f0f0f0, #9c9b9b, #f0f0f0);
@@ -42,8 +62,17 @@ hr {
     }
 }
 
-::selection {
-    background-color: $selectionColor;
+h1 {
+    font-size: 2rem;
+    margin: 1rem 1rem;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0.5rem 1rem;
 }
 
 header {
@@ -51,15 +80,32 @@ header {
     flex-direction: row;
     justify-content: center;
     padding: 1rem;
+    margin-bottom: 1.5rem;
     color: $themeTextColor;
     background-color: $themeColor;
 
     div#left {
-        flex: 0 0 10rem;
+        flex: 0 0 7.5rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+        border-radius: 50%;
+        width: 7.5rem;
+        height: 7.5rem;
+
+        img {
+            border-radius: 50%;
+            width: 7.5rem;
+            height: 7.5rem;
+            transition: scale 0.2s ease;
+
+            &:hover {
+                scale: 1.1;
+                transition: scale 0.2s ease;
+            }
+        }
     }
 
     div#right {
@@ -118,13 +164,12 @@ nav {
     justify-content: center;
     transition: top 0.2s;
     opacity: 0.975;
-    text-align: center;
 
     a {
         display: flex;
         flex-direction: row;
         color: $themeTextColor;
-        padding: 1vw 2vw;
+        padding: 0.5rem 2vw;
         text-decoration: none;
         font-size: min(1rem, 2vw);
         font-weight: bold;
@@ -137,143 +182,147 @@ nav {
     }
 }
 
-section {
-    width: 98%;
-    margin: 1rem auto;
-    text-align: center;
+main {
+    section {
+        width: 98%;
+        max-width: 80rem;
+        margin: 1rem auto;
+        text-align: center;
 
-    a.textLink {
-        text-decoration: none;
-        font-weight: bold;
-        color: $textLinkColor;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    div.projectInfoContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        div.projectInfoImageColumn {
-            width: 30%;
-            margin: 0.5rem;
-            display: flex;
-            justify-content: right;
-
-            img {
-                width: 95%;
-                max-width: 32rem;
-                object-fit: scale-down;
-                padding: 0.2rem;
-                position: relative;
-                border: 0.1rem #bbbbbb solid;
-                border-radius: 0.1rem;
-                background-color: white;
-                transition: scale 0.5s, transform 0.5s;
-                &:hover {
-                    transform: translate(30%, 0%);
-                    scale: 2.5;
-                    z-index: 1;
-                    transition: scale 1s, transform 0.5s;
-                }
+        a.textLink {
+            text-decoration: none;
+            font-weight: bold;
+            color: $textLinkColor;
+            &:hover {
+                text-decoration: underline;
             }
         }
 
-        div.projectTextColumn {
-            margin: 0.5rem;
+        div.projectInfoContainer {
             display: flex;
-            flex-direction: column;
-            width: 70%;
+            flex-direction: row;
+            justify-content: center;
+            padding: 0.5rem;
 
-            p {
-                text-align: left;
-                line-height: 1.5rem;
-                margin: 0.5rem 1rem;
-            }
-
-            li {
-                text-align: left;
-                line-height: 1.5rem;
-                margin: 0rem 1rem;
-            }
-
-            p.authorline {
-                text-align: left;
-                font-size: 1rem;
-                margin: 0.5rem 1rem;
-                color: $textLinkColor;
-            }
-
-            div.projectButtonRow {
+            div.projectInfoImageColumn {
+                width: 30%;
+                margin: 0.5rem;
                 display: flex;
-                flex-direction: row;
-                margin: 0.5rem 1rem;
-
-                a {
-                    width: 5rem;
-                    padding: 0.25rem;
-                    margin-right: 0.5rem;
-                    font-weight: bold;
-                    border: 0.25rem #bbbbbb4b solid;
-                    text-decoration: none;
-                    color: #e97894;
-                    border-radius: 0.5rem;
-                    background-color: rgb(248, 248, 248);
-                    transition: background-color 0.2s, border 0.2s, color 0.2s;
-
-                    &:hover {
-                        background-color: white;
-                        color: #fd4d79;
-                        border: 0.25rem #ff8fab solid;
-                        transition: background-color 0.1s, border 0.1s, color 0.1s;
-                    }
-                }
-            }
-        }
-    }
-
-    &#Biography {
-        p#bioLine {
-            text-align: left;
-            line-height: 1.5rem;
-            margin: 0.5rem 1rem;
-        }
-
-        div#bioLogoContainer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-
-            div.bioLogoColumn {
-                width: 9rem;
-                padding: 0.5rem;
+                justify-content: center;
+                align-items: center;
 
                 img {
-                    width: 7.5rem;
-                    height: 7.5rem;
-                    margin: 0.5rem;
-                    transition: transform 1s;
-
+                    max-height: 60vh;
+                    max-width: 100%;
+                    object-fit: scale-down;
+                    padding: 0.2rem;
+                    position: relative;
+                    border: 0.1rem #bbbbbb solid;
+                    border-radius: 0.1rem;
+                    background-color: white;
+                    transition: scale 0.5s, transform 0.5s;
                     &:hover {
-                        transform: scale(1.2);
-                        transition: transform 0.2s;
+                        transform: translate(30%, 0%);
+                        scale: 2.5;
+                        z-index: 1;
+                        transition: scale 1s, transform 0.5s;
                     }
                 }
+            }
 
-                p.logoLine {
-                    font-size: 0.9rem;
-                    text-align: center;
-                    margin-bottom: 0;
+            div.projectTextColumn {
+                margin: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                width: 70%;
+
+                p {
+                    text-align: left;
+                    line-height: 1.5rem;
+                    margin: 0.5rem 1rem;
                 }
 
-                p.logoSubLine {
-                    font-size: 0.75rem;
-                    text-align: center;
-                    margin-top: 0.2rem;
-                    letter-spacing: 0rem;
+                li {
+                    text-align: left;
+                    line-height: 1.5rem;
+                    margin: 0rem 1rem;
+                }
+
+                p.authorline {
+                    text-align: left;
+                    font-size: 1rem;
+                    margin: 0.5rem 1rem;
+                    color: $textLinkColor;
+                }
+
+                div.projectButtonRow {
+                    display: flex;
+                    flex-direction: row;
+                    margin: 0.5rem 1rem;
+
+                    a {
+                        width: 5rem;
+                        padding: 0.25rem;
+                        margin-right: 0.5rem;
+                        font-weight: bold;
+                        border: 0.25rem #bbbbbb4b solid;
+                        text-decoration: none;
+                        color: #e97894;
+                        border-radius: 0.5rem;
+                        background-color: rgb(248, 248, 248);
+                        transition: background-color 0.2s, border 0.2s, color 0.2s;
+
+                        &:hover {
+                            background-color: white;
+                            color: #fd4d79;
+                            border: 0.25rem #ff8fab solid;
+                            transition: background-color 0.1s, border 0.1s, color 0.1s;
+                        }
+                    }
+                }
+            }
+        }
+
+        &#Biography {
+            p#bioLine {
+                text-align: left;
+                line-height: 1.5rem;
+                margin: 0.5rem 2rem;
+            }
+
+            div#bioLogoContainer {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+
+                div.bioLogoColumn {
+                    width: 9rem;
+                    padding: 0.5rem;
+
+                    img {
+                        width: 7.5rem;
+                        height: 7.5rem;
+                        margin: 0.5rem;
+                        transition: transform 1s;
+
+                        &:hover {
+                            transform: scale(1.2);
+                            transition: transform 0.2s;
+                        }
+                    }
+
+                    p.logoLine {
+                        font-size: 0.9rem;
+                        text-align: center;
+                        margin-bottom: 0;
+                    }
+
+                    p.logoSubLine {
+                        font-size: 0.75rem;
+                        text-align: center;
+                        margin-top: 0.2rem;
+                        letter-spacing: 0rem;
+                    }
                 }
             }
         }
@@ -307,22 +356,25 @@ footer {
 
 /* Pad */
 @media only screen and (max-width: 1024px) {
-    section {
-        div.projectInfoContainer {
-            flex-direction: column;
+    main {
+        section {
+            div.projectInfoContainer {
+                flex-direction: column;
+                align-items: center;
 
-            div.projectInfoImageColumn {
-                width: 60%;
-                justify-content: center;
+                div.projectInfoImageColumn {
+                    width: 85%;
+                    justify-content: center;
 
-                img:hover {
-                    transform: translate(0);
-                    scale: 1;
+                    img:hover {
+                        transform: none;
+                        scale: unset;
+                    }
                 }
-            }
 
-            div.projectTextColumn {
-                width: 95%;
+                div.projectTextColumn {
+                    width: 95%;
+                }
             }
         }
     }
@@ -332,10 +384,7 @@ footer {
 @media only screen and (max-width: 540px) {
     header {
         flex-direction: column;
-
-        div#left {
-            flex: 0 0 0;
-        }
+        align-items: center;
 
         div#right {
             flex: 0 0 0;
@@ -354,5 +403,12 @@ footer {
             padding: 1rem 0rem 1rem 0rem;
             border-radius: unset;
         }
+    }
+}
+
+/* Short Height*/
+@media screen and (max-height: 480px){
+    nav {
+        display: none;
     }
 }
