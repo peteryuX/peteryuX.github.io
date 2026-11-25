@@ -329,21 +329,24 @@
       colophon: '富嶽晝・台北',
       themeColor: '#f7f4ec',
       paper: '#f7f4ec',
-      skyTop: '#eaf0f2',
-      grainDark: 'rgba(22, 46, 70, 0.020)',
+      skyTop: '#e6eef2',
+      skyFade: 'rgba(230, 238, 242, 0)',
+      grainDark: 'rgba(22, 46, 70, 0.018)',
       grainLight: 'rgba(255, 255, 255, 0.055)',
       orb: '#c24032',
       orbAlpha: 0.78,
       orbCut: 'rgba(247, 244, 236, 0.28)',
-      orbHalo: 'rgba(194, 64, 50, 0.10)',
-      mtnFill: 'rgba(54, 92, 118, 0.10)',
-      mtnSnow: 'rgba(255, 254, 250, 0.55)',
+      orbHalo: 'rgba(194, 64, 50, 0.12)',
+      orbHaloFade: 'rgba(194, 64, 50, 0)',
+      mtnFill: 'rgba(54, 92, 118, 0.12)',
+      mtnFade: 'rgba(54, 92, 118, 0)',
+      mtnSnow: 'rgba(255, 254, 250, 0.65)',
       waves: [
-        { col: '#74a0b8', a: 0.14, crest: 'rgba(255, 254, 250, 0.80)' },
-        { col: '#407896', a: 0.19, crest: 'rgba(186, 140, 56, 0.52)' },
-        { col: '#225678', a: 0.24, crest: 'rgba(255, 254, 250, 0.70)' },
-        { col: '#183f5e', a: 0.30, crest: 'rgba(255, 254, 250, 0.54)' },
-        { col: '#102b45', a: 0.36, crest: 'rgba(186, 140, 56, 0.44)' }
+        { col: '#74a0b8', fade: 'rgba(116, 160, 184, 0)', a: 0.12, crest: 'rgba(255, 254, 250, 0.84)' },
+        { col: '#407896', fade: 'rgba(64, 120, 150, 0)', a: 0.15, crest: 'rgba(186, 140, 56, 0.50)' },
+        { col: '#225678', fade: 'rgba(34, 86, 120, 0)', a: 0.18, crest: 'rgba(255, 254, 250, 0.72)' },
+        { col: '#183f5e', fade: 'rgba(24, 63, 94, 0)', a: 0.22, crest: 'rgba(255, 254, 250, 0.56)' },
+        { col: '#102b45', fade: 'rgba(16, 43, 69, 0)', a: 0.26, crest: 'rgba(186, 140, 56, 0.46)' }
       ]
     },
     night: {
@@ -352,20 +355,23 @@
       themeColor: '#161513',
       paper: '#161513',
       skyTop: '#0f0e0d',
+      skyFade: 'rgba(15, 14, 13, 0)',
       grainDark: 'rgba(0, 0, 0, 0.14)',
       grainLight: 'rgba(236, 228, 214, 0.032)',
       orb: '#e8dfd0',
       orbAlpha: 0.84,
       orbCut: 'rgba(22, 21, 19, 0.22)',
-      orbHalo: 'rgba(232, 223, 208, 0.10)',
+      orbHalo: 'rgba(232, 223, 208, 0.11)',
+      orbHaloFade: 'rgba(232, 223, 208, 0)',
       mtnFill: 'rgba(68, 62, 54, 0.26)',
-      mtnSnow: 'rgba(232, 223, 208, 0.16)',
+      mtnFade: 'rgba(68, 62, 54, 0)',
+      mtnSnow: 'rgba(232, 223, 208, 0.18)',
       waves: [
-        { col: '#4a443c', a: 0.22, crest: 'rgba(232, 223, 208, 0.36)' },
-        { col: '#3a352f', a: 0.28, crest: 'rgba(196, 156, 102, 0.38)' },
-        { col: '#2e2a25', a: 0.36, crest: 'rgba(232, 223, 208, 0.28)' },
-        { col: '#23201c', a: 0.44, crest: 'rgba(232, 223, 208, 0.20)' },
-        { col: '#1a1815', a: 0.54, crest: 'rgba(209, 87, 68, 0.34)' }
+        { col: '#4a443c', fade: 'rgba(74, 68, 60, 0)', a: 0.22, crest: 'rgba(232, 223, 208, 0.36)' },
+        { col: '#3a352f', fade: 'rgba(58, 53, 47, 0)', a: 0.28, crest: 'rgba(196, 156, 102, 0.38)' },
+        { col: '#2e2a25', fade: 'rgba(46, 42, 37, 0)', a: 0.36, crest: 'rgba(232, 223, 208, 0.28)' },
+        { col: '#23201c', fade: 'rgba(35, 32, 28, 0)', a: 0.44, crest: 'rgba(232, 223, 208, 0.20)' },
+        { col: '#1a1815', fade: 'rgba(26, 24, 21, 0)', a: 0.54, crest: 'rgba(209, 87, 68, 0.34)' }
       ]
     }
   };
@@ -578,7 +584,7 @@
 
     const heroFade = Math.max(0, 1 - smoothScroll / (H * 0.58));
     const colEl = document.getElementById('hero-colophon');
-    if (colEl) colEl.style.opacity = (heroFade * 0.65).toFixed(2);
+    if (colEl) colEl.style.opacity = (heroFade * 0.80).toFixed(2);
 
     // 1. Washi Paper + Sky Bokashi
     ctx.fillStyle = getPaperPattern(t);
@@ -586,7 +592,7 @@
 
     const sky = ctx.createLinearGradient(0, 0, 0, H * 0.62);
     sky.addColorStop(0, t.skyTop);
-    sky.addColorStop(1, 'rgba(0,0,0,0)');
+    sky.addColorStop(1, t.skyFade);
     ctx.globalAlpha = 0.65;
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, W, H * 0.62);
@@ -602,7 +608,7 @@
 
       const halo = ctx.createRadialGradient(orbX, orbY, orbR * 0.4, orbX, orbY, orbR * 2.5);
       halo.addColorStop(0, t.orbHalo);
-      halo.addColorStop(1, 'rgba(0,0,0,0)');
+      halo.addColorStop(1, t.orbHaloFade);
       ctx.globalAlpha = heroFade;
       ctx.fillStyle = halo;
       ctx.beginPath();
@@ -640,7 +646,7 @@
         ctx.closePath();
         const mGrad = ctx.createLinearGradient(0, peakY, 0, baseY);
         mGrad.addColorStop(0, t.mtnFill);
-        mGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        mGrad.addColorStop(1, t.mtnFade);
         ctx.fillStyle = mGrad;
         ctx.fill();
 
@@ -691,7 +697,7 @@
 
       const grad = ctx.createLinearGradient(0, baseY - 25, 0, baseY + H * 0.36);
       grad.addColorStop(0, wConf.col);
-      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      grad.addColorStop(1, wConf.fade);
       const readCalm = 1 - scrollPct * 0.24;
       ctx.globalAlpha = wConf.a * readCalm;
       ctx.fillStyle = grad;
