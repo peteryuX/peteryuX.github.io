@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="day">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0" />
-  <meta name="theme-color" content="#f7f4ec" />
+  <meta name="theme-color" content="#f4f1ea" />
 
-  <title>Peter (Kuan-Yu) Huang — Tech Lead Manager, Google Android XR</title>
-  <meta name="description" content="Peter (Kuan-Yu) Huang — Engineering Manager &amp; Tech Lead (TLM) on Perception for Android XR (World Sensing) at Google in Taipei. 3D scene understanding, on-device CV, and production ML." />
+  <title>Peter Huang — Computer Vision &amp; 3D Perception</title>
+  <meta name="description" content="Peter (Kuan-Yu) Huang — Computer vision and 3D perception engineer in Taipei. Android XR at Google, formerly HTC VIVE and Garena." />
   <meta name="author" content="Peter (Kuan-Yu) Huang" />
   <link rel="canonical" href="https://peteryux.github.io/" />
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph / Social (Zero PII) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://peteryux.github.io/" />
-  <meta property="og:title" content="Peter (Kuan-Yu) Huang — Tech Lead Manager, Google Android XR" />
-  <meta property="og:description" content="Engineering Manager &amp; Tech Lead (TLM) on Perception for Android XR (World Sensing) at Google. 3D scene understanding, on-device CV, and production ML." />
-  <meta property="og:image" content="https://peteryux.github.io/images/head_shot.jpg" />
+  <meta property="og:title" content="Peter Huang — Computer Vision &amp; 3D Perception" />
+  <meta property="og:description" content="Computer vision and 3D perception engineer in Taipei. Android XR at Google, formerly HTC VIVE and Garena." />
+  <meta property="og:image" content="https://peteryux.github.io/assets/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Peter Huang — Computer Vision and 3D Perception Engineer in Taipei" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Peter (Kuan-Yu) Huang — Tech Lead Manager, Google Android XR" />
-  <meta name="twitter:description" content="Perception for Android XR (World Sensing) at Google · Former HTC VIVE, Dcard, Garena." />
-  <meta name="twitter:image" content="https://peteryux.github.io/images/head_shot.jpg" />
+  <meta name="twitter:title" content="Peter Huang — Computer Vision &amp; 3D Perception" />
+  <meta name="twitter:description" content="Computer vision and 3D perception engineer in Taipei. Android XR at Google, formerly HTC VIVE and Garena." />
+  <meta name="twitter:image" content="https://peteryux.github.io/assets/og-card.png" />
 
-  <!-- Vermilion P Monogram Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23f7f4ec'/%3E%3Crect x='9' y='9' width='46' height='46' rx='3' fill='none' stroke='%23bc3a2c' stroke-width='4'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23bc3a2c'%3EP%3C/text%3E%3C/svg%3E" />
+  <!-- Minimal Monogram Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23131820'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='500' fill='%23f4f1ea'%3EP%3C/text%3E%3C/svg%3E" />
 
-  <!-- Typography: Newsreader + Noto Serif TC + DM Sans + IBM Plex Mono -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Pre-paint theme bootstrap (prevents Day->Night flash on reload) -->
+  <!-- Pre-paint theme bootstrap -->
   <script>
     (function () {
       try {
         var saved = window.localStorage.getItem('peteryux_theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = (saved === 'day' || saved === 'night') ? saved : (prefersDark ? 'night' : 'day');
+        var theme = (saved === 'dark' || saved === 'night') ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', theme);
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', theme === 'night' ? '#161513' : '#f7f4ec');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0b1017' : '#f4f1ea');
       } catch (e) {}
     })();
   </script>
@@ -48,336 +50,254 @@
 </head>
 <body id="top">
 
-  <!-- 60FPS Living Ukiyo-e Backdrop (Misty Peak + Sun/Moon + 5 Bokashi Waves) -->
-  <canvas id="ukiyo-canvas" aria-hidden="true"></canvas>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <!-- STICKY MINIMAL HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#top" class="brand-link" aria-label="Peter Huang Home">
-        <span class="hanko font-editorial" aria-hidden="true">P</span>
-        <span id="brand-name" class="brand-name font-editorial">Peter Huang</span>
-      </a>
+  <!-- Tactile Paper Grain & Subtle Bathymetric Depth Contours (Full-Scene Continuity) -->
+  <div id="paper-grain" class="paper-grain" aria-hidden="true"></div>
+  <svg id="depth-contours" class="depth-contours" viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+    <path d="M-80 220 C 160 170, 290 310, 210 540 C 140 740, -10 820, 60 1080 C 130 1320, 20 1490, -60 1620" stroke="currentColor" stroke-width="0.9" />
+    <path d="M-60 280 C 130 240, 230 370, 160 570 C 95 750, -35 840, 25 1090 C 85 1310, -10 1470, -80 1600" stroke="currentColor" stroke-width="0.7" />
+    <path d="M-40 350 C 95 320, 170 430, 110 600 C 55 760, -55 860, -5 1100" stroke="currentColor" stroke-width="0.55" />
+    <path d="M1510 140 C 1320 220, 1210 380, 1290 610 C 1365 820, 1460 940, 1340 1200 C 1240 1410, 1360 1540, 1480 1640" stroke="currentColor" stroke-width="0.9" />
+    <path d="M1520 210 C 1360 285, 1275 430, 1345 640 C 1410 830, 1495 950, 1390 1210 C 1300 1420, 1410 1540, 1510 1630" stroke="currentColor" stroke-width="0.7" />
+    <path d="M1530 290 C 1400 355, 1335 480, 1395 670 C 1450 845, 1525 965, 1435 1220" stroke="currentColor" stroke-width="0.55" />
+  </svg>
 
-      <nav class="nav-links font-draft" aria-label="Primary navigation">
-        <a href="#work" data-i18n="navWork">Work</a>
+  <!-- HEADER (Transparent at top, dissolves seamlessly into coastal sky; reveals subtle frosted hairline on scroll) -->
+  <header id="site-header" class="site-header">
+    <div class="shell header-inner">
+      <a href="#top" id="brand-name" class="brand-name">Peter Huang</a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#projects" data-i18n="navProjects">Projects</a>
         <a href="#experience" data-i18n="navExp">Experience</a>
         <a href="#research" data-i18n="navResearch">Research</a>
-        <a href="#credentials" data-i18n="navCreds">Credentials</a>
       </nav>
 
       <div class="header-controls">
-        <div class="ctrl-pill font-draft" role="group" aria-label="Language switch">
-          <button id="btn-lang-en" type="button" class="ctrl-opt ctrl-opt-active" aria-pressed="true">EN</button>
-          <button id="btn-lang-zh" type="button" class="ctrl-opt" aria-pressed="false">繁中</button>
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Language switch">
+          <button id="btn-lang-en" type="button" class="ctrl-btn is-active" aria-pressed="true">EN</button>
+          <span class="ctrl-sep" aria-hidden="true">/</span>
+          <button id="btn-lang-zh" type="button" class="ctrl-btn" aria-pressed="false">繁中</button>
+          <span id="lang-indicator" class="lang-indicator" aria-hidden="true"></span>
         </div>
 
-        <div class="ctrl-pill font-draft" role="group" aria-label="Theme mode">
-          <button id="btn-day" type="button" class="ctrl-opt ctrl-opt-active" aria-pressed="true" aria-label="Day mode" title="Day · Hokusai Indigo">
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-              <circle cx="8" cy="8" r="3" />
-              <path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1" />
-            </svg>
-            <span class="mode-label" data-i18n="modeDay">Day</span>
-          </button>
-          <button id="btn-night" type="button" class="ctrl-opt" aria-pressed="false" aria-label="Night mode" title="Night · Sumi Charcoal">
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z" />
-            </svg>
-            <span class="mode-label" data-i18n="modeNight">Night</span>
-          </button>
-        </div>
+        <button id="btn-theme" type="button" class="theme-btn" aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+            <circle cx="8" cy="8" r="3" />
+            <path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1" />
+          </svg>
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z" />
+          </svg>
+        </button>
       </div>
     </div>
-    <div id="progress-bar" aria-hidden="true"></div>
+    <div id="mobile-tide-bar" class="mobile-tide-bar" aria-hidden="true"></div>
   </header>
 
-  <!-- MAIN DOCUMENT -->
-  <main class="site-main">
+  <!-- FULL-BLEED TAIWAN EAST COAST PRINT HERO (Qingshui Cliffs + Guishan Island + Prussian-Indigo Swells melting into paper) -->
+  <section id="hero-stage" class="hero-stage">
+    <canvas id="coast-canvas" class="coast-canvas" aria-hidden="true"></canvas>
 
-    <!-- =====================================================================
-         00 · HERO
-         ===================================================================== -->
-    <section class="container hero-section">
-      <!-- Quiet Traditional Vertical Print Colophon (Desktop right margin, fades past Hero) -->
-      <div id="hero-colophon" class="hero-colophon" aria-hidden="true">
-        <span class="colophon-line" style="height: 2rem;"></span>
-        <span id="colophon-text" class="vertical-colophon">富嶽晝・台北</span>
-        <span class="colophon-line" style="height: 1.5rem;"></span>
+    <div class="shell hero-content i18n-swap">
+      <h1 id="hero-name" class="hero-name">
+        Peter Huang <span class="hero-name-sub">Kuan-Yu Huang</span>
+      </h1>
+
+      <p class="hero-lead" data-i18n="heroLead">
+        Computer vision &amp; 3D perception, in Taipei.
+      </p>
+
+      <p id="hero-bio" class="hero-bio">
+        Currently working on Android XR at <a href="https://arvr.google.com/" target="_blank" rel="noopener noreferrer" class="text-link">Google</a>, previously at <a href="https://www.vive.com/us/" target="_blank" rel="noopener noreferrer" class="text-link">HTC VIVE</a> and Garena. A small index of projects, open-source work, and papers.
+      </p>
+
+      <div class="hero-links">
+        <a href="https://github.com/peteryuX" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/kuan-yu-huang/" target="_blank" rel="noopener noreferrer" class="text-link">LinkedIn</a>
+        <button type="button" class="text-link copy-email-btn" data-email="peter124574@gmail.com">
+          <span class="copy-email-label">Email</span>
+        </button>
+        <a href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="ctaCv">CV ↗</a>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-body">
-        <div class="hero-eyebrow font-draft">
-          <span class="hero-role" data-i18n="heroRole">Google · Tech Lead Manager · Android XR</span>
-          <span class="hero-sep" aria-hidden="true">/</span>
-          <span class="hero-loc" data-i18n="heroLoc">Taipei · 25.03°N</span>
+  <!-- MAIN EDITORIAL SHELL (Asymmetric Desktop 2-Column: Sticky Tide-Depth Rail + Serene Reading Column) -->
+  <div id="main-content" class="shell editorial-grid">
+
+    <!-- LEFT STICKY RAIL (Desktop >= 1024px) -->
+    <aside class="side-rail" aria-label="Section index and status">
+      <div class="side-rail-inner">
+        <div class="rail-index">
+          <div class="tide-track" aria-hidden="true">
+            <div id="tide-fill" class="tide-fill"></div>
+          </div>
+          <nav class="rail-nav" aria-label="On this page">
+            <a href="#projects" class="rail-link is-active" data-target="projects">
+              <span class="rail-num font-mono">01</span>
+              <span data-i18n="navProjects">Projects</span>
+            </a>
+            <a href="#experience" class="rail-link" data-target="experience">
+              <span class="rail-num font-mono">02</span>
+              <span data-i18n="navExp">Experience</span>
+            </a>
+            <a href="#research" class="rail-link" data-target="research">
+              <span class="rail-num font-mono">03</span>
+              <span data-i18n="navResearch">Research</span>
+            </a>
+          </nav>
         </div>
 
-        <h1 id="hero-name" class="hero-name font-editorial">
-          Peter <span class="hero-name-sub">· Kuan-Yu Huang</span>
-        </h1>
-
-        <p id="hero-tagline" class="hero-tagline font-editorial">
-          Perception &amp; spatial computing for <em>Android XR</em> — from on-device 3D scene understanding to production ML.
-        </p>
-
-        <p id="hero-intro" class="hero-intro">
-          I'm Peter, an Engineering Manager &amp; Tech Lead (TLM) in Taipei working on <strong>Perception for Android XR (World Sensing)</strong> at <strong>Google</strong>. Over 8+ years across <strong>Google</strong>, <strong>HTC VIVE</strong>, <strong>Dcard</strong>, and <strong>Garena</strong>, I've led teams and shipped end-to-end ML systems — spanning 3D scene understanding, hand/pose tracking, 3D data pipelines, and large-scale recommendation.
-        </p>
-
-        <div class="hero-actions font-draft">
-          <a href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD" target="_blank" rel="noopener noreferrer" class="btn-ink" data-i18n="ctaCv">
-            Resume / CV ↗
-          </a>
-          <a href="https://github.com/peteryuX" target="_blank" rel="noopener noreferrer" class="ed-link">GitHub</a>
-          <a href="https://www.linkedin.com/in/kuan-yu-huang/" target="_blank" rel="noopener noreferrer" class="ed-link">LinkedIn</a>
-          <a href="mailto:peter124574@gmail.com" class="ed-link">Email</a>
+        <div class="rail-meta font-mono">
+          <div class="rail-loc" data-i18n="railLoc">Taipei</div>
+          <div id="taipei-clock" class="rail-clock">--:-- CST</div>
         </div>
-      </div>
 
-      <div class="hero-footer-strip font-draft">
-        <div id="hero-metrics" class="hero-metrics">
-          <span><strong>Google Android XR</strong> · Tech Lead Manager</span>
-          <span><strong>8+ Years</strong> · XR Perception &amp; ML</span>
-          <span><strong>750+ ★</strong> · Open-Source CV</span>
-          <span><strong>IEEE SAM 2020</strong> · NTHU M.S. EE</span>
-        </div>
-        <a href="#work" class="accent-link" data-i18n="scrollCue">Scroll ↓</a>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         01 · SELECTED WORK
-         ===================================================================== -->
-    <section id="work" class="container content-section">
-      <div class="section-header reveal">
-        <div class="section-rule font-draft" data-i18n="sec1Kicker">01 · Selected Work</div>
-        <div class="section-title-row">
-          <h2 class="section-title font-editorial" data-i18n="sec1Title">Featured Project &amp; Open Source</h2>
-          <span class="section-sub font-draft" data-i18n="sec1Sub">Side projects &amp; TensorFlow 2 vision repos</span>
+        <div id="rail-actions" class="rail-actions">
+          <button type="button" class="rail-action-link copy-email-btn" data-email="peter124574@gmail.com">
+            <span class="copy-email-label" data-i18n="copyEmailShort">Copy Email</span>
+          </button>
+          <a href="https://github.com/peteryuX" target="_blank" rel="noopener noreferrer" class="rail-action-link">GitHub ↗</a>
+          <a href="https://drive.google.com/open?id=17-lXG5CuVkr2549FdiioRPHkRUV3npoD" target="_blank" rel="noopener noreferrer" class="rail-action-link" data-i18n="ctaCv">CV ↗</a>
         </div>
       </div>
+    </aside>
 
-      <!-- Flagship Featured Project: Nordic Aurora Radar -->
-      <article class="folio folio-hover folio-flagship reveal">
-        <div class="flagship-top">
-          <div class="hero-eyebrow font-draft">
-            <span class="badge-accent" data-i18n="auroraBadge">Featured</span>
-            <span class="hero-loc" data-i18n="auroraSub">Aurora &amp; Clear-Sky Forecast · PWA</span>
-          </div>
-          <div class="flagship-links font-draft">
-            <a href="https://peteryux.github.io/nordic-aurora-radar/" target="_blank" rel="noopener noreferrer" class="accent-link" data-i18n="liveApp">Live App ↗</a>
-            <a href="https://github.com/peteryuX/nordic-aurora-radar" target="_blank" rel="noopener noreferrer" class="ed-link">GitHub</a>
-            <a href="https://github.com/peteryuX/nordic-aurora-radar/blob/main/VALIDATION.md" target="_blank" rel="noopener noreferrer" class="ed-link" data-i18n="validation">Validation</a>
-          </div>
-        </div>
+    <!-- RIGHT READING STREAM -->
+    <main class="reading-stream i18n-swap">
 
-        <div class="flagship-grid">
-          <div>
-            <h3 class="flagship-title font-editorial">Nordic Aurora Radar</h3>
-            <p class="body-copy" data-i18n="auroraDesc">
-              A zero-dependency global aurora and 360° clear-sky forecasting PWA built on space-weather physics — combining 14 live NOAA SWPC feeds, MET Norway 2.5km layered clouds, airport METAR, JPL astronomy, and multi-year public-archive validation.
-            </p>
-          </div>
+      <!-- 01 · PROJECTS & OPEN SOURCE -->
+      <section id="projects" class="section">
+        <header class="section-head">
+          <span class="section-num font-mono">01</span>
+          <h2 class="section-title" data-i18n="secProjects">Projects &amp; Open Source</h2>
+        </header>
 
-          <div class="metrics-2x2">
-            <div class="metric-cell">
-              <div class="metric-val font-editorial">14</div>
-              <div class="metric-lbl font-draft" data-i18n="mFeeds">NOAA Live Feeds</div>
+        <!-- Featured Side Project (Architectural Editorial Hairline Plate, Zero SaaS Box) -->
+        <article class="editorial-plate">
+          <div class="plate-top">
+            <div class="entry-title-group">
+              <h3 class="entry-title">Nordic Aurora Radar</h3>
+              <span class="entry-tag" data-i18n="auroraBadge">Side Project</span>
             </div>
-            <div class="metric-cell">
-              <div class="metric-val font-editorial">2.5 km</div>
-              <div class="metric-lbl font-draft" data-i18n="mClouds">Layered Clouds</div>
-            </div>
-            <div class="metric-cell">
-              <div class="metric-val font-editorial">360°</div>
-              <div class="metric-lbl font-draft" data-i18n="mRadar">Polar Sky Radar</div>
-            </div>
-            <div class="metric-cell">
-              <div class="metric-val font-editorial">0 dep</div>
-              <div class="metric-lbl font-draft" data-i18n="mPwa">Pure Static PWA</div>
+            <div class="inline-links">
+              <a href="https://peteryux.github.io/nordic-aurora-radar/" target="_blank" rel="noopener noreferrer" class="accent-link" data-i18n="liveApp">Live App ↗</a>
+              <a href="https://github.com/peteryuX/nordic-aurora-radar" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
+              <a href="https://github.com/peteryuX/nordic-aurora-radar/blob/main/VALIDATION.md" target="_blank" rel="noopener noreferrer" class="text-link" data-i18n="validation">Backtest</a>
             </div>
           </div>
-        </div>
-      </article>
 
-      <!-- Open Source TensorFlow 2 Vision Repos -->
-      <div class="repo-grid reveal">
-        <a href="https://github.com/peteryuX/retinaface-tf2" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card">
-          <div>
-            <div class="repo-head font-draft">
-              <span class="repo-name">retinaface-tf2</span>
-              <span class="repo-stars" data-repo-stars="retinaface-tf2">★ 281</span>
-            </div>
-            <p class="repo-desc" data-i18n="repoRetina">
-              Single-stage dense face localization (ResNet50 &amp; MobileNetV2) in TensorFlow 2, supporting single-GPU training with Colab.
-            </p>
-          </div>
-          <div class="repo-meta font-draft">Python · TensorFlow 2 · Face Detection</div>
-        </a>
-
-        <a href="https://github.com/peteryuX/arcface-tf2" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card">
-          <div>
-            <div class="repo-head font-draft">
-              <span class="repo-name">arcface-tf2</span>
-              <span class="repo-stars" data-repo-stars="arcface-tf2">★ 272</span>
-            </div>
-            <p class="repo-desc" data-i18n="repoArc">
-              Clean TensorFlow 2 implementation of CVPR 2019 ArcFace (Additive Angular Margin Loss) with ResNet50 and MobileNetV2 backbones.
-            </p>
-          </div>
-          <div class="repo-meta font-draft">Python · TensorFlow 2 · Recognition</div>
-        </a>
-
-        <a href="https://github.com/peteryuX/esrgan-tf2" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card">
-          <div>
-            <div class="repo-head font-draft">
-              <span class="repo-name">esrgan-tf2</span>
-              <span class="repo-stars" data-repo-stars="esrgan-tf2">★ 134</span>
-            </div>
-            <p class="repo-desc" data-i18n="repoEsrgan">
-              ECCV 2018 Enhanced Super-Resolution GAN (ESRGAN) in TensorFlow 2 with perceptual adversarial training and Colab demo.
-            </p>
-          </div>
-          <div class="repo-meta font-draft">Python · GAN · Super-Resolution</div>
-        </a>
-
-        <a href="https://github.com/peteryuX/tensorflow-GHM-loss" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card">
-          <div>
-            <div class="repo-head font-draft">
-              <span class="repo-name">tensorflow-GHM-loss</span>
-              <span class="repo-stars-muted" data-repo-stars="tensorflow-GHM-loss">★ 29</span>
-            </div>
-            <p class="repo-desc" data-i18n="repoGhm">
-              TensorFlow implementation of AAAI 2019 (Oral) Gradient Harmonized Single-stage Detector loss for hard-example balancing.
-            </p>
-          </div>
-          <div class="repo-meta font-draft">Loss Function · Object Detection</div>
-        </a>
-
-        <a href="https://github.com/peteryuX/pcdarts-tf2" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card">
-          <div>
-            <div class="repo-head font-draft">
-              <span class="repo-name">pcdarts-tf2</span>
-              <span class="repo-stars-muted" data-repo-stars="pcdarts-tf2">★ 27</span>
-            </div>
-            <p class="repo-desc" data-i18n="repoPcdarts">
-              Memory-efficient Differentiable Architecture Search (ICLR 2020 PC-DARTS) implemented in TensorFlow 2.
-            </p>
-          </div>
-          <div class="repo-meta font-draft">NAS · AutoML · TensorFlow 2</div>
-        </a>
-
-        <a href="https://github.com/peteryuX?tab=repositories" target="_blank" rel="noopener noreferrer" class="folio folio-hover repo-card repo-more">
-          <div class="repo-more-title font-editorial" data-i18n="allReposTitle">All Repositories ↗</div>
-          <p class="repo-desc" data-i18n="allReposDesc">
-            Qualcomm SNPE edge inference notes, headless GPU fan tools, and other ML experiments.
+          <p class="item-desc" data-i18n="auroraDesc">
+            Built during a trip to the Nordics after realizing aurora numbers aren't much help without knowing where the clouds clear. It combines NOAA space weather, MET Norway cloud layers, and airport METAR, backtested against over ten years of records.
           </p>
-        </a>
-      </div>
-    </section>
 
-    <!-- =====================================================================
-         02 · ABOUT & EXPERIENCE
-         ===================================================================== -->
-    <section id="experience" class="container content-section">
-      <div class="section-header reveal">
-        <div class="section-rule font-draft" data-i18n="sec2Kicker">02 · Experience</div>
-        <div class="section-title-row">
-          <h2 class="section-title font-editorial" data-i18n="sec2Title">About &amp; Experience</h2>
-          <span class="section-sub font-draft" data-i18n="sec2Sub">2011 — Present · Taipei &amp; Hsinchu</span>
-        </div>
-      </div>
+          <p class="meta-line font-mono">PWA · NOAA / MET Norway / METAR · 10+ yr backtest</p>
+        </article>
 
-      <div class="exp-grid reveal">
-        <aside class="folio bio-card">
-          <div class="kicker-sm font-draft" data-i18n="bioLabel">About</div>
-          <div id="bio-paragraphs" class="bio-paragraphs">
-            <p>I'm an Engineering Manager &amp; Tech Lead focused on spatial perception and machine learning — taking computer vision models from data systems and prototypes into reliable, real-time on-device products.</p>
-            <p>Currently at <a href="https://arvr.google.com/" target="_blank" rel="noopener noreferrer" class="ed-link"><strong>Google</strong></a>, I serve as a TLM on <strong>Perception for Android XR (World Sensing)</strong>. Earlier across two stints at <a href="https://www.vive.com/us/" target="_blank" rel="noopener noreferrer" class="ed-link"><strong>HTC VIVE</strong></a>, I led ML scene understanding, 3D room capture, tracking algorithms, and 3D data/labeling infrastructure across VIVE Focus Vision, XR Elite, Focus 3, and Cosmos.</p>
-            <p>Outside XR, I built large-scale recommendation systems as a Senior Data Scientist at Garena (<a href="https://booyah.live/" target="_blank" rel="noopener noreferrer" class="ed-link"><strong>BOOYAH! Live</strong></a>, lifting clip view duration by 10%) and Senior ML Engineer at <a href="https://www.dcard.tw/" target="_blank" rel="noopener noreferrer" class="ed-link"><strong>Dcard</strong></a>. I hold an M.S. in Electrical Engineering from NTHU (advised by Prof. <a href="https://scholar.google.com.tw/citations?user=fXN3dl0AAAAJ&hl=zh-TW" target="_blank" rel="noopener noreferrer" class="ed-link">Chia-Wen Lin</a>) and a B.S. in EE from CCU.</p>
+        <!-- Open Source (Spotlight Depth-of-Field List) -->
+        <div class="list-wrap">
+          <div class="sub-label" data-i18n="ossLabel">Open Source (2019–2020)</div>
+
+          <div class="list-group spotlight-group">
+            <a href="https://github.com/peteryuX/retinaface-tf2" target="_blank" rel="noopener noreferrer" class="list-row list-row-link spotlight-item">
+              <div class="row-main">
+                <span class="row-title font-mono">retinaface-tf2</span>
+                <p class="item-desc" data-i18n="repoRetina">
+                  Single-stage face detection and 5-point landmarks in TensorFlow 2, with ResNet50 / MobileNetV2 support.
+                </p>
+              </div>
+              <div class="row-meta font-mono">
+                <span>TF2 · Detection</span>
+                <span class="star-count" data-repo="retinaface-tf2">★ 281</span>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/peteryuX/arcface-tf2" target="_blank" rel="noopener noreferrer" class="list-row list-row-link spotlight-item">
+              <div class="row-main">
+                <span class="row-title font-mono">arcface-tf2</span>
+                <p class="item-desc" data-i18n="repoArc">
+                  TensorFlow 2 implementation of ArcFace (CVPR 2019) face recognition.
+                </p>
+              </div>
+              <div class="row-meta font-mono">
+                <span>TF2 · Recognition</span>
+                <span class="star-count" data-repo="arcface-tf2">★ 272</span>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/peteryuX/esrgan-tf2" target="_blank" rel="noopener noreferrer" class="list-row list-row-link spotlight-item">
+              <div class="row-main">
+                <span class="row-title font-mono">esrgan-tf2</span>
+                <p class="item-desc" data-i18n="repoEsrgan">
+                  TensorFlow 2 implementation of ESRGAN (ECCV 2018) image super-resolution.
+                </p>
+              </div>
+              <div class="row-meta font-mono">
+                <span>TF2 · Super-Resolution</span>
+                <span class="star-count" data-repo="esrgan-tf2">★ 134</span>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
           </div>
-          <div class="focus-block">
-            <div class="focus-label font-draft" data-i18n="focusLabel">Technical Focus</div>
-            <div id="focus-chips" class="focus-chips font-draft">
-              <span class="focus-chip">Android XR / World Sensing</span>
-              <span class="focus-chip">3D Scene Understanding</span>
-              <span class="focus-chip">Depth &amp; Segmentation</span>
-              <span class="focus-chip">On-Device CV &amp; Quantization</span>
-              <span class="focus-chip">3D Data &amp; Labeling Systems</span>
-              <span class="focus-chip">Recommender Systems</span>
-            </div>
+
+          <div class="list-footer">
+            <span class="muted-note" data-i18n="moreReposNote">More repos covering GHM-loss, PC-DARTS, and SNPE notes are on GitHub.</span>
+            <a href="https://github.com/peteryuX?tab=repositories" target="_blank" rel="noopener noreferrer" class="accent-link" data-i18n="allReposLink">All on GitHub ↗</a>
           </div>
-        </aside>
-
-        <div id="timeline-list" class="folio list-folio"></div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         03 · RESEARCH & PUBLICATIONS
-         ===================================================================== -->
-    <section id="research" class="container content-section">
-      <div class="section-header reveal">
-        <div class="section-rule font-draft" data-i18n="sec3Kicker">03 · Research</div>
-        <div class="section-title-row">
-          <h2 class="section-title font-editorial" data-i18n="sec3Title">Publications &amp; Academic Projects</h2>
-          <span class="section-sub font-draft" data-i18n="sec3Sub">Click any item to view abstract</span>
         </div>
-      </div>
+      </section>
 
-      <!-- IEEE SAM 2020 Publication -->
-      <article class="folio pub-card reveal">
-        <div class="pub-meta font-draft">
-          <span class="hero-role" data-i18n="pubBadge">IEEE SAM 2020 · Publication</span>
-          <span class="hero-loc">Chih-Chung Hsu &amp; Kuan-Yu Huang</span>
+      <!-- 02 · EXPERIENCE -->
+      <section id="experience" class="section">
+        <header class="section-head">
+          <span class="section-num font-mono">02</span>
+          <h2 class="section-title" data-i18n="secExp">Experience</h2>
+        </header>
+
+        <ol id="timeline-list" class="timeline-list spotlight-group"></ol>
+
+        <div class="edu-block">
+          <div class="sub-label" data-i18n="eduLabel">Education</div>
+          <ol id="edu-list" class="edu-list"></ol>
         </div>
-        <h3 class="pub-title font-editorial">
-          Coupled Adversarial Learning for Single Image Super-Resolution
-        </h3>
-        <p class="body-copy" data-i18n="pubDesc">
-          Proposes a Coupled Adversarial Net (CAN) built on a Siamese structure, combining adversarial loss and semantic feature distances to improve single-image super-resolution while lowering training complexity.
-        </p>
-        <div class="pub-links font-draft">
-          <a href="https://ieeexplore.ieee.org/document/9104288" target="_blank" rel="noopener noreferrer" class="accent-link" data-i18n="pubPaper">IEEE Xplore ↗</a>
-          <a href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="ed-link" data-i18n="pubSlides">Slides ↗</a>
-        </div>
-      </article>
+      </section>
 
-      <!-- Expandable Academic Archive -->
-      <div id="archive-list" class="folio list-folio reveal"></div>
-    </section>
+      <!-- 03 · RESEARCH -->
+      <section id="research" class="section">
+        <header class="section-head">
+          <span class="section-num font-mono">03</span>
+          <h2 class="section-title" data-i18n="secResearch">Research</h2>
+        </header>
 
-    <!-- =====================================================================
-         04 · CREDENTIALS
-         ===================================================================== -->
-    <section id="credentials" class="container content-section">
-      <div class="section-header reveal">
-        <div class="section-rule font-draft" data-i18n="sec4Kicker">04 · Credentials</div>
-        <h2 class="section-title font-editorial" data-i18n="sec4Title">Certifications</h2>
-      </div>
+        <div id="research-list" class="list-group spotlight-group"></div>
+      </section>
 
-      <div id="certs-grid" class="certs-grid reveal"></div>
-    </section>
+    </main>
+  </div>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="container site-footer">
-    <div class="footer-inner font-draft">
-      <div class="footer-brand">
-        <span class="hanko hanko-sm font-editorial" aria-hidden="true">P</span>
-        <span data-i18n="footerSign">Peter (Kuan-Yu) Huang · 25.03°N 121.56°E · [D] Theme [L] Lang</span>
-      </div>
+  <!-- FOOTER WITH RICH RETURNING PACIFIC TIDE -->
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span class="footer-copy" data-i18n="footerCopy">Peter Huang · Taipei</span>
       <div class="footer-links">
         <a href="https://github.com/peteryuX" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/kuan-yu-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="mailto:peter124574@gmail.com">Email</a>
-        <a href="#top" class="accent-link" data-i18n="backTop">Top ↑</a>
+        <button type="button" class="copy-email-btn footer-btn" data-email="peter124574@gmail.com">
+          <span class="copy-email-label">Email</span>
+        </button>
+        <a href="#top" data-i18n="backTop">Top ↑</a>
       </div>
     </div>
+    <canvas id="footer-tide" class="footer-tide" aria-hidden="true"></canvas>
   </footer>
 
-  <script src="js/app.js" defer></script>
+  <!-- Screen-reader live announcement for clipboard copy -->
+  <div id="sr-status" class="sr-only" aria-live="polite"></div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
