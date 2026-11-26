@@ -16,7 +16,7 @@
       navExp: 'Experience',
       navResearch: 'Research',
       heroName: 'Peter Huang <span class="hero-name-sub">Kuan-Yu Huang</span>',
-      heroLead: 'Computer vision & 3D perception, in Taipei.',
+      heroLead: 'Computer vision & 3D perception.',
       heroBio: 'Currently working on Android XR at <a href="https://arvr.google.com/" target="_blank" rel="noopener noreferrer" class="text-link">Google</a>, previously at <a href="https://www.vive.com/us/" target="_blank" rel="noopener noreferrer" class="text-link">HTC VIVE</a> and Garena. A small index of projects, open-source work, and papers.',
       ctaCv: 'CV ↗',
       railLoc: 'Taipei',
@@ -90,7 +90,6 @@
         {
           venue: '2017 · M.S. Thesis · NTHU',
           title: 'Pairwise Learning on Image Quality Assessment using Deep Siamese Neural Network',
-          authors: '<strong>K.-Y. Huang</strong>',
           desc: 'Trained a deep Siamese network on pairwise comparisons for subjective image quality assessment, letting annotators compare two images rather than assign absolute scores.',
           links: [
             { label: 'Thesis PDF ↗', url: 'https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing', accent: true }
@@ -109,7 +108,7 @@
       navExp: '經歷',
       navResearch: '研究',
       heroName: '黃冠諭 <span class="hero-name-sub">Peter Huang</span>',
-      heroLead: '電腦視覺、3D 感知，在台北。',
+      heroLead: '專注於電腦視覺與 3D 感知。',
       heroBio: '目前在 <a href="https://arvr.google.com/" target="_blank" rel="noopener noreferrer" class="text-link">Google</a> 做 Android XR，之前待過 <a href="https://www.vive.com/us/" target="_blank" rel="noopener noreferrer" class="text-link">HTC VIVE</a> 和 Garena。這裡放一些做過的專案、開源實作和論文。',
       ctaCv: '履歷 CV ↗',
       railLoc: '台北',
@@ -183,7 +182,6 @@
         {
           venue: '2017 · 碩士論文 · 國立清華大學',
           title: 'Pairwise Learning on Image Quality Assessment using Deep Siamese Neural Network',
-          authors: '<strong>黃冠諭</strong>',
           desc: '用成對比較資料訓練深度 Siamese 網路做主觀影像品質評估，讓標註者只需比較兩張圖的優劣，不必給絕對分數。',
           links: [
             { label: '論文 PDF ↗', url: 'https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing', accent: true }
@@ -220,10 +218,14 @@
     themeListeners.forEach((fn) => fn(currentTheme));
   }
 
-  // Origin-aware circular ink-wash View Transition on theme toggle
+  // Origin-aware circular ink-wash View Transition on theme toggle (skip on rapid clicks)
+  let lastThemeToggleMs = 0;
   function toggleTheme(triggerEl) {
     const next = currentTheme === 'dark' ? 'light' : 'dark';
-    if (!reducedMotion && document.startViewTransition && triggerEl) {
+    const now = performance.now();
+    const allowVT = !reducedMotion && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 550);
+    lastThemeToggleMs = now;
+    if (allowVT) {
       const rect = triggerEl.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top + rect.height / 2;
@@ -290,7 +292,7 @@
           </div>
         </div>
         <h3 class="research-title">${item.title}</h3>
-        <div class="research-authors">${item.authors}</div>
+        ${item.authors ? `<div class="research-authors">${item.authors}</div>` : ''}
         <p class="item-desc">${item.desc}</p>
       </article>
     `).join('');
@@ -333,6 +335,7 @@
       }
 
       requestAnimationFrame(updateLangIndicator);
+      window.dispatchEvent(new CustomEvent('coast:lang', { detail: currentLang }));
       try {
         window.localStorage.setItem('peteryux_lang', currentLang);
       } catch (_) {}
@@ -479,17 +482,19 @@
       if (tideFill) tideFill.style.transform = `scaleY(${Math.max(0.12, progress).toFixed(4)})`;
       if (mobileBar) mobileBar.style.transform = `scaleX(${progress.toFixed(4)})`;
       if (railActions && heroStage) {
-        railActions.classList.toggle('is-visible', sy > heroStage.offsetHeight * 0.52);
+        const showRail = sy > heroStage.offsetHeight * 0.52;
+        railActions.classList.toggle('is-visible', showRail);
+        railActions.setAttribute('aria-hidden', String(!showRail));
       }
       if (contours && !reducedMotion) {
         contours.style.transform = `translate3d(0, ${(-sy * 0.06).toFixed(1)}px, 0)`;
       }
 
-      // Active section detection
+      // Active section detection (viewport-relative, immune to positioned ancestors)
       let activeId = sectionIds[0];
-      const probe = sy + window.innerHeight * 0.34;
+      const probeY = window.innerHeight * 0.34;
       for (let i = 0; i < sections.length; i++) {
-        if (sections[i].offsetTop <= probe) activeId = sections[i].id;
+        if (sections[i].getBoundingClientRect().top <= probeY) activeId = sections[i].id;
       }
       navLinks.forEach((a) => {
         const tgt = a.getAttribute('data-target') || (a.getAttribute('href') || '').slice(1);
@@ -735,10 +740,29 @@
       }
     }
 
-    const startMs = performance.now();
+    const heroHooks = { beforeRender: null, afterSky: null, afterCoast: null, afterWaveLayer: null, afterScene: null };
+    let simTime = 0;
+    let lastFrameMs = 0;
+    let stageRect = null;
+    let cachedSky = null;
+    let cachedSkyKey = '';
+
+    // Reusable typed buffers for wave sampling (zero per-frame array GC churn)
+    let ptsCap = 256;
+    let ptsX = new Float32Array(ptsCap);
+    let ptsY = new Float32Array(ptsCap);
+
+    function refreshStageRect() {
+      stageRect = stage.getBoundingClientRect();
+      return stageRect;
+    }
 
     function render(nowMs) {
-      const t = (nowMs - startMs) * 0.001;
+      const dt = lastFrameMs ? Math.min(0.033, Math.max(0, (nowMs - lastFrameMs) * 0.001)) : 0.016;
+      lastFrameMs = nowMs;
+      if (!reducedMotion) simTime += dt;
+      const t = simTime;
+
       themeVal += (themeTarget - themeVal) * 0.12;
       if (Math.abs(themeTarget - themeVal) < 0.002) themeVal = themeTarget;
 
@@ -752,19 +776,28 @@
       const tv = themeVal;
       const scrollY = window.scrollY || 0;
       const scale = W < 640 ? 0.68 : 1.0;
-
-      // 1. Atmospheric Coastal Sky (Dawn ochre-mist Light ↔ Lunar indigo-teal Dark)
-      const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0.0, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
-      sky.addColorStop(0.48, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
-      sky.addColorStop(0.72, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
-      sky.addColorStop(1.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
-      ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, W, H);
-
-      // Subtle horizon glow centered softly behind Guishan Island (East Pacific dawn / moonrise — zero hard orb!)
       const glowX = W * 0.80 + pointer.x * 5;
       const horizonY = H - 154 * scale - Math.min(10, scrollY * 0.03);
+      const ridgeH = W < 640 ? 220 : 390;
+
+      const frameInfo = { t, dt, tv, W, H, scale, scrollY, horizonY, ridgeH, glowX, px: pointer.x, py: pointer.y, isVisible };
+      if (heroHooks.beforeRender) heroHooks.beforeRender(frameInfo);
+
+      // 1. Atmospheric Coastal Sky (cached gradient rebuilt only when W/H/tv changes)
+      const skyKey = `${W}|${H}|${Math.round(tv * 255)}`;
+      if (skyKey !== cachedSkyKey) {
+        cachedSkyKey = skyKey;
+        const sky = ctx.createLinearGradient(0, 0, 0, H);
+        sky.addColorStop(0.0, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
+        sky.addColorStop(0.48, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
+        sky.addColorStop(0.72, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
+        sky.addColorStop(1.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
+        cachedSky = sky;
+      }
+      ctx.fillStyle = cachedSky;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle horizon glow centered softly behind Guishan Island
       const glowR = Math.min(W * 0.42, 420);
       const hGlow = ctx.createRadialGradient(glowX, horizonY - 22, 8, glowX, horizonY - 22, glowR);
       if (tv < 0.5) {
@@ -781,8 +814,9 @@
       ctx.fillStyle = hGlow;
       ctx.fillRect(0, 0, W, H);
 
-      // 2. Sculpted Taiwan East Coast Landforms (Authentic Mineral Pigment Weight!)
-      const ridgeH = W < 640 ? 220 : 390;
+      if (heroHooks.afterSky) heroHooks.afterSky(ctx, frameInfo);
+
+      // 2. Sculpted Taiwan East Coast Landforms
       drawCoastRidge(QINGSHUI_FAR, horizonY, ridgeH, pointer.x * 5, tv, PAL.cliffFar, lerp(0.32, 0.52, tv), 0, null);
       drawCoastRidge(QINGSHUI_NEAR, horizonY + 3, ridgeH * 0.86, pointer.x * 9.5, tv, PAL.cliffMid, lerp(0.56, 0.72, tv), lerp(0.28, 0.30, tv), [8, 22]);
       drawCoastRidge(GUISHAN, horizonY + 3, ridgeH * 0.96, pointer.x * 7.2, tv, PAL.island, lerp(0.62, 0.76, tv), lerp(0.36, 0.42, tv), [10, 26]);
@@ -795,27 +829,36 @@
       ctx.fillStyle = mist;
       ctx.fillRect(0, horizonY - 24, W, 38);
 
+      if (heroHooks.afterCoast) heroHooks.afterCoast(ctx, frameInfo);
+
       // 3. Five Depth-Layered Prussian-Indigo / Kuroshio Pacific Swells (Layer 4 = Seamless Page Paper)
       const step = Math.max(4, Math.round(W / 195));
+      const needed = Math.ceil((W + step * 2) / step) + 2;
+      if (needed > ptsCap) {
+        ptsCap = needed + 32;
+        ptsX = new Float32Array(ptsCap);
+        ptsY = new Float32Array(ptsCap);
+      }
 
       for (let li = 0; li < LAYERS.length; li++) {
         const layer = LAYERS[li];
         const pxShift = pointer.x * 28 * layer.parallax;
-        const pts = [];
+        let ptsLen = 0;
         for (let x = -step; x <= W + step; x += step) {
-          pts.push([x, waveY(layer, x, t, pxShift, li, scale, scrollY)]);
+          ptsX[ptsLen] = x;
+          ptsY[ptsLen] = waveY(layer, x, t, pxShift, li, scale, scrollY);
+          ptsLen += 1;
         }
 
         const baseY = H - layer.bottomOff * scale - Math.min(34, scrollY * layer.scrollK * 0.14);
 
         ctx.beginPath();
-        ctx.moveTo(pts[0][0], H + 6);
-        for (let i = 0; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-        ctx.lineTo(pts[pts.length - 1][0], H + 6);
+        ctx.moveTo(ptsX[0], H + 6);
+        for (let i = 0; i < ptsLen; i++) ctx.lineTo(ptsX[i], ptsY[i]);
+        ctx.lineTo(ptsX[ptsLen - 1], H + 6);
         ctx.closePath();
 
         if (layer.isPaper) {
-          // Seamless integration: foreground wave IS the warm paper / dark slate reading surface!
           ctx.fillStyle = mixRGB(PAL.paper[0], PAL.paper[1], tv);
           ctx.fill();
         } else {
@@ -826,15 +869,15 @@
           ctx.fill();
         }
 
-        // Hokusai internal carved flow striations (筋彫り)
+        // Hokusai internal carved flow striations
         for (let k = 1; k <= layer.lines; k++) {
           const offset = k * (5.2 + li * 1.55) * scale;
           const ia = (0.28 - k * 0.06) * lerp(1.0, 0.78, tv);
           ctx.beginPath();
-          for (let i = 0; i < pts.length; i++) {
-            const x = pts[i][0];
-            const lift = Math.max(0, (baseY - pts[i][1]) / Math.max(1, layer.amp * scale));
-            const y = pts[i][1] + offset * (0.84 + lift * 0.34) + Math.sin(x * 0.011 + li * 1.8 + k - t * 0.24) * 1.1;
+          for (let i = 0; i < ptsLen; i++) {
+            const x = ptsX[i];
+            const lift = Math.max(0, (baseY - ptsY[i]) / Math.max(1, layer.amp * scale));
+            const y = ptsY[i] + offset * (0.84 + lift * 0.34) + Math.sin(x * 0.011 + li * 1.8 + k - t * 0.24) * 1.1;
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           }
@@ -843,27 +886,27 @@
           ctx.stroke();
         }
 
-        // Carved tapered woodblock foam crest ribbons on steeper Pacific swells
+        // Carved tapered woodblock foam crest ribbons
         if (!layer.isPaper && layer.foam > 0) {
           const thr = baseY - layer.amp * scale * 0.26;
           let rs = -1;
-          for (let i = 0; i <= pts.length; i++) {
-            const act = i < pts.length && pts[i][1] < thr;
+          for (let i = 0; i <= ptsLen; i++) {
+            const act = i < ptsLen && ptsY[i] < thr;
             if (act && rs === -1) rs = i;
             else if (!act && rs !== -1) {
               const re = i - 1;
               const rl = re - rs + 1;
               if (rl >= 4) {
                 ctx.beginPath();
-                ctx.moveTo(pts[rs][0], pts[rs][1]);
-                for (let j = rs + 1; j <= re; j++) ctx.lineTo(pts[j][0], pts[j][1] - 0.3);
+                ctx.moveTo(ptsX[rs], ptsY[rs]);
+                for (let j = rs + 1; j <= re; j++) ctx.lineTo(ptsX[j], ptsY[j] - 0.3);
                 for (let j = re; j >= rs; j--) {
                   const frac = (j - rs) / Math.max(1, rl - 1);
-                  const taper = Math.pow(Math.sin(frac * Math.PI), 0.74);
-                  const depth = Math.min(1, (thr - pts[j][1]) / Math.max(1, layer.amp * scale * 0.72));
-                  const xv = pts[j][0];
+                  const taper = Math.pow(Math.max(0, Math.sin(frac * Math.PI)), 0.74);
+                  const depth = Math.min(1, (thr - ptsY[j]) / Math.max(1, layer.amp * scale * 0.72));
+                  const xv = ptsX[j];
                   const organic = 0.85 + 0.09 * Math.sin(xv * 0.042 + li * 2) + 0.06 * Math.sin(xv * 0.095 - t * 0.35);
-                  ctx.lineTo(xv, pts[j][1] + (1.3 + depth * (2.2 + li * 0.55)) * layer.foam * taper * organic);
+                  ctx.lineTo(xv, ptsY[j] + (1.3 + depth * (2.2 + li * 0.55)) * layer.foam * taper * organic);
                 }
                 ctx.closePath();
                 ctx.fillStyle = mixRGB(PAL.foam[0], PAL.foam[1], tv, (0.76 * layer.foam * lerp(1.0, 0.56, tv)).toFixed(3));
@@ -874,45 +917,60 @@
           }
         }
 
-        // Subtle shimmer reflection beneath the East horizon glow (especially luminous in Dark moonlit mode)
+        // Subtle horizon shimmer reflection (batched into 2 opacity buckets to cut stroke calls by 10x)
         if (!layer.isPaper) {
           const bw = W * lerp(0.11, 0.16, tv) * (0.65 + li * 0.16);
           const gs = lerp(0.16, 0.42, tv) * (1.0 - li * 0.12);
-          for (let i = 1; i < pts.length - 1; i += 2) {
-            const x = pts[i][0];
-            const dx = Math.abs(x - glowX);
-            if (dx > bw) continue;
-            const rad = Math.exp(-Math.pow(dx / (bw * 0.46), 2));
-            const sh = 0.5 + 0.5 * Math.sin(x * 0.12 + t * (1.5 + li * 0.3) + li * 2.1);
-            const a = rad * sh * gs;
-            if (a < 0.03) continue;
-            ctx.strokeStyle = mixRGB([250, 244, 228], [198, 224, 244], tv, a.toFixed(3));
-            ctx.lineWidth = 0.75 + li * 0.16;
-            const len = 4 + rad * (10 + li * 2);
+          ctx.lineWidth = 0.75 + li * 0.16;
+          for (let bucket = 0; bucket < 2; bucket++) {
+            let any = false;
             ctx.beginPath();
-            ctx.moveTo(x - len * 0.5, pts[i][1] + 2.8 + li);
-            ctx.lineTo(x + len * 0.5, pts[i][1] + 2.8 + li);
-            ctx.stroke();
+            for (let i = 1; i < ptsLen - 1; i += 2) {
+              const x = ptsX[i];
+              const dx = Math.abs(x - glowX);
+              if (dx > bw) continue;
+              const rad = Math.exp(-Math.pow(dx / (bw * 0.46), 2));
+              const sh = 0.5 + 0.5 * Math.sin(x * 0.12 + t * (1.5 + li * 0.3) + li * 2.1);
+              const a = rad * sh * gs;
+              if (a < 0.03) continue;
+              const isBright = a >= gs * 0.48;
+              if ((bucket === 1) !== isBright) continue;
+              const len = 4 + rad * (10 + li * 2);
+              const y = ptsY[i] + 2.8 + li;
+              ctx.moveTo(x - len * 0.5, y);
+              ctx.lineTo(x + len * 0.5, y);
+              any = true;
+            }
+            if (any) {
+              const ba = bucket === 1 ? gs * 0.72 : gs * 0.32;
+              ctx.strokeStyle = mixRGB([250, 244, 228], [198, 224, 244], tv, ba.toFixed(3));
+              ctx.stroke();
+            }
           }
         }
 
-        // Woodblock key-block ridge hairline (clean seam where sea meets paper!)
+        // Woodblock key-block ridge hairline
         ctx.beginPath();
-        for (let i = 0; i < pts.length; i++) {
-          if (i === 0) ctx.moveTo(pts[i][0], pts[i][1]);
-          else ctx.lineTo(pts[i][0], pts[i][1]);
+        for (let i = 0; i < ptsLen; i++) {
+          if (i === 0) ctx.moveTo(ptsX[i], ptsY[i]);
+          else ctx.lineTo(ptsX[i], ptsY[i]);
         }
         ctx.strokeStyle = layer.isPaper
           ? mixRGB([22, 54, 78], [142, 184, 214], tv, lerp(0.32, 0.34, tv).toFixed(3))
           : mixRGB(PAL.keyInk[0], PAL.keyInk[1], tv, lerp(0.28 + li * 0.06, 0.52, tv).toFixed(3));
         ctx.lineWidth = layer.isPaper ? 1.05 : (0.7 + li * 0.12);
         ctx.stroke();
+
+        if (heroHooks.afterWaveLayer) heroHooks.afterWaveLayer(ctx, li, ptsX, ptsY, ptsLen, baseY, frameInfo);
       }
+
+      if (heroHooks.afterScene) heroHooks.afterScene(ctx, frameInfo);
 
       if (!reducedMotion && isVisible && pageVisible) {
         rafId = requestAnimationFrame(render);
       } else {
         rafId = null;
+        lastFrameMs = 0;
       }
     }
 
@@ -923,6 +981,7 @@
         return;
       }
       if (isVisible && pageVisible && rafId === null) {
+        lastFrameMs = 0;
         rafId = requestAnimationFrame(render);
       }
     }
@@ -937,34 +996,35 @@
       }
     });
 
+    stage.addEventListener('pointerenter', refreshStageRect, { passive: true });
+
     stage.addEventListener('pointermove', (e) => {
-      const rect = stage.getBoundingClientRect();
+      const rect = stageRect || refreshStageRect();
       const rx = (e.clientX - rect.left) / Math.max(1, rect.width);
       const ry = (e.clientY - rect.top) / Math.max(1, rect.height);
       pointer.tx = (rx - 0.5) * 2;
       pointer.ty = (ry - 0.5) * 2;
 
-      const nowT = (performance.now() - startMs) * 0.001;
-      if (!reducedMotion && ry > 0.52 && nowT - pointer.lastT > 0.14 && Math.abs(e.clientX - pointer.lastX) > 12) {
-        pointer.lastT = nowT;
+      if (!reducedMotion && ry > 0.52 && simTime - pointer.lastT > 0.14 && Math.abs(e.clientX - pointer.lastX) > 12) {
+        pointer.lastT = simTime;
         pointer.lastX = e.clientX;
         const estLayer = Math.max(0, Math.min(4, Math.round(((ry - 0.56) / 0.44) * 4)));
         if (ripples.length > 8) ripples.shift();
-        ripples.push({ x: rx * W, t0: nowT, layer: estLayer, strength: 4.5 });
+        ripples.push({ x: rx * W, t0: simTime, layer: estLayer, strength: 4.5 });
       }
     });
 
     stage.addEventListener('pointerdown', (e) => {
       if (reducedMotion) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
       if (e.target && e.target.closest && e.target.closest('a, button')) return;
-      const rect = stage.getBoundingClientRect();
+      const rect = refreshStageRect();
       const rx = (e.clientX - rect.left) / Math.max(1, rect.width);
       const ry = (e.clientY - rect.top) / Math.max(1, rect.height);
       if (ry < 0.45) return;
-      const nowT = (performance.now() - startMs) * 0.001;
       const estLayer = Math.max(0, Math.min(4, Math.round(((Math.max(0.56, ry) - 0.56) / 0.44) * 4)));
       if (ripples.length > 10) ripples.shift();
-      ripples.push({ x: rx * W, t0: nowT, layer: estLayer, strength: 8.0 });
+      ripples.push({ x: rx * W, t0: simTime, layer: estLayer, strength: 8.0 });
     });
 
     stage.addEventListener('pointerleave', () => {
@@ -978,6 +1038,7 @@
       else if (rafId !== null) {
         cancelAnimationFrame(rafId);
         rafId = null;
+        lastFrameMs = 0;
       }
     });
 
@@ -988,18 +1049,63 @@
         else if (rafId !== null) {
           cancelAnimationFrame(rafId);
           rafId = null;
+          lastFrameMs = 0;
         }
       }, { threshold: 0.01 });
       io.observe(stage);
     }
 
+    window.addEventListener('scroll', () => { stageRect = null; }, { passive: true });
     window.addEventListener('resize', () => {
+      stageRect = null;
+      cachedSkyKey = '';
       resize();
-      if (reducedMotion || !isVisible) render(performance.now());
+      if (isVisible && reducedMotion) render(performance.now());
     }, { passive: true });
 
     resize();
     ensureRunning();
+
+    window.__COAST_BRIDGE__ = window.__COAST_BRIDGE__ || {};
+    window.__COAST_BRIDGE__.hero = {
+      stage,
+      LAYERS,
+      QINGSHUI_NEAR,
+      GUISHAN,
+      hooks: heroHooks,
+      getNow: () => simTime,
+      getRect: () => stageRect || refreshStageRect(),
+      getState: () => {
+        const scrollY = window.scrollY || 0;
+        const scale = W < 640 ? 0.68 : 1.0;
+        return {
+          W, H, scale, scrollY, tv: themeVal,
+          px: pointer.x, py: pointer.y,
+          horizonY: H - 154 * scale - Math.min(10, scrollY * 0.03),
+          ridgeH: W < 640 ? 220 : 390,
+          isVisible
+        };
+      },
+      sampleWaveY: (li, x, t) => {
+        const layer = LAYERS[Math.max(0, Math.min(LAYERS.length - 1, li))];
+        const scale = W < 640 ? 0.68 : 1.0;
+        const scrollY = window.scrollY || 0;
+        const pxShift = pointer.x * 28 * layer.parallax;
+        return waveY(layer, x, t, pxShift, li, scale, scrollY);
+      },
+      sampleWaveSlope: (li, x, t) => {
+        const layer = LAYERS[Math.max(0, Math.min(LAYERS.length - 1, li))];
+        const scale = W < 640 ? 0.68 : 1.0;
+        const scrollY = window.scrollY || 0;
+        const pxShift = pointer.x * 28 * layer.parallax;
+        return (waveY(layer, x + 4, t, pxShift, li, scale, scrollY) - waveY(layer, x - 4, t, pxShift, li, scale, scrollY)) / 8;
+      },
+      addRipple: (x, li, strength) => {
+        if (ripples.length > 12) ripples.shift();
+        ripples.push({ x, t0: simTime, layer: li, strength: strength || 7.5 });
+      },
+      ensureRunning
+    };
   }
 
   /* ========================================================================
@@ -1020,16 +1126,35 @@
     let themeTarget = themeVal;
     let px = 0;
     let pxTarget = 0;
+    let simTime = 0;
+    let lastFrameMs = 0;
+    let footerRect = null;
+    const footerHooks = { afterWaveLayer: null };
 
     const WAVES = [
       { y: 0.30, amp: 5.5, freq: 0.0040, speed: 0.22, phase: 0.7, top: [[124, 160, 178], [21, 41, 61]], bot: [[92, 134, 156], [16, 33, 50]], line: 0.24 },
       { y: 0.54, amp: 7.0, freq: 0.0033, speed: 0.29, phase: 2.8, top: [[56, 102, 128],  [15, 31, 48]], bot: [[36, 78, 104],  [11, 24, 38]], line: 0.32 },
       { y: 0.78, amp: 6.5, freq: 0.0028, speed: 0.36, phase: 4.9, top: [[24, 60, 86],    [10, 22, 36]], bot: [[15, 42, 64],   [7, 15, 25]],  line: 0.36 }
     ];
-    const startMs = performance.now();
+
+    let fCap = 200;
+    let fPtsX = new Float32Array(fCap);
+    let fPtsY = new Float32Array(fCap);
+
+    function refreshFooterRect() {
+      footerRect = canvas.getBoundingClientRect();
+      return footerRect;
+    }
+
+    function sampleFooterWaveY(i, x, t) {
+      const l = WAVES[i];
+      const p = (x + px * (12 + i * 8)) * l.freq - t * l.speed + l.phase;
+      const dy = (Math.sin(p) - 0.36 * Math.sin(2 * p + 0.3) * 0.38) * l.amp;
+      return H * l.y + dy;
+    }
 
     function resize() {
-      const r = canvas.getBoundingClientRect();
+      const r = refreshFooterRect();
       W = Math.max(1, Math.round(r.width));
       H = Math.max(1, Math.round(r.height));
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1039,46 +1164,64 @@
     }
 
     function render(nowMs) {
-      const t = (nowMs - startMs) * 0.001;
+      const dt = lastFrameMs ? Math.min(0.04, Math.max(0, (nowMs - lastFrameMs) * 0.001)) : 0.016;
+      lastFrameMs = nowMs;
+      if (!reducedMotion) simTime += dt;
+      const t = simTime;
+
       themeVal += (themeTarget - themeVal) * 0.12;
       if (Math.abs(themeTarget - themeVal) < 0.002) themeVal = themeTarget;
       px += (pxTarget - px) * 0.06;
 
       ctx.clearRect(0, 0, W, H);
       const step = Math.max(5, Math.round(W / 160));
+      const needed = Math.ceil((W + step * 2) / step) + 2;
+      if (needed > fCap) {
+        fCap = needed + 32;
+        fPtsX = new Float32Array(fCap);
+        fPtsY = new Float32Array(fCap);
+      }
 
       for (let i = 0; i < WAVES.length; i++) {
         const l = WAVES[i];
-        const pts = [];
+        let n = 0;
         for (let x = -step; x <= W + step; x += step) {
-          const p = (x + px * (12 + i * 8)) * l.freq - t * l.speed + l.phase;
-          const dy = (Math.sin(p) - 0.36 * Math.sin(2 * p + 0.3) * 0.38) * l.amp;
-          pts.push([x, H * l.y + dy]);
+          fPtsX[n] = x;
+          fPtsY[n] = sampleFooterWaveY(i, x, t);
+          n += 1;
         }
         const g = ctx.createLinearGradient(0, H * l.y - l.amp, 0, H);
         g.addColorStop(0, mixRGB(l.top[0], l.top[1], themeVal));
         g.addColorStop(1, mixRGB(l.bot[0], l.bot[1], themeVal));
 
         ctx.beginPath();
-        ctx.moveTo(pts[0][0], H + 2);
-        for (let j = 0; j < pts.length; j++) ctx.lineTo(pts[j][0], pts[j][1]);
-        ctx.lineTo(pts[pts.length - 1][0], H + 2);
+        ctx.moveTo(fPtsX[0], H + 2);
+        for (let j = 0; j < n; j++) ctx.lineTo(fPtsX[j], fPtsY[j]);
+        ctx.lineTo(fPtsX[n - 1], H + 2);
         ctx.closePath();
         ctx.fillStyle = g;
         ctx.fill();
 
         ctx.beginPath();
-        for (let j = 0; j < pts.length; j++) {
-          if (j === 0) ctx.moveTo(pts[j][0], pts[j][1]);
-          else ctx.lineTo(pts[j][0], pts[j][1]);
+        for (let j = 0; j < n; j++) {
+          if (j === 0) ctx.moveTo(fPtsX[j], fPtsY[j]);
+          else ctx.lineTo(fPtsX[j], fPtsY[j]);
         }
         ctx.strokeStyle = mixRGB([16, 42, 62], [156, 198, 226], themeVal, l.line);
         ctx.lineWidth = 0.85;
         ctx.stroke();
+
+        if (footerHooks.afterWaveLayer) {
+          footerHooks.afterWaveLayer(ctx, i, { t, dt, tv: themeVal, W, H, px });
+        }
       }
 
-      if (!reducedMotion && isVisible && !document.hidden) rafId = requestAnimationFrame(render);
-      else rafId = null;
+      if (!reducedMotion && isVisible && !document.hidden) {
+        rafId = requestAnimationFrame(render);
+      } else {
+        rafId = null;
+        lastFrameMs = 0;
+      }
     }
 
     function ensureRunning() {
@@ -1087,14 +1230,27 @@
         render(performance.now());
         return;
       }
-      if (isVisible && !document.hidden && rafId === null) rafId = requestAnimationFrame(render);
+      if (isVisible && !document.hidden && rafId === null) {
+        lastFrameMs = 0;
+        rafId = requestAnimationFrame(render);
+      }
     }
 
+    canvas.addEventListener('pointerenter', refreshFooterRect, { passive: true });
     canvas.addEventListener('pointermove', (e) => {
-      const r = canvas.getBoundingClientRect();
+      const r = footerRect || refreshFooterRect();
       pxTarget = ((e.clientX - r.left) / Math.max(1, r.width) - 0.5) * 2;
     });
     canvas.addEventListener('pointerleave', () => { pxTarget = 0; });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && isVisible) ensureRunning();
+      else if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        lastFrameMs = 0;
+      }
+    });
 
     themeListeners.push((theme) => {
       themeTarget = theme === 'dark' ? 1 : 0;
@@ -1113,18 +1269,35 @@
         else if (rafId !== null) {
           cancelAnimationFrame(rafId);
           rafId = null;
+          lastFrameMs = 0;
         }
       }, { threshold: 0.01 });
       io.observe(canvas);
+    } else {
+      isVisible = true;
+      ensureRunning();
     }
 
+    window.addEventListener('scroll', () => { footerRect = null; }, { passive: true });
     window.addEventListener('resize', () => {
+      footerRect = null;
       resize();
-      render(performance.now());
+      if (isVisible) render(performance.now());
     }, { passive: true });
 
     resize();
     render(performance.now());
+
+    window.__COAST_BRIDGE__ = window.__COAST_BRIDGE__ || {};
+    window.__COAST_BRIDGE__.footer = {
+      canvas,
+      hooks: footerHooks,
+      getNow: () => simTime,
+      getRect: () => footerRect || refreshFooterRect(),
+      sampleWaveY: sampleFooterWaveY,
+      sampleWaveSlope: (i, x, t) => (sampleFooterWaveY(i, x + 5, t) - sampleFooterWaveY(i, x - 5, t)) / 10,
+      ensureRunning
+    };
   }
 
   function init() {
@@ -1146,6 +1319,16 @@
     initHeroCoastScene();
     initFooterTide();
     fetchLiveStars();
+
+    window.__COAST_BRIDGE__ = window.__COAST_BRIDGE__ || {};
+    window.__COAST_BRIDGE__.core = {
+      getLang: () => currentLang,
+      getTheme: () => currentTheme,
+      reducedMotion,
+      lerp,
+      mixRGB
+    };
+    window.dispatchEvent(new CustomEvent('coast:ready'));
 
     window.addEventListener('resize', updateLangIndicator, { passive: true });
     if (document.fonts && document.fonts.ready) {
