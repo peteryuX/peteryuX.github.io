@@ -321,6 +321,11 @@
         if (d[key] !== undefined) el.textContent = d[key];
       });
 
+      const auroraLink = document.getElementById('aurora-live-link');
+      if (auroraLink) {
+        auroraLink.href = `https://peteryux.github.io/nordic-aurora-radar/?lang=${currentLang}`;
+      }
+
       renderTimeline(d.timeline);
       renderEducation(d.education);
       renderResearch(d.research);
