@@ -1,27 +1,11 @@
 <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="s1Sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F6F1E7"/>
-      <stop offset="100%" stop-color="#EAE0CE"/>
-    </linearGradient>
-    <linearGradient id="s1Sea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#14344D"/>
-      <stop offset="100%" stop-color="#0B1F30"/>
-    </linearGradient>
-    <clipPath id="s1ClipTop"><rect x="0" y="0" width="180" height="101"/></clipPath>
-    <clipPath id="s1ClipBot"><rect x="0" y="101" width="180" height="79"/></clipPath>
-    <clipPath id="s1LeftC"><circle cx="72" cy="84" r="40"/></clipPath>
+    <mask id="tcMask">
+      <rect width="180" height="180" fill="#fff"/>
+      <rect x="0" y="96" width="180" height="9" fill="#000"/>
+      <rect x="0" y="116" width="180" height="11" fill="#000"/>
+    </mask>
   </defs>
-  <rect x="0" y="0" width="180" height="101" fill="url(#s1Sky)"/>
-  <rect x="0" y="101" width="180" height="79" fill="url(#s1Sea)"/>
-  <g clip-path="url(#s1ClipTop)">
-    <circle cx="72" cy="84" r="40" fill="#265D7E"/>
-    <circle cx="108" cy="84" r="40" fill="#D45B38"/>
-    <circle cx="108" cy="84" r="40" fill="#FAF7F0" clip-path="url(#s1LeftC)"/>
-  </g>
-  <g clip-path="url(#s1ClipBot)">
-    <circle cx="72" cy="84" r="40" fill="#1F4F70"/>
-    <circle cx="108" cy="84" r="40" fill="#6F3834"/>
-    <circle cx="108" cy="84" r="40" fill="#8CC0E0" clip-path="url(#s1LeftC)"/>
-  </g>
+  <rect width="180" height="180" rx="38" fill="#F3EFE6"/>
+  <circle cx="90" cy="90" r="54" fill="#142C42" mask="url(#tcMask)"/>
 </svg>
