@@ -232,9 +232,20 @@ button:focus-visible {
   color: var(--fg);
   letter-spacing: -0.01em;
   white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 240ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.site-header.has-passed-hero .brand-name,
+.brand-name:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 html[lang="zh-Hant"] .brand-name {

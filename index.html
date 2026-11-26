@@ -25,8 +25,11 @@
   <meta name="twitter:description" content="Computer vision and 3D perception engineer in Taipei. Android XR at Google, formerly HTC VIVE and Garena." />
   <meta name="twitter:image" content="https://peteryux.github.io/assets/og-card.png" />
 
-  <!-- Minimal Monogram Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23131820'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='34' font-weight='500' fill='%23f4f1ea'%3EP%3C/text%3E%3C/svg%3E" />
+  <!-- App Icon & Favicon (Stereo Sun) -->
+  <meta name="apple-mobile-web-app-title" content="Peter Huang" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png" />
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -152,7 +155,7 @@
 
         <div class="rail-meta font-mono">
           <div class="rail-loc" data-i18n="railLoc">Taipei</div>
-          <div id="taipei-clock" class="rail-clock">--:-- CST</div>
+          <div id="taipei-clock" class="rail-clock">--:-- UTC+8</div>
         </div>
 
         <div id="rail-actions" class="rail-actions">
@@ -258,11 +261,69 @@
           <h2 class="section-title" data-i18n="secExp">Experience</h2>
         </header>
 
-        <ol id="timeline-list" class="timeline-list spotlight-group"></ol>
+        <ol id="timeline-list" class="timeline-list">
+          <li class="timeline-item is-current">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-head">
+              <div class="timeline-org-wrap">
+                <span class="timeline-org">Google</span>
+                <span class="entry-tag">Current</span>
+              </div>
+              <span class="timeline-period font-mono">Feb 2025 — Present</span>
+            </div>
+            <div class="timeline-role">Tech Lead Manager · Android XR Perception</div>
+            <p class="timeline-detail">Working on Android XR on-device perception with teammates across the US and Europe, and leading a team in Taipei.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-head">
+              <div class="timeline-org-wrap"><span class="timeline-org">HTC VIVE</span></div>
+              <span class="timeline-period font-mono">Nov 2022 — Feb 2025</span>
+            </div>
+            <div class="timeline-role">Senior Assistant Manager &amp; Tech Lead · XR Scene Understanding</div>
+            <p class="timeline-detail">Worked on real-time depth estimation, semantic segmentation, and 3D room reconstruction for VIVE Focus Vision and XR Elite, and contributed to an indoor 3D capture rig and multi-user labeling system.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-head">
+              <div class="timeline-org-wrap"><span class="timeline-org">Dcard</span></div>
+              <span class="timeline-period font-mono">Aug 2022 — Nov 2022</span>
+            </div>
+            <div class="timeline-role">Senior Machine Learning Engineer · Post Recommendation</div>
+            <p class="timeline-detail">Worked on feed ranking, NLP sentiment analysis, and anomaly detection.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-head">
+              <div class="timeline-org-wrap"><span class="timeline-org">Garena | SEA (BOOYAH! Live)</span></div>
+              <span class="timeline-period font-mono">Feb 2021 — Mar 2022</span>
+            </div>
+            <div class="timeline-role">Senior Data Scientist · Video Recommendation</div>
+            <p class="timeline-detail">Collaborated with teams in Taipei and Singapore on live-video ranking models, data pipelines, A/B testing, and anomalous account detection.</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-head">
+              <div class="timeline-org-wrap"><span class="timeline-org">HTC VIVE</span></div>
+              <span class="timeline-period font-mono">Dec 2017 — Feb 2021</span>
+            </div>
+            <div class="timeline-role">Engineer → Principal Engineer · VR/AR Computer Vision</div>
+            <p class="timeline-detail">Worked on on-device hand, face, body, and 6-DoF controller tracking for VIVE Focus 3 and Cosmos, along with model quantization, synthetic data workflows, and a multi-camera motion capture setup.</p>
+          </li>
+        </ol>
 
         <div class="edu-block">
           <div class="sub-label" data-i18n="eduLabel">Education</div>
-          <ol id="edu-list" class="edu-list"></ol>
+          <ol id="edu-list" class="edu-list">
+            <li class="edu-item">
+              <div class="edu-main"><strong>National Tsing Hua University</strong><span class="edu-degree">M.S. in Electrical Engineering</span></div>
+              <span class="timeline-period font-mono">2015 — 2017</span>
+            </li>
+            <li class="edu-item">
+              <div class="edu-main"><strong>National Chung Cheng University</strong><span class="edu-degree">B.S. in Electrical Engineering</span></div>
+              <span class="timeline-period font-mono">2011 — 2015</span>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -273,7 +334,30 @@
           <h2 class="section-title" data-i18n="secResearch">Research</h2>
         </header>
 
-        <div id="research-list" class="list-group spotlight-group"></div>
+        <div id="research-list" class="list-group">
+          <article class="research-item">
+            <div class="research-top">
+              <span class="research-venue">IEEE SAM 2020 · Conference Paper</span>
+              <div class="inline-links">
+                <a href="https://ieeexplore.ieee.org/document/9104288" target="_blank" rel="noopener noreferrer" class="accent-link">IEEE Xplore ↗</a>
+                <a href="https://drive.google.com/file/d/1vRl-KzjME1YsZ8MMoa1YzVe2M_aSxWBx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-link">Slides ↗</a>
+              </div>
+            </div>
+            <h3 class="research-title">Coupled Adversarial Net for Single Image Super-Resolution</h3>
+            <div class="research-authors">S.-Y. Su, <strong>K.-Y. Huang</strong>, C.-W. Lin</div>
+            <p class="item-desc">Used a shared Siamese discriminator to compute both adversarial loss and semantic feature distance in single-image super-resolution, removing the need for a separate pretrained perceptual network.</p>
+          </article>
+          <article class="research-item">
+            <div class="research-top">
+              <span class="research-venue">2017 · M.S. Thesis · NTHU</span>
+              <div class="inline-links">
+                <a href="https://drive.google.com/file/d/1zC_vFjnTs9s74RT2SB_xEcDwKQv6sKQ_/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="accent-link">Thesis PDF ↗</a>
+              </div>
+            </div>
+            <h3 class="research-title">Pairwise Learning on Image Quality Assessment using Deep Siamese Neural Network</h3>
+            <p class="item-desc">Trained a deep Siamese network on pairwise comparisons for subjective image quality assessment, letting annotators compare two images rather than assign absolute scores.</p>
+          </article>
+        </div>
       </section>
 
     </main>
@@ -299,6 +383,6 @@
   <div id="sr-status" class="sr-only" aria-live="polite"></div>
 
   <script src="js/app.js"></script>
-  <script src="js/easter-eggs.js"></script>
+  <script src="js/easter-eggs.js" defer></script>
 </body>
 </html>

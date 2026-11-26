@@ -42,7 +42,7 @@
           badge: 'Current',
           current: true,
           role: 'Tech Lead Manager · Android XR Perception',
-          detail: 'Working on on-device perception for Android XR in Taipei, while managing a small local team.',
+          detail: 'Working on Android XR on-device perception with teammates across the US and Europe, and leading a team in Taipei.',
           period: 'Feb 2025 — Present'
         },
         {
@@ -114,7 +114,7 @@
       railLoc: '台北',
       copyEmailShort: '複製信箱',
       emailLabel: 'Email',
-      copiedText: '已複製信箱 ✓',
+      copiedText: '已複製 · peter124574@gmail.com',
       copiedShort: '已複製 ✓',
       secProjects: '專案與開源',
       auroraBadge: '個人專案',
@@ -134,7 +134,7 @@
           badge: '現職',
           current: true,
           role: 'Tech Lead Manager · Android XR Perception',
-          detail: '在台北做 Android XR 裝置端感知相關開發，並帶領在地小團隊。',
+          detail: '參與 Android XR 裝置端感知開發，在台北帶領團隊，並與美國、歐洲的同組夥伴跨區合作。',
           period: '2025.02 — 至今'
         },
         {
@@ -408,7 +408,7 @@
           minute: '2-digit',
           hour12: false
         }).format(new Date());
-        el.textContent = `${str} CST`;
+        el.textContent = `${str} UTC+8`;
       } catch (_) {
         el.textContent = 'UTC+8';
       }
@@ -465,6 +465,7 @@
 
   function initScrollChrome() {
     const header = document.getElementById('site-header');
+    const heroName = document.getElementById('hero-name');
     const tideFill = document.getElementById('tide-fill');
     const mobileBar = document.getElementById('mobile-tide-bar');
     const railActions = document.getElementById('rail-actions');
@@ -483,7 +484,13 @@
       const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const progress = Math.max(0, Math.min(1, sy / docH));
 
-      if (header) header.classList.toggle('is-scrolled', sy > 36);
+      if (header) {
+        header.classList.toggle('is-scrolled', sy > 36);
+        const passedHero = heroName
+          ? heroName.getBoundingClientRect().bottom <= (header.offsetHeight || 56) + 4
+          : sy > 140;
+        header.classList.toggle('has-passed-hero', passedHero);
+      }
       if (tideFill) tideFill.style.transform = `scaleY(${Math.max(0.12, progress).toFixed(4)})`;
       if (mobileBar) mobileBar.style.transform = `scaleX(${progress.toFixed(4)})`;
       if (railActions && heroStage) {
