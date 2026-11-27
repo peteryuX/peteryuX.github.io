@@ -77,7 +77,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  transition: background-color 0.28s ease, color 0.28s ease;
+  transition: color 0.28s ease;
+}
+
+/* Safari 26+ DOM-sampled status-bar tinting strip (12px+ fixed top plate, invisible to user) */
+.ios-status-plate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: max(12px, env(safe-area-inset-top, 0px));
+  background-color: var(--bg);
+  pointer-events: none;
+  z-index: 200;
+  visibility: hidden;
 }
 
 ::selection {
