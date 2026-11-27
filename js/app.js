@@ -207,16 +207,24 @@
     return nav.startsWith('zh') ? 'zh' : 'en';
   }
 
-  let themeNudgeRaf1 = 0;
-  let themeNudgeRaf2 = 0;
+  const THEME_FADE_MS = 260;
+  let themeFadeTimer = 0;
   let themePostVtTimer = 0;
 
-  function replaceStatusPlate(color) {
-    const plate = document.getElementById('ios-status-plate');
-    if (!plate || !plate.parentNode) return;
-    const fresh = plate.cloneNode(true);
-    fresh.style.backgroundColor = color;
-    plate.replaceWith(fresh);
+  // Exact CSS cubic-bezier(0.25, 0.1, 0.25, 1) ("ease") matching Apple UIKit & CSS transitions
+  function easeCss(x) {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    let t = x;
+    for (let i = 0; i < 6; i++) {
+      const mt = 1 - t;
+      const cx = 3 * mt * mt * t * 0.25 + 3 * mt * t * t * 0.25 + t * t * t;
+      const dx = 3 * mt * mt * 0.25 + 6 * mt * t * (0.25 - 0.25) + 3 * t * t * (1 - 0.25);
+      if (Math.abs(cx - x) < 1e-4 || Math.abs(dx) < 1e-5) break;
+      t = Math.max(0, Math.min(1, t - (cx - x) / dx));
+    }
+    const mt = 1 - t;
+    return 3 * mt * mt * t * 0.1 + 3 * mt * t * t * 1.0 + t * t * t;
   }
 
   function replaceThemeColorMeta(color) {
@@ -232,38 +240,40 @@
   function syncThemeColorMeta(theme) {
     const isDark = theme === 'dark';
     const color = isDark ? '#0b1017' : '#f4f1ea';
-    const nudge = isDark ? '#0b1018' : '#f4f1eb'; // valid opaque 6-digit hex (1-LSB shift)
+    // Immediate t=0ms update to root & body (no CSS transition on html/body) so Safari 26+/27+'s
+    // live <body> observer & UIKit ~260ms status-bar fade start at exact t=0ms with zero rAF lag.
     document.documentElement.style.colorScheme = theme;
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
-
-    // 1. Safari 26+/27+ DOM-sampled fixed strip: clone-replace forces WebKit to drop cached tint element
-    replaceStatusPlate(color);
-
-    // 2. iOS 15–18 standalone PWA & Android: remove + re-insert fresh <meta name="theme-color">
-    replaceThemeColorMeta(nudge);
-
-    cancelAnimationFrame(themeNudgeRaf1);
-    cancelAnimationFrame(themeNudgeRaf2);
-    themeNudgeRaf1 = requestAnimationFrame(() => {
-      replaceThemeColorMeta(color);
-      themeNudgeRaf2 = requestAnimationFrame(() => {
-        replaceStatusPlate(color);
-      });
-    });
+    // iOS 15–18 & Android: recreate <meta name="theme-color"> immediately at t=0ms
+    replaceThemeColorMeta(color);
   }
 
-  function setThemeDOM(theme) {
-    currentTheme = theme === 'dark' ? 'dark' : 'light';
+  function setThemeDOM(theme, animate) {
+    const next = theme === 'dark' ? 'dark' : 'light';
+    const doFade = Boolean(animate) && !reducedMotion;
+    currentTheme = next;
+    clearTimeout(themeFadeTimer);
+    if (doFade) {
+      document.documentElement.classList.add('is-theme-fading');
+      void document.documentElement.offsetHeight;
+    } else {
+      document.documentElement.classList.remove('is-theme-fading');
+    }
     document.documentElement.setAttribute('data-theme', currentTheme);
     syncThemeColorMeta(currentTheme);
     try {
       window.localStorage.setItem('peteryux_theme', currentTheme);
     } catch (_) {}
-    themeListeners.forEach((fn) => fn(currentTheme));
+    themeListeners.forEach((fn) => fn(currentTheme, doFade));
+    if (doFade) {
+      themeFadeTimer = window.setTimeout(() => {
+        document.documentElement.classList.remove('is-theme-fading');
+      }, THEME_FADE_MS + 40);
+    }
   }
 
-  // Origin-aware circular ink-wash View Transition on desktop (skip on iOS / standalone PWA so WebKit never latches frozen old-root snapshot into status bar)
+  // Origin-aware circular ink-wash View Transition on desktop; synchronized 260ms ease on iOS / standalone PWA
   let lastThemeToggleMs = 0;
   function toggleTheme(triggerEl) {
     const next = currentTheme === 'dark' ? 'light' : 'dark';
@@ -283,7 +293,7 @@
       document.documentElement.style.setProperty('--vt-x', `${Math.round(x)}px`);
       document.documentElement.style.setProperty('--vt-y', `${Math.round(y)}px`);
       document.documentElement.style.setProperty('--vt-r', `${Math.ceil(maxR)}px`);
-      const vt = document.startViewTransition(() => setThemeDOM(next));
+      const vt = document.startViewTransition(() => setThemeDOM(next, false));
       if (vt && vt.finished) {
         vt.finished.then(() => {
           syncThemeColorMeta(currentTheme);
@@ -291,7 +301,7 @@
         }).catch(() => {});
       }
     } else {
-      setThemeDOM(next);
+      setThemeDOM(next, true);
     }
   }
 
@@ -659,7 +669,9 @@
     let rafId = null;
 
     let themeVal = currentTheme === 'dark' ? 1 : 0;
+    let themeFrom = themeVal;
     let themeTarget = themeVal;
+    let themeStartMs = 0;
 
     const pointer = { tx: 0, ty: 0, x: 0, y: 0, lastX: 0, lastT: 0 };
     const ripples = [];
@@ -831,8 +843,16 @@
       if (!reducedMotion) simTime += dt;
       const t = simTime;
 
-      themeVal += (themeTarget - themeVal) * 0.12;
-      if (Math.abs(themeTarget - themeVal) < 0.002) themeVal = themeTarget;
+      if (themeStartMs > 0) {
+        const p = Math.min(1, (nowMs - themeStartMs) / THEME_FADE_MS);
+        themeVal = themeFrom + (themeTarget - themeFrom) * easeCss(p);
+        if (p >= 1) {
+          themeVal = themeTarget;
+          themeStartMs = 0;
+        }
+      } else {
+        themeVal = themeTarget;
+      }
 
       pointer.x += (pointer.tx - pointer.x) * 0.055;
       pointer.y += (pointer.ty - pointer.y) * 0.055;
@@ -1056,12 +1076,20 @@
       }
     }
 
-    themeListeners.push((theme) => {
+    themeListeners.push((theme, animate) => {
       themeTarget = theme === 'dark' ? 1 : 0;
-      themeVal = themeTarget;
       cachedSkyKey = '';
-      render(performance.now());
-      if (!reducedMotion) ensureRunning();
+      if (animate && !reducedMotion) {
+        themeFrom = themeVal;
+        themeStartMs = performance.now();
+        ensureRunning();
+      } else {
+        themeVal = themeTarget;
+        themeFrom = themeTarget;
+        themeStartMs = 0;
+        render(performance.now());
+        if (!reducedMotion) ensureRunning();
+      }
     });
 
     stage.addEventListener('pointerenter', refreshStageRect, { passive: true });
@@ -1191,7 +1219,9 @@
     let isVisible = false;
     let rafId = null;
     let themeVal = currentTheme === 'dark' ? 1 : 0;
+    let themeFrom = themeVal;
     let themeTarget = themeVal;
+    let themeStartMs = 0;
     let px = 0;
     let pxTarget = 0;
     let simTime = 0;
@@ -1237,8 +1267,16 @@
       if (!reducedMotion) simTime += dt;
       const t = simTime;
 
-      themeVal += (themeTarget - themeVal) * 0.12;
-      if (Math.abs(themeTarget - themeVal) < 0.002) themeVal = themeTarget;
+      if (themeStartMs > 0) {
+        const p = Math.min(1, (nowMs - themeStartMs) / THEME_FADE_MS);
+        themeVal = themeFrom + (themeTarget - themeFrom) * easeCss(p);
+        if (p >= 1) {
+          themeVal = themeTarget;
+          themeStartMs = 0;
+        }
+      } else {
+        themeVal = themeTarget;
+      }
       px += (pxTarget - px) * 0.06;
 
       ctx.clearRect(0, 0, W, H);
@@ -1320,11 +1358,19 @@
       }
     });
 
-    themeListeners.push((theme) => {
+    themeListeners.push((theme, animate) => {
       themeTarget = theme === 'dark' ? 1 : 0;
-      themeVal = themeTarget;
-      render(performance.now());
-      if (!reducedMotion && isVisible) ensureRunning();
+      if (animate && !reducedMotion && isVisible) {
+        themeFrom = themeVal;
+        themeStartMs = performance.now();
+        ensureRunning();
+      } else {
+        themeVal = themeTarget;
+        themeFrom = themeTarget;
+        themeStartMs = 0;
+        render(performance.now());
+        if (!reducedMotion && isVisible) ensureRunning();
+      }
     });
 
     if ('IntersectionObserver' in window) {

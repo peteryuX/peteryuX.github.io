@@ -79,20 +79,51 @@ body {
   overflow-x: hidden;
 }
 
-/* Safari 26+/27+ DOM-sampled status-bar tinting strip:
-   WebKit skips opacity < 0.1; a 12px (>10px) bar at top:-7px keeps a 5px sliver over y=4px
-   that blends invisibly into the matching var(--bg) top sky edge while driving the status bar. */
-.ios-status-plate {
-  position: fixed;
-  top: -7px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 12px;
+/* Visible full-width content surface below hero so body background can signal
+   Safari 26+/27+ live status-bar observer at t=0ms while all visible surfaces ease in lockstep. */
+.page-band {
+  position: relative;
+  z-index: 1;
   background-color: var(--bg);
-  pointer-events: none;
-  z-index: 200;
-  opacity: 1;
+}
+
+html.is-theme-fading .page-band,
+html.is-theme-fading .site-footer,
+html.is-theme-fading .hero-stage,
+html.is-theme-fading .featured-card,
+html.is-theme-fading .site-header .header-glass {
+  transition: background-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              border-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              color 260ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+html.is-theme-fading body,
+html.is-theme-fading .hero-name,
+html.is-theme-fading .hero-name-sub,
+html.is-theme-fading .hero-lead,
+html.is-theme-fading .hero-bio,
+html.is-theme-fading .section-title,
+html.is-theme-fading .section-num,
+html.is-theme-fading .item-desc,
+html.is-theme-fading .featured-title,
+html.is-theme-fading .entry-tag,
+html.is-theme-fading .repo-name,
+html.is-theme-fading .repo-desc,
+html.is-theme-fading .timeline-org,
+html.is-theme-fading .timeline-role,
+html.is-theme-fading .timeline-detail,
+html.is-theme-fading .timeline-period,
+html.is-theme-fading .research-title,
+html.is-theme-fading .research-venue,
+html.is-theme-fading .brand-name,
+html.is-theme-fading .ctrl-btn,
+html.is-theme-fading .theme-btn,
+html.is-theme-fading .text-link,
+html.is-theme-fading .accent-link,
+html.is-theme-fading .footer-inner {
+  transition: color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              border-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
+              text-decoration-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 ::selection {
@@ -187,7 +218,7 @@ button:focus-visible {
   inset: 0;
   width: 100vw;
   height: 112vh;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   color: var(--contour);
   will-change: transform;
@@ -556,7 +587,7 @@ html[lang="zh-Hant"] .hero-name {
    ========================================================================== */
 .editorial-grid {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding-top: 1.5rem;
   padding-bottom: 5.5rem;
 }
