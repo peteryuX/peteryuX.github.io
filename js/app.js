@@ -207,11 +207,21 @@
     return nav.startsWith('zh') ? 'zh' : 'en';
   }
 
+  function syncThemeColorMeta(theme) {
+    const color = theme === 'dark' ? '#0b1017' : '#f4f1ea';
+    document.documentElement.style.colorScheme = theme;
+    // Remove and re-append <meta name="theme-color"> to force iOS Safari / standalone PWA status bar repaint
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove());
+    const meta = document.createElement('meta');
+    meta.setAttribute('name', 'theme-color');
+    meta.setAttribute('content', color);
+    document.head.appendChild(meta);
+  }
+
   function setThemeDOM(theme) {
     currentTheme = theme === 'dark' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', currentTheme === 'dark' ? '#0b1017' : '#f4f1ea');
+    syncThemeColorMeta(currentTheme);
     try {
       window.localStorage.setItem('peteryux_theme', currentTheme);
     } catch (_) {}
@@ -233,7 +243,10 @@
       document.documentElement.style.setProperty('--vt-x', `${Math.round(x)}px`);
       document.documentElement.style.setProperty('--vt-y', `${Math.round(y)}px`);
       document.documentElement.style.setProperty('--vt-r', `${Math.ceil(maxR)}px`);
-      document.startViewTransition(() => setThemeDOM(next));
+      const vt = document.startViewTransition(() => setThemeDOM(next));
+      if (vt && vt.finished) {
+        vt.finished.then(() => syncThemeColorMeta(currentTheme)).catch(() => {});
+      }
     } else {
       setThemeDOM(next);
     }

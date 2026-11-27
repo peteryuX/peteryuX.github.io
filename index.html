@@ -2,9 +2,10 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="google-site-verification" content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0" />
   <meta name="theme-color" content="#f4f1ea" />
+  <link rel="manifest" href="manifest.webmanifest" />
 
   <title>Peter Huang — Computer Vision &amp; 3D Perception</title>
   <meta name="description" content="Peter (Kuan-Yu) Huang — Computer vision and 3D perception engineer in Taipei. Android XR at Google, formerly HTC VIVE and Garena." />
@@ -26,6 +27,9 @@
   <meta name="twitter:image" content="https://peteryux.github.io/assets/og-card.png" />
 
   <!-- App Icon & Favicon (Tide Crest) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Peter Huang" />
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
@@ -42,9 +46,15 @@
       try {
         var saved = window.localStorage.getItem('peteryux_theme');
         var theme = (saved === 'dark' || saved === 'night') ? 'dark' : 'light';
+        var color = theme === 'dark' ? '#0b1017' : '#f4f1ea';
         document.documentElement.setAttribute('data-theme', theme);
-        var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0b1017' : '#f4f1ea');
+        document.documentElement.style.colorScheme = theme;
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) metas[i].parentNode.removeChild(metas[i]);
+        var nextMeta = document.createElement('meta');
+        nextMeta.setAttribute('name', 'theme-color');
+        nextMeta.setAttribute('content', color);
+        document.head.appendChild(nextMeta);
       } catch (e) {}
     })();
   </script>
