@@ -77,7 +77,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  transition: color 0.28s ease;
 }
 
 /* Safari 26+/27+ DOM-sampled status-bar tinting strip:
