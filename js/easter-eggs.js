@@ -1326,15 +1326,16 @@
       });
     }
 
-    // Long-press brand name (Mobile + Desktop) -> 3D Perception Mode (suppresses accidental #top jump & OS callout)
-    const brandEl = document.getElementById('brand-name');
-    if (brandEl) {
+    // Long-press brand name (Mobile + Desktop) -> 3D Perception Mode (delegated so it survives #site-header remount)
+    {
       let brandHold = null;
       let brandStart = null;
       let suppressBrandClick = false;
       const cancelBrand = () => { if (brandHold) { clearTimeout(brandHold); brandHold = null; } brandStart = null; };
+      const isBrand = (t) => Boolean(t && t.closest && t.closest('#brand-name'));
 
-      brandEl.addEventListener('pointerdown', (e) => {
+      document.addEventListener('pointerdown', (e) => {
+        if (!isBrand(e.target)) return;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         Audio.unlock();
         suppressBrandClick = false;
@@ -1346,42 +1347,40 @@
           setPerceptionActive(!state.perception.active);
         }, 480);
       });
-      brandEl.addEventListener('pointermove', (e) => {
+      document.addEventListener('pointermove', (e) => {
         if (brandStart && Math.hypot(e.clientX - brandStart[0], e.clientY - brandStart[1]) > 8) cancelBrand();
       }, { passive: true });
-      ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => brandEl.addEventListener(ev, cancelBrand));
-      brandEl.addEventListener('contextmenu', (e) => { if (brandHold || suppressBrandClick) e.preventDefault(); });
-      brandEl.addEventListener('click', (e) => {
-        if (suppressBrandClick) {
+      ['pointerup', 'pointercancel'].forEach((ev) => document.addEventListener(ev, cancelBrand));
+      document.addEventListener('contextmenu', (e) => { if (isBrand(e.target) && (brandHold || suppressBrandClick)) e.preventDefault(); });
+      document.addEventListener('click', (e) => {
+        if (isBrand(e.target) && suppressBrandClick) {
           suppressBrandClick = false;
           e.preventDefault();
         }
       });
     }
 
-    // 5× rapid theme toggle -> Unfurl Aurora (Dark) or Dawn Rays + Birds (Light)
-    const themeBtn = document.getElementById('btn-theme');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', () => {
-        Audio.unlock();
-        const now = performance.now();
-        state.themeClicks.push(now);
-        state.themeClicks = state.themeClicks.filter((ts) => now - ts < 2800);
-        if (state.themeClicks.length >= 5) {
-          state.themeClicks.length = 0;
-          haptic(18);
-          Audio.guishanChord();
-          if (core.getTheme() === 'dark') {
-            state.auroraTarget = state.auroraTarget > 0.5 ? 0 : 1;
-          } else {
-            const hs = hero.getState();
-            state.dawnBloom = 1;
-            spawnBirds(hs.W, hs.horizonY);
-          }
-          hero.ensureRunning();
+    // 5× rapid theme toggle -> Unfurl Aurora (Dark) or Dawn Rays + Birds (Light) (delegated)
+    document.addEventListener('click', (e) => {
+      if (!e.target || !e.target.closest || !e.target.closest('#btn-theme')) return;
+      Audio.unlock();
+      const now = performance.now();
+      state.themeClicks.push(now);
+      state.themeClicks = state.themeClicks.filter((ts) => now - ts < 2800);
+      if (state.themeClicks.length >= 5) {
+        state.themeClicks.length = 0;
+        haptic(18);
+        Audio.guishanChord();
+        if (core.getTheme() === 'dark') {
+          state.auroraTarget = state.auroraTarget > 0.5 ? 0 : 1;
+        } else {
+          const hs = hero.getState();
+          state.dawnBloom = 1;
+          spawnBirds(hs.W, hs.horizonY);
         }
-      });
-    }
+        hero.ensureRunning();
+      }
+    });
 
     // Keyboard: D (Perception), 1-4 (Channels), S (Launch skip), Space (active-game boost/rethrow without hijacking normal scroll), Esc, Konami
     const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
