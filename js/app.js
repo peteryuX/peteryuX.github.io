@@ -273,16 +273,12 @@
     }
   }
 
-  // Origin-aware circular ink-wash View Transition on desktop; synchronized 260ms ease on iOS / standalone PWA
+  // Origin-aware circular ink-wash View Transition across desktop & iOS (absorbs OS status-bar IPC phase delta naturally)
   let lastThemeToggleMs = 0;
   function toggleTheme(triggerEl) {
     const next = currentTheme === 'dark' ? 'light' : 'dark';
     const now = performance.now();
-    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent || '') ||
-      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const isStandalone = window.navigator.standalone === true ||
-      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
-    const allowVT = !reducedMotion && !isIOS && !isStandalone && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 550);
+    const allowVT = !reducedMotion && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 420);
     lastThemeToggleMs = now;
     clearTimeout(themePostVtTimer);
     if (allowVT) {
@@ -297,7 +293,7 @@
       if (vt && vt.finished) {
         vt.finished.then(() => {
           syncThemeColorMeta(currentTheme);
-          themePostVtTimer = window.setTimeout(() => syncThemeColorMeta(currentTheme), 80);
+          themePostVtTimer = window.setTimeout(() => syncThemeColorMeta(currentTheme), 60);
         }).catch(() => {});
       }
     } else {
