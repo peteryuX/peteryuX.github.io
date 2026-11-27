@@ -857,9 +857,10 @@
         cachedSkyKey = skyKey;
         const sky = ctx.createLinearGradient(0, 0, 0, H);
         sky.addColorStop(0.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
-        sky.addColorStop(0.06, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
-        sky.addColorStop(0.50, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
-        sky.addColorStop(0.74, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
+        sky.addColorStop(0.03, mixRGB(PAL.paper[0], PAL.paper[1], tv));
+        sky.addColorStop(0.12, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
+        sky.addColorStop(0.52, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
+        sky.addColorStop(0.75, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
         sky.addColorStop(1.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
         cachedSky = sky;
       }
@@ -1057,12 +1058,10 @@
 
     themeListeners.push((theme) => {
       themeTarget = theme === 'dark' ? 1 : 0;
-      if (reducedMotion) {
-        themeVal = themeTarget;
-        render(performance.now());
-      } else {
-        ensureRunning();
-      }
+      themeVal = themeTarget;
+      cachedSkyKey = '';
+      render(performance.now());
+      if (!reducedMotion) ensureRunning();
     });
 
     stage.addEventListener('pointerenter', refreshStageRect, { passive: true });
@@ -1323,12 +1322,9 @@
 
     themeListeners.push((theme) => {
       themeTarget = theme === 'dark' ? 1 : 0;
-      if (reducedMotion || !isVisible) {
-        themeVal = themeTarget;
-        render(performance.now());
-      } else {
-        ensureRunning();
-      }
+      themeVal = themeTarget;
+      render(performance.now());
+      if (!reducedMotion && isVisible) ensureRunning();
     });
 
     if ('IntersectionObserver' in window) {
