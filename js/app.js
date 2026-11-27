@@ -211,6 +211,24 @@
   let themeNudgeRaf2 = 0;
   let themePostVtTimer = 0;
 
+  function replaceStatusPlate(color) {
+    const plate = document.getElementById('ios-status-plate');
+    if (!plate || !plate.parentNode) return;
+    const fresh = plate.cloneNode(true);
+    fresh.style.backgroundColor = color;
+    plate.replaceWith(fresh);
+  }
+
+  function replaceThemeColorMeta(color) {
+    document.querySelectorAll('meta[name="theme-color"]').forEach((el) => el.remove());
+    const fresh = document.createElement('meta');
+    fresh.id = 'theme-color-meta';
+    fresh.setAttribute('name', 'theme-color');
+    fresh.setAttribute('content', color);
+    document.head.appendChild(fresh);
+    return fresh;
+  }
+
   function syncThemeColorMeta(theme) {
     const isDark = theme === 'dark';
     const color = isDark ? '#0b1017' : '#f4f1ea';
@@ -219,31 +237,18 @@
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
 
-    // Force RenderLayer / box-tree unregister & re-register so Safari 26+ re-samples bidirectionally
-    const plate = document.getElementById('ios-status-plate');
-    if (plate) {
-      plate.style.display = 'none';
-      plate.style.backgroundColor = color;
-      void plate.offsetHeight;
-      plate.style.display = 'block';
-    }
+    // 1. Safari 26+/27+ DOM-sampled fixed strip: clone-replace forces WebKit to drop cached tint element
+    replaceStatusPlate(color);
 
-    // Mutate persistent <meta name="theme-color"> with opaque 1-LSB nudge
-    let meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.id = 'theme-color-meta';
-      meta.setAttribute('name', 'theme-color');
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', nudge);
+    // 2. iOS 15–18 standalone PWA & Android: remove + re-insert fresh <meta name="theme-color">
+    replaceThemeColorMeta(nudge);
 
     cancelAnimationFrame(themeNudgeRaf1);
     cancelAnimationFrame(themeNudgeRaf2);
     themeNudgeRaf1 = requestAnimationFrame(() => {
-      meta.setAttribute('content', color);
+      replaceThemeColorMeta(color);
       themeNudgeRaf2 = requestAnimationFrame(() => {
-        if (plate) plate.style.backgroundColor = color;
+        replaceStatusPlate(color);
       });
     });
   }
@@ -258,12 +263,16 @@
     themeListeners.forEach((fn) => fn(currentTheme));
   }
 
-  // Origin-aware circular ink-wash View Transition on theme toggle (skip on rapid clicks)
+  // Origin-aware circular ink-wash View Transition on desktop (skip on iOS / standalone PWA so WebKit never latches frozen old-root snapshot into status bar)
   let lastThemeToggleMs = 0;
   function toggleTheme(triggerEl) {
     const next = currentTheme === 'dark' ? 'light' : 'dark';
     const now = performance.now();
-    const allowVT = !reducedMotion && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 550);
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent || '') ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isStandalone = window.navigator.standalone === true ||
+      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+    const allowVT = !reducedMotion && !isIOS && !isStandalone && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 550);
     lastThemeToggleMs = now;
     clearTimeout(themePostVtTimer);
     if (allowVT) {
@@ -847,9 +856,10 @@
       if (skyKey !== cachedSkyKey) {
         cachedSkyKey = skyKey;
         const sky = ctx.createLinearGradient(0, 0, 0, H);
-        sky.addColorStop(0.0, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
-        sky.addColorStop(0.48, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
-        sky.addColorStop(0.72, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
+        sky.addColorStop(0.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
+        sky.addColorStop(0.06, mixRGB(PAL.skyTop[0], PAL.skyTop[1], tv));
+        sky.addColorStop(0.50, mixRGB(PAL.skyMid[0], PAL.skyMid[1], tv));
+        sky.addColorStop(0.74, mixRGB(PAL.skyWarm[0], PAL.skyWarm[1], tv));
         sky.addColorStop(1.0, mixRGB(PAL.paper[0], PAL.paper[1], tv));
         cachedSky = sky;
       }
