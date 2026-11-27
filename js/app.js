@@ -237,21 +237,35 @@
     return fresh;
   }
 
+  function remountSiteHeader() {
+    const header = document.getElementById('site-header');
+    if (!header || !header.parentNode) return null;
+    const activeId = document.activeElement && header.contains(document.activeElement)
+      ? document.activeElement.id
+      : '';
+    const fresh = header.cloneNode(true);
+    header.replaceWith(fresh);
+    if (activeId) {
+      const focusEl = document.getElementById(activeId);
+      if (focusEl && focusEl.focus) focusEl.focus({ preventScroll: true });
+    }
+    return fresh;
+  }
+
   function syncThemeColorMeta(theme) {
     const isDark = theme === 'dark';
     const color = isDark ? '#0b1017' : '#f4f1ea';
     // Immediate t=0ms update to root & body (no CSS transition on html/body) so Safari 26+/27+'s
-    // live <body> observer updates cleanly at scrollY=0 and scrollY>0 alike.
+    // live <body> observer updates cleanly at scrollY=0.
     document.documentElement.style.colorScheme = theme;
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
-    // When scrolled, clone-replace matte .header-glass so WebKit immediately re-samples its updated var(--bg)
+    // When scrolled, #site-header itself carries solid var(--bg). Remounting the fixed <header>
+    // invalidates WebKit's cached WeakPtr lastFixedContainer (Page.cpp:5878 / LocalFrameView.cpp:2746)
+    // and guarantees a fresh RemoteLayerTree commit so the status bar re-samples the new color.
     const header = document.getElementById('site-header');
     if (header && header.classList.contains('is-scrolled')) {
-      const glass = header.querySelector('.header-glass');
-      if (glass && glass.parentNode) {
-        glass.replaceWith(glass.cloneNode(true));
-      }
+      remountSiteHeader();
     }
     // iOS 15–18 & Android: recreate <meta name="theme-color"> immediately at t=0ms
     replaceThemeColorMeta(color);
@@ -534,34 +548,39 @@
   }
 
   function initScrollChrome() {
-    const header = document.getElementById('site-header');
     const heroName = document.getElementById('hero-name');
     const tideFill = document.getElementById('tide-fill');
-    const mobileBar = document.getElementById('mobile-tide-bar');
     const railActions = document.getElementById('rail-actions');
     const contours = document.getElementById('depth-contours');
     const heroStage = document.getElementById('hero-stage');
 
-    const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"], .rail-link[data-target]'));
     const sectionIds = ['projects', 'experience', 'research'];
     const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
     let ticking = false;
+    let prevScrolled = null;
 
     function update() {
       ticking = false;
       const sy = window.scrollY || 0;
       const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const progress = Math.max(0, Math.min(1, sy / docH));
+      const isScrolled = sy > 36;
 
+      let header = document.getElementById('site-header');
       if (header) {
-        header.classList.toggle('is-scrolled', sy > 36);
+        header.classList.toggle('is-scrolled', isScrolled);
         const passedHero = heroName
           ? heroName.getBoundingClientRect().bottom <= (header.offsetHeight || 56) + 4
           : sy > 140;
         header.classList.toggle('has-passed-hero', passedHero);
+        if (prevScrolled !== null && isScrolled !== prevScrolled) {
+          header = remountSiteHeader() || header;
+        }
+        prevScrolled = isScrolled;
       }
       if (tideFill) tideFill.style.transform = `scaleY(${Math.max(0.12, progress).toFixed(4)})`;
+      const mobileBar = document.getElementById('mobile-tide-bar');
       if (mobileBar) mobileBar.style.transform = `scaleX(${progress.toFixed(4)})`;
       if (railActions && heroStage) {
         const showRail = sy > heroStage.offsetHeight * 0.52;
@@ -578,7 +597,7 @@
       for (let i = 0; i < sections.length; i++) {
         if (sections[i].getBoundingClientRect().top <= probeY) activeId = sections[i].id;
       }
-      navLinks.forEach((a) => {
+      document.querySelectorAll('.nav-links a[href^="#"], .rail-link[data-target]').forEach((a) => {
         const tgt = a.getAttribute('data-target') || (a.getAttribute('href') || '').slice(1);
         a.classList.toggle('is-active', tgt === activeId);
       });
@@ -1419,13 +1438,13 @@
     setThemeDOM(currentTheme);
     applyLang(detectInitialLang(), false);
 
-    const btnEn = document.getElementById('btn-lang-en');
-    const btnZh = document.getElementById('btn-lang-zh');
-    const btnTheme = document.getElementById('btn-theme');
-
-    if (btnEn) btnEn.addEventListener('click', () => applyLang('en', true));
-    if (btnZh) btnZh.addEventListener('click', () => applyLang('zh', true));
-    if (btnTheme) btnTheme.addEventListener('click', () => toggleTheme(btnTheme));
+    document.addEventListener('click', (e) => {
+      const btn = e.target && e.target.closest ? e.target.closest('#btn-lang-en, #btn-lang-zh, #btn-theme') : null;
+      if (!btn) return;
+      if (btn.id === 'btn-lang-en') applyLang('en', true);
+      else if (btn.id === 'btn-lang-zh') applyLang('zh', true);
+      else if (btn.id === 'btn-theme') toggleTheme(btn);
+    });
 
     initCopyEmail();
     initTaipeiClock();

@@ -248,9 +248,10 @@ button:focus-visible {
 
 /* ==========================================================================
    HEADER (Zero backdrop-filter anywhere in fixed header — real iOS 26 testing
-   proved backdrop-filter on a fixed header freezes status-bar tint switching.
-   At scrollY=0, .header-glass is display:none so <body> drives the status bar;
-   when scrolled, matte var(--bg) matches <body> identically with zero transition lag.)
+   proved backdrop-filter stops WebKit tint sampling. When scrolled, solid
+   background-color: var(--bg) lives directly on fixed .site-header so WebKit
+   LocalFrameView::fixedContainerEdges() reads CSS background-color directly
+   from the ancestor chain instead of falling back to cached pixel sampling.)
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -262,18 +263,9 @@ button:focus-visible {
   background-color: transparent;
 }
 
-.header-glass {
-  display: none;
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
+.site-header.is-scrolled {
   background-color: var(--bg);
   border-bottom: 1px solid var(--border);
-}
-
-.site-header.is-scrolled .header-glass {
-  display: block;
 }
 
 .header-inner {
