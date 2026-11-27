@@ -247,11 +247,10 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   HEADER (Excluded from Safari 26+ top-edge tint sampling at ALL scroll positions:
-   1. Neutral backdrop-filter on fixed .site-header excludes subtree from WebKit sampler.
-   2. background-color stays transparent on both .site-header and .header-glass forever.
-   3. Scrolled glass fill is painted via conic-gradient border-image, which WebKit's
-      tint scanner ignores, revealed cleanly via opacity so <body> always drives the bar.)
+   HEADER (Zero backdrop-filter anywhere in fixed header — real iOS 26 testing
+   proved backdrop-filter on a fixed header freezes status-bar tint switching.
+   At scrollY=0, .header-glass is display:none so <body> drives the status bar;
+   when scrolled, matte var(--bg) matches <body> identically with zero transition lag.)
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -261,30 +260,20 @@ button:focus-visible {
   z-index: 40;
   padding-top: env(safe-area-inset-top, 0px);
   background-color: transparent;
-  backdrop-filter: saturate(100%);
-  -webkit-backdrop-filter: saturate(100%);
-}
-
-.site-header.is-scrolled {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .header-glass {
+  display: none;
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: transparent;
-  border: 0 solid transparent;
-  border-image: conic-gradient(var(--header-scrolled) 0 0) 1 fill / 0 / 0 stretch;
-  box-shadow: inset 0 -1px 0 var(--border);
-  opacity: 0;
-  transition: opacity 0.24s ease;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
 .site-header.is-scrolled .header-glass {
-  opacity: 1;
+  display: block;
 }
 
 .header-inner {
