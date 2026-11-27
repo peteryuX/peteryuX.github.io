@@ -80,18 +80,20 @@ body {
   transition: color 0.28s ease;
 }
 
-/* Safari 26+ DOM-sampled status-bar tinting strip (12px+ fixed top plate, invisible to user) */
+/* Safari 26+/27+ DOM-sampled status-bar tinting strip:
+   WebKit skips opacity < 0.1; a 12px (>10px) bar at top:-7px keeps a 5px sliver over y=4px
+   that blends invisibly into the matching var(--bg) top sky edge while driving the status bar. */
 .ios-status-plate {
   position: fixed;
-  top: 0;
+  top: -7px;
   left: 0;
   right: 0;
   width: 100%;
-  height: max(12px, env(safe-area-inset-top, 0px));
+  height: 12px;
   background-color: var(--bg);
   pointer-events: none;
   z-index: 200;
-  opacity: 0;
+  opacity: 1;
 }
 
 ::selection {
@@ -172,7 +174,10 @@ button:focus-visible {
    ========================================================================== */
 .paper-grain {
   position: fixed;
-  inset: 0;
+  top: 8px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 50;
   pointer-events: none;
   opacity: 0.55;
