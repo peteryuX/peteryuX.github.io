@@ -245,10 +245,13 @@
     document.documentElement.style.colorScheme = theme;
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
-    // Clone-replace decorative .header-glass so WebKit drops any cached fixed-header sample when scrolled
-    const glass = document.querySelector('#site-header .header-glass');
-    if (glass && glass.parentNode) {
-      glass.replaceWith(glass.cloneNode(true));
+    // When scrolled, clone-replace matte .header-glass so WebKit immediately re-samples its updated var(--bg)
+    const header = document.getElementById('site-header');
+    if (header && header.classList.contains('is-scrolled')) {
+      const glass = header.querySelector('.header-glass');
+      if (glass && glass.parentNode) {
+        glass.replaceWith(glass.cloneNode(true));
+      }
     }
     // iOS 15–18 & Android: recreate <meta name="theme-color"> immediately at t=0ms
     replaceThemeColorMeta(color);
