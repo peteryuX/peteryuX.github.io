@@ -241,10 +241,15 @@
     const isDark = theme === 'dark';
     const color = isDark ? '#0b1017' : '#f4f1ea';
     // Immediate t=0ms update to root & body (no CSS transition on html/body) so Safari 26+/27+'s
-    // live <body> observer & UIKit ~260ms status-bar fade start at exact t=0ms with zero rAF lag.
+    // live <body> observer updates cleanly at scrollY=0 and scrollY>0 alike.
     document.documentElement.style.colorScheme = theme;
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
+    // Clone-replace decorative .header-glass so WebKit drops any cached fixed-header sample when scrolled
+    const glass = document.querySelector('#site-header .header-glass');
+    if (glass && glass.parentNode) {
+      glass.replaceWith(glass.cloneNode(true));
+    }
     // iOS 15–18 & Android: recreate <meta name="theme-color"> immediately at t=0ms
     replaceThemeColorMeta(color);
   }
