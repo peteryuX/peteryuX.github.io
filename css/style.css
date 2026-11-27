@@ -96,8 +96,7 @@ body {
 html.is-theme-fading .page-band,
 html.is-theme-fading .site-footer,
 html.is-theme-fading .hero-stage,
-html.is-theme-fading .featured-card,
-html.is-theme-fading .site-header .header-glass {
+html.is-theme-fading .featured-card {
   transition: background-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
               border-color 260ms cubic-bezier(0.25, 0.1, 0.25, 1),
               color 260ms cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -248,7 +247,11 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   HEADER (Seamless at scroll=0, frosted hairline on absolute child so Safari 26 never latches stale tint)
+   HEADER (Excluded from Safari 26+ top-edge tint sampling at ALL scroll positions:
+   1. Neutral backdrop-filter on fixed .site-header excludes subtree from WebKit sampler.
+   2. background-color stays transparent on both .site-header and .header-glass forever.
+   3. Scrolled glass fill is painted via conic-gradient border-image, which WebKit's
+      tint scanner ignores, revealed cleanly via opacity so <body> always drives the bar.)
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -258,6 +261,13 @@ button:focus-visible {
   z-index: 40;
   padding-top: env(safe-area-inset-top, 0px);
   background-color: transparent;
+  backdrop-filter: saturate(100%);
+  -webkit-backdrop-filter: saturate(100%);
+}
+
+.site-header.is-scrolled {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .header-glass {
@@ -266,15 +276,15 @@ button:focus-visible {
   z-index: -1;
   pointer-events: none;
   background-color: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.28s ease, border-color 0.28s ease, backdrop-filter 0.28s ease;
+  border: 0 solid transparent;
+  border-image: conic-gradient(var(--header-scrolled) 0 0) 1 fill / 0 / 0 stretch;
+  box-shadow: inset 0 -1px 0 var(--border);
+  opacity: 0;
+  transition: opacity 0.24s ease;
 }
 
 .site-header.is-scrolled .header-glass {
-  background-color: var(--header-scrolled);
-  border-bottom-color: var(--border);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  opacity: 1;
 }
 
 .header-inner {
