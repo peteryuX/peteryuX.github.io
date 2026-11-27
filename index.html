@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="google-site-verification" content="9uDTXgYt6cLyIyEW8tmFensPSWjd_Yc3Xj_U_BoEsS0" />
-  <meta name="theme-color" content="#f4f1ea" />
+  <meta id="theme-color-meta" name="theme-color" content="#f4f1ea" />
   <link rel="manifest" href="manifest.webmanifest" />
 
   <title>Peter Huang — Computer Vision &amp; 3D Perception</title>
@@ -47,14 +47,12 @@
         var saved = window.localStorage.getItem('peteryux_theme');
         var theme = (saved === 'dark' || saved === 'night') ? 'dark' : 'light';
         var color = theme === 'dark' ? '#0b1017' : '#f4f1ea';
-        document.documentElement.setAttribute('data-theme', theme);
-        document.documentElement.style.colorScheme = theme;
-        var metas = document.querySelectorAll('meta[name="theme-color"]');
-        for (var i = 0; i < metas.length; i++) metas[i].parentNode.removeChild(metas[i]);
-        var nextMeta = document.createElement('meta');
-        nextMeta.setAttribute('name', 'theme-color');
-        nextMeta.setAttribute('content', color);
-        document.head.appendChild(nextMeta);
+        var root = document.documentElement;
+        root.setAttribute('data-theme', theme);
+        root.style.colorScheme = theme;
+        root.style.backgroundColor = color;
+        var meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', color);
       } catch (e) {}
     })();
   </script>
@@ -62,6 +60,9 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body id="top">
+
+  <!-- Safari 26+ DOM-sampled fixed top tinting strip (decoupled from transparent/frosted header) -->
+  <div id="ios-status-plate" class="ios-status-plate" aria-hidden="true"></div>
 
   <a href="#main-content" class="skip-link">Skip to content</a>
 

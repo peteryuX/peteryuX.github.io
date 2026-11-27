@@ -207,15 +207,36 @@
     return nav.startsWith('zh') ? 'zh' : 'en';
   }
 
+  let themeNudgeRaf1 = 0;
+  let themeNudgeRaf2 = 0;
+
   function syncThemeColorMeta(theme) {
     const color = theme === 'dark' ? '#0b1017' : '#f4f1ea';
     document.documentElement.style.colorScheme = theme;
-    // Remove and re-append <meta name="theme-color"> to force iOS Safari / standalone PWA status bar repaint
-    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove());
-    const meta = document.createElement('meta');
-    meta.setAttribute('name', 'theme-color');
+    document.documentElement.style.backgroundColor = color;
+    if (document.body) document.body.style.backgroundColor = color;
+
+    const plate = document.getElementById('ios-status-plate');
+    if (plate) plate.style.backgroundColor = color;
+
+    // Mutate persistent <meta name="theme-color"> in place (iOS 15-18) + 2-frame observer nudge (Safari 26+)
+    let meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.id = 'theme-color-meta';
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
     meta.setAttribute('content', color);
-    document.head.appendChild(meta);
+
+    cancelAnimationFrame(themeNudgeRaf1);
+    cancelAnimationFrame(themeNudgeRaf2);
+    themeNudgeRaf1 = requestAnimationFrame(() => {
+      meta.setAttribute('content', `${color}fe`);
+      themeNudgeRaf2 = requestAnimationFrame(() => {
+        meta.setAttribute('content', color);
+      });
+    });
   }
 
   function setThemeDOM(theme) {
