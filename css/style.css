@@ -6,6 +6,7 @@
 
 :root,
 [data-theme="light"] {
+  color-scheme: light;
   --bg: #f4f1ea;
   --surface: rgba(20, 56, 82, 0.042);
   --fg: #131820;
@@ -19,6 +20,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0b1017;
   --surface: rgba(152, 194, 224, 0.055);
   --fg: #eef1f5;
@@ -199,6 +201,7 @@ button:focus-visible {
   left: 0;
   right: 0;
   z-index: 40;
+  padding-top: env(safe-area-inset-top, 0px);
   background-color: transparent;
   border-bottom: 1px solid transparent;
   transition: background-color 0.28s ease, border-color 0.28s ease, backdrop-filter 0.28s ease;
@@ -393,7 +396,7 @@ html[lang="zh-Hant"] .brand-name {
   width: 100%;
   min-height: 66svh;
   overflow: hidden;
-  padding-top: 6.25rem;
+  padding-top: calc(6.25rem + env(safe-area-inset-top, 0px));
   padding-bottom: 11.5rem;
   display: flex;
   align-items: flex-start;
@@ -403,7 +406,7 @@ html[lang="zh-Hant"] .brand-name {
 @media (min-width: 640px) {
   .hero-stage {
     min-height: clamp(560px, 76vh, 720px);
-    padding-top: 7.75rem;
+    padding-top: calc(7.75rem + env(safe-area-inset-top, 0px));
     padding-bottom: 16.5rem;
   }
 }
