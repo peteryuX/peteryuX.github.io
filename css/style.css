@@ -91,7 +91,7 @@ body {
   background-color: var(--bg);
   pointer-events: none;
   z-index: 200;
-  visibility: hidden;
+  opacity: 0;
 }
 
 ::selection {
@@ -207,7 +207,7 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   HEADER (Seamless at scroll=0, frosted hairline reveals on scroll)
+   HEADER (Seamless at scroll=0, frosted hairline on absolute child so Safari 26 never latches stale tint)
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -217,11 +217,19 @@ button:focus-visible {
   z-index: 40;
   padding-top: env(safe-area-inset-top, 0px);
   background-color: transparent;
+}
+
+.header-glass {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: transparent;
   border-bottom: 1px solid transparent;
   transition: background-color 0.28s ease, border-color 0.28s ease, backdrop-filter 0.28s ease;
 }
 
-.site-header.is-scrolled {
+.site-header.is-scrolled .header-glass {
   background-color: var(--header-scrolled);
   border-bottom-color: var(--border);
   backdrop-filter: blur(14px);
@@ -229,6 +237,7 @@ button:focus-visible {
 }
 
 .header-inner {
+  position: relative;
   height: 54px;
   display: flex;
   align-items: center;

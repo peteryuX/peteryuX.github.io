@@ -209,17 +209,26 @@
 
   let themeNudgeRaf1 = 0;
   let themeNudgeRaf2 = 0;
+  let themePostVtTimer = 0;
 
   function syncThemeColorMeta(theme) {
-    const color = theme === 'dark' ? '#0b1017' : '#f4f1ea';
+    const isDark = theme === 'dark';
+    const color = isDark ? '#0b1017' : '#f4f1ea';
+    const nudge = isDark ? '#0b1018' : '#f4f1eb'; // valid opaque 6-digit hex (1-LSB shift)
     document.documentElement.style.colorScheme = theme;
     document.documentElement.style.backgroundColor = color;
     if (document.body) document.body.style.backgroundColor = color;
 
+    // Force RenderLayer / box-tree unregister & re-register so Safari 26+ re-samples bidirectionally
     const plate = document.getElementById('ios-status-plate');
-    if (plate) plate.style.backgroundColor = color;
+    if (plate) {
+      plate.style.display = 'none';
+      plate.style.backgroundColor = color;
+      void plate.offsetHeight;
+      plate.style.display = 'block';
+    }
 
-    // Mutate persistent <meta name="theme-color"> in place (iOS 15-18) + 2-frame observer nudge (Safari 26+)
+    // Mutate persistent <meta name="theme-color"> with opaque 1-LSB nudge
     let meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
     if (!meta) {
       meta = document.createElement('meta');
@@ -227,14 +236,14 @@
       meta.setAttribute('name', 'theme-color');
       document.head.appendChild(meta);
     }
-    meta.setAttribute('content', color);
+    meta.setAttribute('content', nudge);
 
     cancelAnimationFrame(themeNudgeRaf1);
     cancelAnimationFrame(themeNudgeRaf2);
     themeNudgeRaf1 = requestAnimationFrame(() => {
-      meta.setAttribute('content', `${color}fe`);
+      meta.setAttribute('content', color);
       themeNudgeRaf2 = requestAnimationFrame(() => {
-        meta.setAttribute('content', color);
+        if (plate) plate.style.backgroundColor = color;
       });
     });
   }
@@ -256,6 +265,7 @@
     const now = performance.now();
     const allowVT = !reducedMotion && document.startViewTransition && triggerEl && (now - lastThemeToggleMs > 550);
     lastThemeToggleMs = now;
+    clearTimeout(themePostVtTimer);
     if (allowVT) {
       const rect = triggerEl.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
@@ -266,7 +276,10 @@
       document.documentElement.style.setProperty('--vt-r', `${Math.ceil(maxR)}px`);
       const vt = document.startViewTransition(() => setThemeDOM(next));
       if (vt && vt.finished) {
-        vt.finished.then(() => syncThemeColorMeta(currentTheme)).catch(() => {});
+        vt.finished.then(() => {
+          syncThemeColorMeta(currentTheme);
+          themePostVtTimer = window.setTimeout(() => syncThemeColorMeta(currentTheme), 80);
+        }).catch(() => {});
       }
     } else {
       setThemeDOM(next);
