@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nordic Aurora Radar — Redirecting…</title>
+  <link rel="canonical" href="https://ohwhatif.com/nordic-aurora-radar/" />
+  <meta http-equiv="refresh" content="0; url=https://ohwhatif.com/nordic-aurora-radar/" />
+  <meta name="robots" content="noindex, follow" />
+  <script>
+    (function () {
+      window.location.replace(
+        "https://ohwhatif.com/nordic-aurora-radar/" +
+          window.location.search +
+          window.location.hash
+      );
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f1ea;
+      --fg: #131820;
+      --muted: #586372;
+      --accent: #1b4a68;
+      --border: #dfd9cc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1017;
+        --fg: #eef1f5;
+        --muted: #8290a2;
+        --accent: #8cc0e0;
+        --border: #1b2430;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 480px;
+      width: 100%;
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Nordic Aurora Radar 已搬家</h1>
+    <p>正在自動前往新網址；如果沒有自動跳轉，請點擊下方連結：</p>
+    <p>
+      <a id="fallback-link" href="https://ohwhatif.com/nordic-aurora-radar/">https://ohwhatif.com/nordic-aurora-radar/</a>
+    </p>
+  </main>
+  <script>
+    (function () {
+      var target =
+        "https://ohwhatif.com/nordic-aurora-radar/" +
+        window.location.search +
+        window.location.hash;
+      var link = document.getElementById("fallback-link");
+      if (link) {
+        link.href = target;
+        link.textContent = target;
+      }
+    })();
+  </script>
+</body>
+</html>

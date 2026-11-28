@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Page Not Found</title>
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      if (path === "/nordic-aurora-radar" || path.indexOf("/nordic-aurora-radar/") === 0) {
+        document.documentElement.className = "is-redirecting";
+        window.location.replace(
+          "https://ohwhatif.com" + path + window.location.search + window.location.hash
+        );
+      }
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f1ea;
+      --fg: #131820;
+      --body: #323c48;
+      --muted: #586372;
+      --accent: #1b4a68;
+      --border: #dfd9cc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1017;
+        --fg: #eef1f5;
+        --body: #b5c0cd;
+        --muted: #8290a2;
+        --accent: #8cc0e0;
+        --border: #1b2430;
+      }
+    }
+    * { box-sizing: border-box; }
+    html.is-redirecting body { opacity: 0; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 480px;
+      width: 100%;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+    }
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0 0 22px;
+      color: var(--body);
+      font-size: 15px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      font-size: 15px;
+    }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="code">404 · NOT FOUND</p>
+    <h1>找不到這個頁面</h1>
+    <p>這個路徑不存在或已經搬移。你可以回到首頁，或前往新版北歐極光雷達。</p>
+    <nav class="links" aria-label="快速連結">
+      <a href="/">← 回到首頁</a>
+      <a href="https://ohwhatif.com/nordic-aurora-radar/">Nordic Aurora Radar →</a>
+    </nav>
+  </main>
+</body>
+</html>
